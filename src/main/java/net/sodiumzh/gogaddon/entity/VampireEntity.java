@@ -14,4 +14,9 @@ public class VampireEntity extends AbstractGaiaEntity {
     public float getBaseDefense() {
         return 0;
     }
+
+    public boolean isArmored() {
+        return true;
+    }
+
 }
