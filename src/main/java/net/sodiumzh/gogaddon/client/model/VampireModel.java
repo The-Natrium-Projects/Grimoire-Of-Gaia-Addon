@@ -30,6 +30,10 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
     public static final ModelLayerLocation AURA_LAYER_LOCATION =
         new ModelLayerLocation(new ResourceLocation(GOGAddon.MOD_ID, "vampire"), "aura");
 
+    // ── Animation state ───────────────────────────────────────────────────────
+    /** Attack swing progress in [0, 1], equivalent to {@code swingProgress} in 1.12. */
+    public float attackTime;
+
     // ── Part references ───────────────────────────────────────────────────────
     private final ModelPart anchor;
 
@@ -283,7 +287,6 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
     public void translateToHand(HumanoidArm side, PoseStack poseStack) {
         // Translate the pose stack so held items appear at the correct hand position.
         // The arm offset relative to the entity root: X = ±2.5, Y = -18.5 (anchor) - 1 (arm box top), Z = 0.
-        float xSign = side == HumanoidArm.RIGHT ? -1F : 1F;
         ModelPart arm = side == HumanoidArm.RIGHT ? rightarm : leftarm;
         arm.translateAndRotate(poseStack);
     }
@@ -302,6 +305,8 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
                           float limbSwing, float limbSwingAmount,
                           float ageInTicks,
                           float netHeadYaw, float headPitch) {
+
+        this.attackTime = entity.getAttackAnim(ageInTicks - entity.tickCount);
 
         // anchor bob
         anchor.y = 12F - 2.0F + Mth.cos((1.5F + ageInTicks) * 0.5F) * 0.5F;
