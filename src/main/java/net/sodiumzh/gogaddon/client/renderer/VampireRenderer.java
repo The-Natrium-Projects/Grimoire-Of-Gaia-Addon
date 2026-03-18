@@ -19,7 +19,7 @@ public class VampireRenderer extends MobRenderer<VampireEntity, VampireModel> {
     public VampireRenderer(EntityRendererProvider.Context context) {
         super(context, new VampireModel(context.bakeLayer(VampireModel.LAYER_LOCATION)), 0.5F);
         addLayer(new GlowingLayer<>(this, EYE_TEXTURE));
-        addLayer(new VampireAuraLayer(this));
+        addLayer(new VampireAuraLayer(this, context.getModelSet()));
     }
 
     @Override

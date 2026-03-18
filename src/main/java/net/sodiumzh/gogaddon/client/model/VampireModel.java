@@ -8,6 +8,7 @@ import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
@@ -115,69 +116,69 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
         // anchor – tiny invisible pivot that bobs up and down
         PartDefinition anchor = root.addOrReplaceChild("anchor",
             CubeListBuilder.create().texOffs(0, 0)
-                .addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1, inf),
+                .addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1, new CubeDeformation(inf)),
             PartPose.offset(0F, 12F, 0F));   // entity origin Y=24 → anchor at Y=12 in model space
 
         // ── head cluster ────────────────────────────────────────────────────
         // All head parts share the same absolute point (0, -8, 0) → relative to anchor: (0, -20, 0)
         anchor.addOrReplaceChild("head",
             CubeListBuilder.create().texOffs(0, 0)
-                .addBox(-3F, -6F, -3F, 6, 6, 6, inf),
+                .addBox(-3F, -6F, -3F, 6, 6, 6, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         anchor.addOrReplaceChild("headeyes",
             CubeListBuilder.create().texOffs(24, 0)
-                .addBox(-3F, -6F, -3.1F, 6, 6, 0, inf),
+                .addBox(-3F, -6F, -3.1F, 6, 6, 0, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         anchor.addOrReplaceChild("headaccessory",
             CubeListBuilder.create().texOffs(36, 0)
-                .addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7, inf),
+                .addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         anchor.addOrReplaceChild("neck",
             CubeListBuilder.create().texOffs(0, 12)
-                .addBox(-1F, -1F, -1F, 2, 2, 2, inf),
+                .addBox(-1F, -1F, -1F, 2, 2, 2, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         // ── body ────────────────────────────────────────────────────────────
         anchor.addOrReplaceChild("bodytop",
             CubeListBuilder.create().texOffs(0, 16)
-                .addBox(-2.5F, 0F, -1.5F, 5, 6, 3, inf),
+                .addBox(-2.5F, 0F, -1.5F, 5, 6, 3, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(0F, -20F, 0F, -0.0872665F, 0F, 0F));
 
         anchor.addOrReplaceChild("bodymiddle",
             CubeListBuilder.create().texOffs(0, 25)
-                .addBox(-2F, 5.5F, -1.5F, 4, 3, 2, inf),
+                .addBox(-2F, 5.5F, -1.5F, 4, 3, 2, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         anchor.addOrReplaceChild("bodymiddlebutton",
             CubeListBuilder.create().texOffs(0, 25)
-                .addBox(-0.5F, 6F, -1.6F, 1, 2, 0, inf),
+                .addBox(-0.5F, 6F, -1.6F, 1, 2, 0, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         anchor.addOrReplaceChild("bodybottom",
             CubeListBuilder.create().texOffs(0, 30)
-                .addBox(-3F, 8F, -2.5F, 6, 3, 3, inf),
+                .addBox(-3F, 8F, -2.5F, 6, 3, 3, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(0F, -20F, 0F, 0.0872665F, 0F, 0F));
 
         // ── chest details ───────────────────────────────────────────────────
         // rightchest absolute: (-1.3, -6, -1.5) → relative to anchor at (0,-12,0): (-1.3, -18, -1.5)
         anchor.addOrReplaceChild("rightchest",
             CubeListBuilder.create().texOffs(0, 36)
-                .addBox(-1F, -1F, -1F, 2, 2, 2, inf),
+                .addBox(-1F, -1F, -1F, 2, 2, 2, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(-1.3F, -18F, -1.5F, 0.7853982F, 0.1745329F, 0.0872665F));
 
         anchor.addOrReplaceChild("leftchest",
             CubeListBuilder.create().texOffs(0, 36).mirror()
-                .addBox(-1F, -1F, -1F, 2, 2, 2, inf),
+                .addBox(-1F, -1F, -1F, 2, 2, 2, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(1.3F, -18F, -1.5F, 0.7853982F, -0.1745329F, -0.0872665F));
 
         // ── arms (shoulders are children) ───────────────────────────────────
         // rightarm absolute: (-2.5, -6.5, 0) → relative to anchor: (-2.5, -18.5, 0)
         PartDefinition rightarm = anchor.addOrReplaceChild("rightarm",
             CubeListBuilder.create().texOffs(16, 12)
-                .addBox(-2F, -1F, -1F, 2, 12, 2, inf),
+                .addBox(-2F, -1F, -1F, 2, 12, 2, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(-2.5F, -18.5F, 0F, 0.0872665F, 0F, 0.1745329F));
 
         // rightshoulder in 1.12 had the same rotationPoint as rightarm but was
@@ -185,92 +186,92 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
         // and its rotation becomes (xR - parentXR, ...) = (0.0872665 - 0.0872665, 0, 0.0872665 - 0.1745329)
         rightarm.addOrReplaceChild("rightshoulder",
             CubeListBuilder.create().texOffs(80, 0)
-                .addBox(-2.5F, -1F, -1.5F, 3, 4, 3, inf),
+                .addBox(-2.5F, -1F, -1.5F, 3, 4, 3, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(0F, 0F, 0F, 0F, 0F, -0.0872664F));
 
         PartDefinition leftarm = anchor.addOrReplaceChild("leftarm",
             CubeListBuilder.create().texOffs(16, 12).mirror()
-                .addBox(0F, -1F, -1F, 2, 12, 2, inf),
+                .addBox(0F, -1F, -1F, 2, 12, 2, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(2.5F, -18.5F, 0F, 0.0872665F, 0F, -0.1745329F));
 
         leftarm.addOrReplaceChild("leftshoulder",
             CubeListBuilder.create().texOffs(80, 0).mirror()
-                .addBox(-0.5F, -1F, -1.5F, 3, 4, 3, inf),
+                .addBox(-0.5F, -1F, -1.5F, 3, 4, 3, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(0F, 0F, 0F, 0F, 0F, 0.0872664F));
 
         // ── legs ────────────────────────────────────────────────────────────
         // rightleg absolute: (-2, 2, 0) → relative to anchor at (0,-12,0): (-2, 14, 0)
         anchor.addOrReplaceChild("rightleg",
             CubeListBuilder.create().texOffs(24, 12)
-                .addBox(-1.5F, -1F, -1.5F, 3, 14, 3, inf),
+                .addBox(-1.5F, -1F, -1.5F, 3, 14, 3, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(-2F, 14F, 0F, 0.0872665F, 0F, -0.0349066F));
 
         anchor.addOrReplaceChild("leftleg",
             CubeListBuilder.create().texOffs(24, 12)
-                .addBox(-1.5F, -1F, -1.5F, 3, 14, 3, inf),
+                .addBox(-1.5F, -1F, -1.5F, 3, 14, 3, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(2F, 14F, 0F, -0.0872665F, 0F, 0.0349066F));
 
         // ── mantle ──────────────────────────────────────────────────────────
         // mantle absolute: (0, -8, 0) → relative to anchor: (0, -20, 0)
         anchor.addOrReplaceChild("mantle",
             CubeListBuilder.create().texOffs(36, 14)
-                .addBox(-5F, -6F, -2F, 10, 7, 6, inf),
+                .addBox(-5F, -6F, -2F, 10, 7, 6, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         // ── cloak chain ─────────────────────────────────────────────────────
         // cloak1 absolute: (0, -7, 1)  → relative to anchor at (0,-12,0): (0, -19, 1)
         PartDefinition cloak1 = anchor.addOrReplaceChild("cloak1",
             CubeListBuilder.create().texOffs(36, 27)
-                .addBox(-6.5F, 0F, 0F, 13, 4, 3, inf),
+                .addBox(-6.5F, 0F, 0F, 13, 4, 3, new CubeDeformation(inf)),
             PartPose.offset(0F, -19F, 1F));
 
         // cloak2 absolute: (0, -3, 4)  → relative to cloak1 at (0,-7,1): (0, 4, 3)
         PartDefinition cloak2 = cloak1.addOrReplaceChild("cloak2",
             CubeListBuilder.create().texOffs(36, 34)
-                .addBox(-7F, 0F, -4F, 14, 5, 4, inf),
+                .addBox(-7F, 0F, -4F, 14, 5, 4, new CubeDeformation(inf)),
             PartPose.offset(0F, 4F, 3F));
 
         // cloak3 absolute: (0, 2, 4)   → relative to cloak2 at (0,-3,4): (0, 5, 0)
         PartDefinition cloak3 = cloak2.addOrReplaceChild("cloak3",
             CubeListBuilder.create().texOffs(36, 43)
-                .addBox(-7.5F, 0F, -5F, 15, 5, 5, inf),
+                .addBox(-7.5F, 0F, -5F, 15, 5, 5, new CubeDeformation(inf)),
             PartPose.offset(0F, 5F, 0F));
 
         // cloak4 absolute: (0, 7, 4)   → relative to cloak3 at (0,2,4): (0, 5, 0)
         cloak3.addOrReplaceChild("cloak4",
             CubeListBuilder.create().texOffs(36, 53)
-                .addBox(-8F, 0F, -6F, 16, 6, 6, inf),
+                .addBox(-8F, 0F, -6F, 16, 6, 6, new CubeDeformation(inf)),
             PartPose.offset(0F, 5F, 0F));
 
         // ── waist chain ─────────────────────────────────────────────────────
         // waist absolute: (0, -8, 0)   → relative to anchor: (0, -20, 0)
         anchor.addOrReplaceChild("waist",
             CubeListBuilder.create().texOffs(80, 7)
-                .addBox(-3F, 5F, -2.5F, 6, 2, 5, inf),
+                .addBox(-3F, 5F, -2.5F, 6, 2, 5, new CubeDeformation(inf)),
             PartPose.offset(0F, -20F, 0F));
 
         // waist1 absolute: (0, -8, 0)  → relative to anchor: (0, -20, 0)
         anchor.addOrReplaceChild("waist1",
             CubeListBuilder.create().texOffs(80, 14)
-                .addBox(-3.5F, 7.5F, -3F, 7, 4, 4, inf),
+                .addBox(-3.5F, 7.5F, -3F, 7, 4, 4, new CubeDeformation(inf)),
             PartPose.offsetAndRotation(0F, -20F, 0F, 0.0872665F, 0F, 0F));
 
         // waist2 absolute: (0, -1, -2.5) → relative to anchor: (0, -13, -2.5)
         PartDefinition waist2 = anchor.addOrReplaceChild("waist2",
             CubeListBuilder.create().texOffs(80, 22)
-                .addBox(-3.5F, 0F, -0.5F, 7, 4, 6, inf),
+                .addBox(-3.5F, 0F, -0.5F, 7, 4, 6, new CubeDeformation(inf)),
             PartPose.offset(0F, -13F, -2.5F));
 
         // waist3 absolute: (0, 3, -3)  → relative to waist2 at (0,-1,-2.5): (0, 4, -0.5)
         PartDefinition waist3 = waist2.addOrReplaceChild("waist3",
             CubeListBuilder.create().texOffs(80, 32)
-                .addBox(-4F, 0F, -0.5666667F, 8, 4, 7, inf),
+                .addBox(-4F, 0F, -0.5666667F, 8, 4, 7, new CubeDeformation(inf)),
             PartPose.offset(0F, 4F, -0.5F));
 
         // waist4 absolute: (0, 7, -3.5) → relative to waist3 at (0,3,-3): (0, 4, -0.5)
         waist3.addOrReplaceChild("waist4",
             CubeListBuilder.create().texOffs(80, 43)
-                .addBox(-4.5F, 0F, -1F, 9, 6, 8, inf),
+                .addBox(-4.5F, 0F, -1F, 9, 6, 8, new CubeDeformation(inf)),
             PartPose.offset(0F, 4F, -0.5F));
 
         return LayerDefinition.create(mesh, 128, 64);
@@ -306,6 +307,8 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
                           float ageInTicks,
                           float netHeadYaw, float headPitch) {
 
+        // LivingEntityRenderer passes ageInTicks = entity.tickCount + partialTick,
+        // so subtracting tickCount recovers the partial tick for smooth interpolation.
         this.attackTime = entity.getAttackAnim(ageInTicks - entity.tickCount);
 
         // anchor bob
@@ -375,5 +378,13 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
     // ── Helper ────────────────────────────────────────────────────────────────
     private static float degToRad(float deg) {
         return deg * (float) Math.PI / 180.0F;
+    }
+
+    /** Copies animation state from {@code source} into this model (used by aura layer).
+     * {@code riding} and {@code young} are inherited from {@link net.minecraft.client.model.EntityModel}. */
+    public void copyPropertiesFrom(VampireModel source) {
+        this.attackTime = source.attackTime;
+        this.riding     = source.riding;
+        this.young      = source.young;
     }
 }
