@@ -1,7 +1,5 @@
 package net.sodiumzh.gogaddon.client.renderer.layer;
 
-import gaia.client.model.ArachneModel;
-import gaia.entity.Arachne;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
