@@ -24,13 +24,6 @@ import net.sodiumzh.gogaddon.entity.VampireEntity;
 @OnlyIn(Dist.CLIENT)
 public class VampireModel extends EntityModel<VampireEntity> implements HeadedModel, ArmedModel {
 
-    // ── Layer locations ───────────────────────────────────────────────────────
-    public static final ModelLayerLocation LAYER_LOCATION =
-        new ModelLayerLocation(new ResourceLocation(GOGAddon.MOD_ID, "vampire"), "main");
-    /** Inflated (+0.5F) variant used by {@code VampireAuraLayer}. */
-    public static final ModelLayerLocation AURA_LAYER_LOCATION =
-        new ModelLayerLocation(new ResourceLocation(GOGAddon.MOD_ID, "vampire"), "aura");
-
     // ── Animation state ───────────────────────────────────────────────────────
     /** Attack swing progress in [0, 1], equivalent to {@code swingProgress} in 1.12. */
     public float attackTime;
