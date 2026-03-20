@@ -2,7 +2,7 @@ package net.sodiumzh.gogaddon.client.model;
 
 
 @OnlyIn(Dist.CLIENT)
-public class ModelGaiaKikimora extends EntityModel<KikimoraEntity> implements HeadedModel, ArmedModel {
+public class KikimoraModel extends EntityModel<KikimoraEntity> implements HeadedModel, ArmedModel {
 
 	ModelRenderer head;
 	ModelRenderer headeyes;
@@ -35,7 +35,7 @@ public class ModelGaiaKikimora extends EntityModel<KikimoraEntity> implements He
 	ModelRenderer tail04;
 	ModelRenderer tail05;
 
-	public ModelGaiaKikimora() {
+	public KikimoraModel() {
 		textureWidth = 128;
 		textureHeight = 64;
 

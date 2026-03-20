@@ -2,7 +2,7 @@ package net.sodiumzh.gogaddon.client.model;
 
 
 @OnlyIn(Dist.CLIENT)
-public class ModelGaiaGorgon extends EntityModel<GorgonEntity> implements HeadedModel, ArmedModel {
+public class GorgonModel extends EntityModel<GorgonEntity> implements HeadedModel, ArmedModel {
 
 	private ModelRenderer head;
 	private ModelRenderer headeyes;
@@ -57,7 +57,7 @@ public class ModelGaiaGorgon extends EntityModel<GorgonEntity> implements Headed
 		};
 
 
-	public ModelGaiaGorgon(float scaleFactor) {
+	public GorgonModel(float scaleFactor) {
 		textureWidth = 128;
 		textureHeight = 64;
 

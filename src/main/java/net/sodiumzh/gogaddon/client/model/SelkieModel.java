@@ -2,7 +2,7 @@ package net.sodiumzh.gogaddon.client.model;
 
 
 @OnlyIn(Dist.CLIENT)
-public class ModelGaiaSelkie extends EntityModel<SelkieEntity> implements HeadedModel, ArmedModel {
+public class SelkieModel extends EntityModel<SelkieEntity> implements HeadedModel, ArmedModel {
 	private ModelRenderer head;
 	private ModelRenderer headeyes;
 	private ModelRenderer headaccessory;
@@ -38,7 +38,7 @@ public class ModelGaiaSelkie extends EntityModel<SelkieEntity> implements Headed
 					{0F, 0F, 0F, 0F, 0F, 0F},
 			};
 
-	public ModelGaiaSelkie() {
+	public SelkieModel() {
 		textureWidth = 128;
 		textureHeight = 64;
 

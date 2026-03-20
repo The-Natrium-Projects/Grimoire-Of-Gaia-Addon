@@ -2,7 +2,7 @@ package net.sodiumzh.gogaddon.client.model;
 
 
 @OnlyIn(Dist.CLIENT)
-public class ModelGaiaDhampir extends EntityModel<DhampirEntity> implements HeadedModel, ArmedModel {
+public class DhampirModel extends EntityModel<DhampirEntity> implements HeadedModel, ArmedModel {
 	private ModelRenderer head;
 	private ModelRenderer headeyes;
 	private ModelRenderer headaccessory;
@@ -23,7 +23,7 @@ public class ModelGaiaDhampir extends EntityModel<DhampirEntity> implements Head
 	private ModelRenderer cape2;
 	private ModelRenderer waist;
 
-	public ModelGaiaDhampir() {
+	public DhampirModel() {
 		textureWidth = 128;
 		textureHeight = 64;
 

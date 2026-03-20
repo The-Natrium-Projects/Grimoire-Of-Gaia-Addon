@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.gogaddon.entity.BaphometEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelGaiaBaphomet extends EntityModel<BaphometEntity> implements HeadedModel, ArmedModel {
+public class BaphometModel extends EntityModel<BaphometEntity> implements HeadedModel, ArmedModel {
 	private ModelRenderer head;
 	private ModelRenderer headeyes;
 	private ModelRenderer headaccessory;
@@ -26,7 +26,7 @@ public class ModelGaiaBaphomet extends EntityModel<BaphometEntity> implements He
 	private ModelRenderer cloak3;
 	private ModelRenderer waist;
 
-	public ModelGaiaBaphomet() {
+	public BaphometModel() {
 		textureWidth = 128;
 		textureHeight = 64;
 
