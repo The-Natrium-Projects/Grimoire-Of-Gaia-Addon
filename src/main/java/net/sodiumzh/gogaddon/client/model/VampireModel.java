@@ -153,7 +153,7 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
 		headaccessory.yRot = head.yRot;
 		headaccessory.xRot = head.xRot;
 
-		headeyes.visible = ageInTicks % 60 == 0 && limbSwingAmount <= 0.1F;
+		headeyes.visible = (int) ageInTicks % 60 == 0 && limbSwingAmount <= 0.1F;
 
 		// arms
 		rightarm.zRot = 0.0F;
