@@ -1,276 +1,241 @@
 package net.sodiumzh.gogaddon.client.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.sodiumzh.gogaddon.entity.SelkieEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class SelkieModel extends EntityModel<SelkieEntity> implements HeadedModel, ArmedModel {
-	private ModelRenderer head;
-	private ModelRenderer headeyes;
-	private ModelRenderer headaccessory;
-	private ModelRenderer neck;
-	private ModelRenderer bodytop;
-	private ModelRenderer bodymiddle;
-	private ModelRenderer bodymiddlebutton;
-	private ModelRenderer bodybottom;
-	private ModelRenderer rightchest;
-	private ModelRenderer leftchest;
-	private ModelRenderer rightarm;
-	private ModelRenderer leftarm;
-	private ModelRenderer hair1;
-	private ModelRenderer hair2;
-	private ModelRenderer righthatear;
-	private ModelRenderer lefthatear;
-	private ModelRenderer chestpiece;
-	private ModelRenderer waist;
-	private ModelRenderer fin1;
-	private ModelRenderer fin2;
-	private ModelRenderer fin3;
-	private ModelRenderer fin4;
-	private ModelRenderer fintail;
+	private final ModelPart root;
+	private final ModelPart head;
+	private final ModelPart headeyes;
+	private final ModelPart headaccessory;
+	private final ModelPart bodytop;
+	private final ModelPart rightarm;
+	private final ModelPart leftarm;
+	private final ModelPart hair1;
+	private final ModelPart hair2;
+	private final ModelPart righthatear;
+	private final ModelPart lefthatear;
+	private final ModelPart chestpiece;
+	private final ModelPart waist;
+	private final ModelPart fin1;
+	private final ModelPart fin2;
+	private final ModelPart fin3;
+	private final ModelPart fin4;
+	private final ModelPart fintail;
 
 	private static final double CYCLES_PER_BLOCK = 0.1D;
-	private float[][] undulationCycle = new float[][]
-			{
-					{-5F, -10F, -15F, -20F, -25F, -30F},
-					{-5F, -7F, -9F, -11F, -13F, -15F},
-					{0F, 0F, 0F, 0F, 0F, 0F},
-					{5F, 10F, 15F, 20F, 25F, 30F},
-					{5F, 7F, 9F, 11F, 13F, 15F},
-					{0F, 0F, 0F, 0F, 0F, 0F},
-			};
+	private final float[][] undulationCycle = new float[][] {
+			{-5F, -10F, -15F, -20F, -25F, -30F},
+			{-5F, -7F, -9F, -11F, -13F, -15F},
+			{0F, 0F, 0F, 0F, 0F, 0F},
+			{5F, 10F, 15F, 20F, 25F, 30F},
+			{5F, 7F, 9F, 11F, 13F, 15F},
+			{0F, 0F, 0F, 0F, 0F, 0F},
+	};
 
-	public SelkieModel() {
-		textureWidth = 128;
-		textureHeight = 64;
+	public SelkieModel(ModelPart root) {
+		this.root = root.getChild("selkie");
+		this.head = this.root.getChild("head");
+		this.headeyes = this.root.getChild("headeyes");
+		this.headaccessory = this.root.getChild("headaccessory");
+		this.bodytop = this.root.getChild("bodytop");
+		this.rightarm = this.root.getChild("rightarm");
+		this.leftarm = this.root.getChild("leftarm");
+		this.hair1 = this.root.getChild("hair1");
+		this.hair2 = this.root.getChild("hair2");
+		this.righthatear = this.root.getChild("righthatear");
+		this.lefthatear = this.root.getChild("lefthatear");
+		this.chestpiece = this.root.getChild("chestpiece");
+		this.waist = this.root.getChild("waist");
+		this.fin1 = this.waist.getChild("fin1");
+		this.fin2 = this.waist.getChild("fin2");
+		this.fin3 = this.waist.getChild("fin3");
+		this.fin4 = this.waist.getChild("fin4");
+		this.fintail = this.waist.getChild("fintail");
+	}
 
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-3F, -6F, -3F, 6, 6, 6);
-		head.setRotationPoint(0F, 1F, 0F);
-		setRotation(head, 0F, 0F, 0F);
-		headeyes = new ModelRenderer(this, 24, 0);
-		headeyes.addBox(-3F, -6F, -3.1F, 6, 6, 0);
-		headeyes.setRotationPoint(0F, 1F, 0F);
-		setRotation(headeyes, 0F, 0F, 0F);
-		headaccessory = new ModelRenderer(this, 36, 0);
-		headaccessory.addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7);
-		headaccessory.setRotationPoint(0F, 1F, 0F);
-		setRotation(headaccessory, 0F, 0F, 0F);
-		neck = new ModelRenderer(this, 0, 12);
-		neck.addBox(-1F, -1F, -1F, 2, 2, 2);
-		neck.setRotationPoint(0F, 1F, 0F);
-		setRotation(neck, 0F, 0F, 0F);
-		bodytop = new ModelRenderer(this, 0, 16);
-		bodytop.addBox(-2.5F, 0F, -1.5F, 5, 6, 3);
-		bodytop.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodytop, -0.0872665F, 0F, 0F);
-		bodymiddle = new ModelRenderer(this, 0, 25);
-		bodymiddle.addBox(-2F, 5.5F, -1.5F, 4, 3, 2);
-		bodymiddle.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodymiddle, 0F, 0F, 0F);
-		bodymiddlebutton = new ModelRenderer(this, 0, 25);
-		bodymiddlebutton.addBox(-0.5F, 6F, -1.6F, 1, 2, 0);
-		bodymiddlebutton.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodymiddlebutton, 0F, 0F, 0F);
-		bodybottom = new ModelRenderer(this, 0, 30);
-		bodybottom.addBox(-3F, 8F, -2.5F, 6, 3, 3);
-		bodybottom.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodybottom, 0.0872665F, 0F, 0F);
-		rightchest = new ModelRenderer(this, 0, 36);
-		rightchest.addBox(-1F, -1F, -1F, 2, 2, 2);
-		rightchest.setRotationPoint(-1.3F, 3F, -1.5F);
-		setRotation(rightchest, 0.7853982F, 0.1745329F, 0.0872665F);
-		leftchest = new ModelRenderer(this, 0, 36);
-		leftchest.mirror = true;
-		leftchest.addBox(-1F, -1F, -1F, 2, 2, 2);
-		leftchest.setRotationPoint(1.3F, 3F, -1.5F);
-		setRotation(leftchest, 0.7853982F, -0.1745329F, -0.0872665F);
-		rightarm = new ModelRenderer(this, 16, 12);
-		rightarm.addBox(-2F, -1F, -1F, 2, 12, 2);
-		rightarm.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(rightarm, 0F, 0F, 0.1745329F);
-		leftarm = new ModelRenderer(this, 16, 12);
-		leftarm.addBox(0F, -1F, -1F, 2, 12, 2);
-		leftarm.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(leftarm, 0F, 0F, -0.1745329F);
-		hair1 = new ModelRenderer(this, 36, 14);
-		hair1.addBox(-4F, -6F, 1F, 8, 8, 3);
-		hair1.setRotationPoint(0F, 1F, 0F);
-		setRotation(hair1, 0F, 0F, 0F);
-		hair2 = new ModelRenderer(this, 36, 25);
-		hair2.addBox(-4.5F, -1F, 1.5F, 9, 9, 3);
-		hair2.setRotationPoint(0F, 1F, 0F);
-		setRotation(hair2, 0F, 0F, 0F);
-		ModelRenderer hat1 = new ModelRenderer(this, 64, 0);
-		hat1.addBox(-4F, -7.5F, -5F, 8, 3, 8);
-		hat1.setRotationPoint(0F, 1F, 0F);
-		setRotation(hat1, -0.1745329F, 0F, 0F);
-		ModelRenderer hat2 = new ModelRenderer(this, 64, 11);
-		hat2.addBox(-3F, -8.5F, -4F, 6, 1, 6);
-		hat2.setRotationPoint(0F, 1F, 0F);
-		setRotation(hat2, -0.1745329F, 0F, 0F);
-		righthatear = new ModelRenderer(this, 64, 10);
-		righthatear.addBox(-5F, -6F, -4F, 0, 18, 8);
-		righthatear.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthatear, 0F, 0F, 0.1745329F);
-		lefthatear = new ModelRenderer(this, 64, 10);
-		lefthatear.addBox(5F, -6F, -4F, 0, 18, 8);
-		lefthatear.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthatear, 0F, 0F, -0.1745329F);
-		chestpiece = new ModelRenderer(this, 64, 36);
-		chestpiece.addBox(-4F, -2F, -1F, 8, 6, 2);
-		chestpiece.setRotationPoint(0F, 1F, 0F);
-		setRotation(chestpiece, -0.7853982F, 0F, 0F);
-		waist = new ModelRenderer(this, 96, 0);
-		waist.addBox(-4F, 7.5F, -3F, 8, 3, 4);
-		waist.setRotationPoint(0F, 1F, 0F);
-		setRotation(waist, 0.0872665F, undulationCycle[0][0], 0F);
-		ModelRenderer zip = new ModelRenderer(this, 96, 7);
-		zip.addBox(-1F, 0F, -3.5F, 2, 3, 1);
-		zip.setRotationPoint(0F, 11F, 0F);
-		setRotation(zip, -0.6108652F, 0, 0F);
-		fin1 = new ModelRenderer(this, 96, 11);
-		fin1.addBox(-3.5F, -1F, -3F, 7, 6, 6);
-		fin1.setRotationPoint(0F, 11F, 0F);
-		setRotation(fin1, -0.2617994F, undulationCycle[0][1], 0F);
-		fin2 = new ModelRenderer(this, 96, 23);
-		fin2.addBox(-3F, 4F, -3.5F, 6, 5, 5);
-		fin2.setRotationPoint(0F, 11F, 0F);
-		setRotation(fin2, -0.0872665F, undulationCycle[0][2], 0F);
-		fin3 = new ModelRenderer(this, 96, 33);
-		fin3.addBox(-2.5F, 7F, -6F, 5, 4, 4);
-		fin3.setRotationPoint(0F, 11F, 0F);
-		setRotation(fin3, 0.2617994F, undulationCycle[0][3], 0F);
-		fin4 = new ModelRenderer(this, 96, 41);
-		fin4.addBox(-2F, 8F, -9F, 4, 3, 3);
-		fin4.setRotationPoint(0F, 11F, 0F);
-		setRotation(fin4, 0.6108652F, undulationCycle[0][4], 0F);
-		fintail = new ModelRenderer(this, 96, 47);
-		fintail.addBox(-4F, 12F, 1F, 8, 1, 4);
-		fintail.setRotationPoint(0F, 11F, 0F);
-		setRotation(fintail, -0.0872665F, undulationCycle[0][5], 0F);
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		convertToChild(head, hat1);
-		convertToChild(head, hat2);
-		convertToChild(waist, zip);
-		convertToChild(waist, fin1);
-		convertToChild(waist, fin2);
-		convertToChild(waist, fin3);
-		convertToChild(waist, fin4);
-		convertToChild(waist, fintail);
+		PartDefinition selkie = partdefinition.addOrReplaceChild("selkie", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		// Direct children of root (Y_offset = original_Y - 24)
+		PartDefinition head = selkie.addOrReplaceChild("head", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("headeyes", CubeListBuilder.create()
+				.texOffs(24, 0).addBox(-3.0F, -6.0F, -3.1F, 6.0F, 6.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("headaccessory", CubeListBuilder.create()
+				.texOffs(36, 0).addBox(-3.5F, -6.5F, -3.5F, 7.0F, 7.0F, 7.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("neck", CubeListBuilder.create()
+				.texOffs(0, 12).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("bodytop", CubeListBuilder.create()
+				.texOffs(0, 16).addBox(-2.5F, 0.0F, -1.5F, 5.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -0.0872665F, 0.0F, 0.0F));
+
+		selkie.addOrReplaceChild("bodymiddle", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-2.0F, 5.5F, -1.5F, 4.0F, 3.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("bodymiddlebutton", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-0.5F, 6.0F, -1.6F, 1.0F, 2.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("bodybottom", CubeListBuilder.create()
+				.texOffs(0, 30).addBox(-3.0F, 8.0F, -2.5F, 6.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0872665F, 0.0F, 0.0F));
+
+		selkie.addOrReplaceChild("rightchest", CubeListBuilder.create()
+				.texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-1.3F, -21.0F, -1.5F, 0.7853982F, 0.1745329F, 0.0872665F));
+
+		selkie.addOrReplaceChild("leftchest", CubeListBuilder.create()
+				.texOffs(0, 36).mirror().addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F).mirror(false), PartPose.offsetAndRotation(1.3F, -21.0F, -1.5F, 0.7853982F, -0.1745329F, -0.0872665F));
+
+		selkie.addOrReplaceChild("rightarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.1745329F));
+
+		selkie.addOrReplaceChild("leftarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(0.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.1745329F));
+
+		selkie.addOrReplaceChild("hair1", CubeListBuilder.create()
+				.texOffs(36, 14).addBox(-4.0F, -6.0F, 1.0F, 8.0F, 8.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("hair2", CubeListBuilder.create()
+				.texOffs(36, 25).addBox(-4.5F, -1.0F, 1.5F, 9.0F, 9.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		selkie.addOrReplaceChild("righthatear", CubeListBuilder.create()
+				.texOffs(64, 10).addBox(-5.0F, -6.0F, -4.0F, 0.0F, 18.0F, 8.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0F, 0.0F, 0.1745329F));
+
+		selkie.addOrReplaceChild("lefthatear", CubeListBuilder.create()
+				.texOffs(64, 10).addBox(5.0F, -6.0F, -4.0F, 0.0F, 18.0F, 8.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0F, 0.0F, -0.1745329F));
+
+		selkie.addOrReplaceChild("chestpiece", CubeListBuilder.create()
+				.texOffs(64, 36).addBox(-4.0F, -2.0F, -1.0F, 8.0F, 6.0F, 2.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -0.7853982F, 0.0F, 0.0F));
+
+		// Head children: hat1, hat2 (offset = (0,0,0) relative to head)
+		head.addOrReplaceChild("hat1", CubeListBuilder.create()
+				.texOffs(64, 0).addBox(-4.0F, -7.5F, -5.0F, 8.0F, 3.0F, 8.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.1745329F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("hat2", CubeListBuilder.create()
+				.texOffs(64, 11).addBox(-3.0F, -8.5F, -4.0F, 6.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.1745329F, 0.0F, 0.0F));
+
+		// Waist with initial X rotation only; Y rotation set in setupAnim
+		PartDefinition waist = selkie.addOrReplaceChild("waist", CubeListBuilder.create()
+				.texOffs(96, 0).addBox(-4.0F, 7.5F, -3.0F, 8.0F, 3.0F, 4.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0872665F, 0.0F, 0.0F));
+
+		// Waist children (offset = (0, 10, 0) relative to waist)
+		waist.addOrReplaceChild("zip", CubeListBuilder.create()
+				.texOffs(96, 7).addBox(-1.0F, 0.0F, -3.5F, 2.0F, 3.0F, 1.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, -0.6108652F, 0.0F, 0.0F));
+
+		waist.addOrReplaceChild("fin1", CubeListBuilder.create()
+				.texOffs(96, 11).addBox(-3.5F, -1.0F, -3.0F, 7.0F, 6.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, -0.2617994F, 0.0F, 0.0F));
+
+		waist.addOrReplaceChild("fin2", CubeListBuilder.create()
+				.texOffs(96, 23).addBox(-3.0F, 4.0F, -3.5F, 6.0F, 5.0F, 5.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, -0.0872665F, 0.0F, 0.0F));
+
+		waist.addOrReplaceChild("fin3", CubeListBuilder.create()
+				.texOffs(96, 33).addBox(-2.5F, 7.0F, -6.0F, 5.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, 0.2617994F, 0.0F, 0.0F));
+
+		waist.addOrReplaceChild("fin4", CubeListBuilder.create()
+				.texOffs(96, 41).addBox(-2.0F, 8.0F, -9.0F, 4.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, 0.6108652F, 0.0F, 0.0F));
+
+		waist.addOrReplaceChild("fintail", CubeListBuilder.create()
+				.texOffs(96, 47).addBox(-4.0F, 12.0F, 1.0F, 8.0F, 1.0F, 4.0F), PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, -0.0872665F, 0.0F, 0.0F));
+
+		return LayerDefinition.create(meshdefinition, 128, 64);
 	}
 
 	@Override
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		head.render(scale);
-		headaccessory.render(scale);
-		neck.render(scale);
-		bodytop.render(scale);
-		bodymiddle.render(scale);
-		bodymiddlebutton.render(scale);
-		bodybottom.render(scale);
-		rightchest.render(scale);
-		leftchest.render(scale);
-		rightarm.render(scale);
-		leftarm.render(scale);
-		hair1.render(scale);
-		hair2.render(scale);
-		righthatear.render(scale);
-		lefthatear.render(scale);
-		chestpiece.render(scale);
-		waist.render(scale);
-
-		if (entityIn.ticksExisted % 60 == 0 && limbSwingAmount <= 0.1F) {
-			headeyes.render(scale);
-		}
-	}
-
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+	public void setupAnim(SelkieEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// head
-		head.rotateAngleY = netHeadYaw / 57.295776F;
-		head.rotateAngleX = headPitch / 57.295776F;
-		headeyes.rotateAngleY = head.rotateAngleY;
-		headeyes.rotateAngleX = head.rotateAngleX;
-		headaccessory.rotateAngleY = head.rotateAngleY;
-		headaccessory.rotateAngleX = head.rotateAngleX;
-		righthatear.rotateAngleY = head.rotateAngleY;
-		lefthatear.rotateAngleY = head.rotateAngleY;
-		hair1.rotateAngleY = head.rotateAngleY;
-		hair2.rotateAngleY = (head.rotateAngleY) * 0.75F;
+		head.yRot = netHeadYaw / 57.295776F;
+		head.xRot = headPitch / 57.295776F;
+		headeyes.yRot = head.yRot;
+		headeyes.xRot = head.xRot;
+		headaccessory.yRot = head.yRot;
+		headaccessory.xRot = head.xRot;
+		righthatear.yRot = head.yRot;
+		lefthatear.yRot = head.yRot;
+		hair1.yRot = head.yRot;
+		hair2.yRot = head.yRot * 0.75F;
+
+		headeyes.visible = entity.tickCount % 60 == 0 && limbSwingAmount <= 0.1F;
 
 		// arms
-		rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
-		leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
+		rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
+		leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
 
-		rightarm.rotateAngleZ = 0.0F;
-		leftarm.rotateAngleZ = 0.0F;
+		rightarm.zRot = 0.0F;
+		leftarm.zRot = 0.0F;
 
-		ItemStack itemstack = ((EntityLivingBase) entityIn).getHeldItemMainhand();
-		EntityGaiaSelkie entity = (EntityGaiaSelkie) entityIn;
-
-		if (entity.isSwingingArms() && (itemstack.getItem() == Items.BOW)) {
-			holdingBow(ageInTicks);
-		} else if (swingProgress > -9990.0F) {
+		// TODO: Bow animation skipped - entity may not support isSwingingArms yet
+		if (attackTime > 0.0F) {
 			holdingMelee();
 		}
 
-		rightarm.rotateAngleZ += (MathHelper.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
-		rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.025F;
-		leftarm.rotateAngleZ -= (MathHelper.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
-		leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.025F;
+		rightarm.zRot += (Mth.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
+		rightarm.xRot += Mth.sin(ageInTicks * 0.067F) * 0.025F;
+		leftarm.zRot -= (Mth.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
+		leftarm.xRot -= Mth.sin(ageInTicks * 0.067F) * 0.025F;
 
-		// legs
-		updateDistanceMovedTotal(entityIn);
-		int cycleIndex = (int) ((getDistanceMovedTotal() * CYCLES_PER_BLOCK) % undulationCycle.length);
+		// undulation (tail fin animation)
+		int cycleIndex = Math.abs((int) ((limbSwing * CYCLES_PER_BLOCK) % undulationCycle.length));
 
-		waist.rotateAngleY = degToRad(undulationCycle[cycleIndex][0]);
-		fin1.rotateAngleY = degToRad(undulationCycle[cycleIndex][1]);
-		fin2.rotateAngleY = degToRad(undulationCycle[cycleIndex][2]);
-		fin3.rotateAngleY = degToRad(undulationCycle[cycleIndex][3]);
-		fin4.rotateAngleY = degToRad(undulationCycle[cycleIndex][4]);
-		fintail.rotateAngleY = degToRad(undulationCycle[cycleIndex][5]);
-	}
-
-	private void holdingBow(float ageInTicks) {
-		float f = MathHelper.sin(swingProgress * (float) Math.PI);
-		float f1 = MathHelper.sin((1.0F - (1.0F - swingProgress) * (1.0F - swingProgress)) * (float) Math.PI);
-
-		rightarm.rotateAngleZ = -0.3F;
-		leftarm.rotateAngleZ = 0.3F;
-		rightarm.rotateAngleY = -(0.1F - f * 0.6F);
-		leftarm.rotateAngleY = 0.3F - f * 0.6F;
-		rightarm.rotateAngleX = -((float) Math.PI / 2F);
-		leftarm.rotateAngleX = -((float) Math.PI / 2F);
-		rightarm.rotateAngleX -= f * 1.2F - f1 * 0.4F;
-		leftarm.rotateAngleX -= f * 1.2F - f1 * 0.4F;
-		rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-		leftarm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-		rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-		leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		waist.yRot = undulationCycle[cycleIndex][0] * Mth.DEG_TO_RAD;
+		fin1.yRot = undulationCycle[cycleIndex][1] * Mth.DEG_TO_RAD;
+		fin2.yRot = undulationCycle[cycleIndex][2] * Mth.DEG_TO_RAD;
+		fin3.yRot = undulationCycle[cycleIndex][3] * Mth.DEG_TO_RAD;
+		fin4.yRot = undulationCycle[cycleIndex][4] * Mth.DEG_TO_RAD;
+		fintail.yRot = undulationCycle[cycleIndex][5] * Mth.DEG_TO_RAD;
 	}
 
 	public void holdingMelee() {
 		float f6;
 		float f7;
 
-		f6 = 1.0F - swingProgress;
+		f6 = 1.0F - attackTime;
 		f6 *= f6;
 		f6 *= f6;
 		f6 = 1.0F - f6;
-		f7 = MathHelper.sin(f6 * (float) Math.PI);
-		float f8 = MathHelper.sin(swingProgress * (float) Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+		f7 = Mth.sin(f6 * (float) Math.PI);
+		float f8 = Mth.sin(attackTime * (float) Math.PI) * -(head.xRot - 0.7F) * 0.75F;
 
-		rightarm.rotateAngleX = (float) ((double) rightarm.rotateAngleX - ((double) f7 * 1.2D + (double) f8));
-		rightarm.rotateAngleX += (bodytop.rotateAngleY * 2.0F);
-		rightarm.rotateAngleZ = (MathHelper.sin(swingProgress * (float) Math.PI) * -0.4F);
+		rightarm.xRot = (float) ((double) rightarm.xRot - ((double) f7 * 1.2D + (double) f8));
+		rightarm.xRot += (bodytop.yRot * 2.0F);
+		rightarm.zRot = (Mth.sin(attackTime * (float) Math.PI) * -0.4F);
 	}
 
-	public ModelRenderer getRightArm() {
-		return rightarm;
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
-	public ModelRenderer getLeftArm() {
-		return leftarm;
+	@Override
+	public ModelPart getHead() {
+		return head;
+	}
+
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftarm : this.rightarm;
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		getArm(arm).translateAndRotate(poseStack);
 	}
 }
