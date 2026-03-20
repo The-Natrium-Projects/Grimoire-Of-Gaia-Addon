@@ -1,288 +1,234 @@
 package net.sodiumzh.gogaddon.client.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.gogaddon.entity.BaphometEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class BaphometModel extends EntityModel<BaphometEntity> implements HeadedModel, ArmedModel {
-	private ModelRenderer head;
-	private ModelRenderer headeyes;
-	private ModelRenderer headaccessory;
-	private ModelRenderer neck;
-	private ModelRenderer bodytop;
-	private ModelRenderer bodymiddle;
-	private ModelRenderer bodymiddlebutton;
-	private ModelRenderer bodybottom;
-	private ModelRenderer rightarm;
-	private ModelRenderer leftarm;
-	private ModelRenderer rightleg;
-	private ModelRenderer leftleg;
-	private ModelRenderer mantle;
-	private ModelRenderer mantlefront;
-	private ModelRenderer cloak1;
-	private ModelRenderer cloak2;
-	private ModelRenderer cloak3;
-	private ModelRenderer waist;
+	private final ModelPart root;
+	private final ModelPart head;
+	private final ModelPart headeyes;
+	private final ModelPart headaccessory;
+	private final ModelPart bodytop;
+	private final ModelPart rightarm;
+	private final ModelPart leftarm;
+	private final ModelPart rightleg;
+	private final ModelPart leftleg;
+	private final ModelPart cloak1;
+	private final ModelPart cloak2;
+	private final ModelPart cloak3;
 
-	public BaphometModel() {
-		textureWidth = 128;
-		textureHeight = 64;
+	public BaphometModel(ModelPart root) {
+		this.root = root.getChild("baphomet");
+		this.head = this.root.getChild("head");
+		this.headeyes = this.root.getChild("headeyes");
+		this.headaccessory = this.root.getChild("headaccessory");
+		this.bodytop = this.root.getChild("bodytop");
+		this.rightarm = this.root.getChild("rightarm");
+		this.leftarm = this.root.getChild("leftarm");
+		this.rightleg = this.root.getChild("rightleg");
+		this.leftleg = this.root.getChild("leftleg");
+		this.cloak1 = this.root.getChild("cloak1");
+		this.cloak2 = this.root.getChild("cloak2");
+		this.cloak3 = this.root.getChild("cloak3");
+	}
 
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-3F, -6F, -3F, 6, 6, 6);
-		head.setRotationPoint(0F, 1F, 0F);
-		setRotation(head, 0F, 0F, 0F);
-		headeyes = new ModelRenderer(this, 24, 0);
-		headeyes.addBox(-3F, -6F, -3.1F, 6, 6, 0);
-		headeyes.setRotationPoint(0F, 1F, 0F);
-		setRotation(headeyes, 0F, 0F, 0F);
-		headaccessory = new ModelRenderer(this, 36, 0);
-		headaccessory.addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7);
-		headaccessory.setRotationPoint(0F, 1F, 0F);
-		setRotation(headaccessory, 0F, 0F, 0F);
-		neck = new ModelRenderer(this, 0, 12);
-		neck.addBox(-1F, -1F, -1F, 2, 2, 2);
-		neck.setRotationPoint(0F, 1F, 0F);
-		setRotation(neck, 0F, 0F, 0F);
-		bodytop = new ModelRenderer(this, 0, 16);
-		bodytop.addBox(-2.5F, 0F, -1.5F, 5, 6, 3);
-		bodytop.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodytop, -0.0872665F, 0F, 0F);
-		bodymiddle = new ModelRenderer(this, 0, 25);
-		bodymiddle.addBox(-2F, 4.5F, -1.5F, 4, 3, 2);
-		bodymiddle.setRotationPoint(0F, 2F, 0F);
-		setRotation(bodymiddle, 0F, 0F, 0F);
-		bodymiddlebutton = new ModelRenderer(this, 0, 25);
-		bodymiddlebutton.addBox(-0.5F, 5F, -1.6F, 1, 2, 0);
-		bodymiddlebutton.setRotationPoint(0F, 2F, 0F);
-		setRotation(bodymiddlebutton, 0F, 0F, 0F);
-		bodybottom = new ModelRenderer(this, 0, 30);
-		bodybottom.addBox(-3F, 8F, -2.5F, 6, 3, 3);
-		bodybottom.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodybottom, 0.0872665F, 0F, 0F);
-		rightarm = new ModelRenderer(this, 16, 12);
-		rightarm.addBox(-2F, -1F, -1F, 2, 12, 2);
-		rightarm.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(rightarm, 0F, 0F, 0.1745329F);
-		leftarm = new ModelRenderer(this, 16, 12);
-		leftarm.addBox(0F, -1F, -1F, 2, 12, 2);
-		leftarm.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(leftarm, 0F, 0F, -0.1745329F);
-		rightleg = new ModelRenderer(this, 24, 12);
-		rightleg.addBox(-1.5F, -1F, -1F, 3, 14, 3);
-		rightleg.setRotationPoint(-2F, 11F, -0.5F);
-		setRotation(rightleg, 0F, 0F, 0F);
-		leftleg = new ModelRenderer(this, 24, 12);
-		leftleg.addBox(-1.5F, -1F, -1F, 3, 14, 3);
-		leftleg.setRotationPoint(2F, 11F, -0.5F);
-		setRotation(leftleg, 0F, 0F, 0F);
-		ModelRenderer righthairclip = new ModelRenderer(this, 36, 14);
-		righthairclip.addBox(-5.5F, -5F, 2.533333F, 3, 5, 3);
-		righthairclip.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthairclip, 0.1745329F, 0F, 0.1745329F);
-		ModelRenderer lefthairclip = new ModelRenderer(this, 48, 14);
-		lefthairclip.addBox(2.5F, -5F, 2.5F, 3, 5, 3);
-		lefthairclip.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthairclip, 0.1745329F, 0F, -0.1745329F);
-		ModelRenderer righthair = new ModelRenderer(this, 36, 22);
-		righthair.addBox(-5F, -4.5F, 3F, 2, 10, 2);
-		righthair.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthair, 0.1745329F, 0F, 0.1745329F);
-		ModelRenderer lefthair = new ModelRenderer(this, 36, 22);
-		lefthair.addBox(3F, -4.5F, 3F, 2, 10, 2);
-		lefthair.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthair, 0.1745329F, 0F, -0.1745329F);
-		ModelRenderer righthorn1 = new ModelRenderer(this, 36, 34);
-		righthorn1.addBox(-3F, -8F, 0F, 2, 2, 2);
-		righthorn1.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthorn1, 0F, 0F, 0F);
-		ModelRenderer righthorn2 = new ModelRenderer(this, 36, 38);
-		righthorn2.addBox(-4F, -9F, 1F, 2, 2, 4);
-		righthorn2.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthorn2, 0F, 0F, 0F);
-		ModelRenderer righthorn3 = new ModelRenderer(this, 36, 44);
-		righthorn3.addBox(-3F, -8F, 4F, 2, 2, 2);
-		righthorn3.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthorn3, 0F, 0F, 0F);
-		ModelRenderer righthorn4 = new ModelRenderer(this, 36, 48);
-		righthorn4.addBox(-1.5F, -6.5F, 4.5F, 1, 1, 1);
-		righthorn4.setRotationPoint(0F, 1F, 0F);
-		setRotation(righthorn4, 0F, 0F, 0F);
-		ModelRenderer lefthorn1 = new ModelRenderer(this, 36, 34);
-		lefthorn1.mirror = true;
-		lefthorn1.addBox(1F, -8F, 0F, 2, 2, 2);
-		lefthorn1.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthorn1, 0F, 0F, 0F);
-		ModelRenderer lefthorn2 = new ModelRenderer(this, 36, 38);
-		lefthorn2.mirror = true;
-		lefthorn2.addBox(2F, -9F, 1F, 2, 2, 4);
-		lefthorn2.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthorn2, 0F, 0F, 0F);
-		ModelRenderer lefthorn3 = new ModelRenderer(this, 36, 44);
-		lefthorn3.mirror = true;
-		lefthorn3.addBox(1F, -8F, 4F, 2, 2, 2);
-		lefthorn3.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthorn3, 0F, 0F, 0F);
-		ModelRenderer lefthorn4 = new ModelRenderer(this, 36, 48);
-		lefthorn4.mirror = true;
-		lefthorn4.addBox(0.5F, -6.5F, 4.5F, 1, 1, 1);
-		lefthorn4.setRotationPoint(0F, 1F, 0F);
-		setRotation(lefthorn4, 0F, 0F, 0F);
-		ModelRenderer rightear = new ModelRenderer(this, 36, 46);
-		rightear.addBox(-4F, -5F, -1F, 0, 4, 4);
-		rightear.setRotationPoint(0F, 1F, 0F);
-		setRotation(rightear, 0F, -0.5235988F, 0F);
-		ModelRenderer leftear = new ModelRenderer(this, 36, 46);
-		leftear.mirror = true;
-		leftear.addBox(4F, -5F, -1F, 0, 4, 4);
-		leftear.setRotationPoint(0F, 1F, 0F);
-		setRotation(leftear, 0F, 0.5235988F, 0F);
-		mantle = new ModelRenderer(this, 64, 0);
-		mantle.addBox(-5F, 0F, -0.5F, 10, 3, 3);
-		mantle.setRotationPoint(0F, 1F, 0F);
-		setRotation(mantle, 0F, 0F, 0F);
-		mantlefront = new ModelRenderer(this, 64, 6);
-		mantlefront.addBox(-4F, 0F, -2F, 8, 3, 3);
-		mantlefront.setRotationPoint(0F, 1F, 0F);
-		setRotation(mantlefront, 0F, 0F, 0F);
-		cloak1 = new ModelRenderer(this, 64, 12);
-		cloak1.addBox(-4.5F, 1F, -0.5F, 9, 4, 3);
-		cloak1.setRotationPoint(0F, 1F, 0F);
-		setRotation(cloak1, 0.2617994F, 0F, 0F);
-		cloak2 = new ModelRenderer(this, 64, 19);
-		cloak2.addBox(-5F, 4.5F, 0.5F, 10, 6, 3);
-		cloak2.setRotationPoint(0F, 1F, 0F);
-		setRotation(cloak2, 0.1745329F, 0F, 0F);
-		cloak3 = new ModelRenderer(this, 64, 28);
-		cloak3.addBox(-5.5F, 10F, 2F, 11, 8, 3);
-		cloak3.setRotationPoint(0F, 1F, 0F);
-		setRotation(cloak3, 0.0872665F, 0F, 0F);
-		ModelRenderer righthand = new ModelRenderer(this, 64, 39);
-		righthand.addBox(-2.5F, 6F, -1.5F, 3, 5, 3);
-		righthand.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(righthand, 0F, 0F, 0.1745329F);
-		ModelRenderer lefthand = new ModelRenderer(this, 76, 39);
-		lefthand.addBox(-0.5F, 6F, -1.5F, 3, 5, 3);
-		lefthand.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(lefthand, 0F, 0F, -0.1745329F);
-		waist = new ModelRenderer(this, 64, 47);
-		waist.addBox(-3.5F, 7.5F, -3F, 7, 4, 4);
-		waist.setRotationPoint(0F, 1F, 0F);
-		setRotation(waist, 0.0872665F, 0F, 0F);
-		ModelRenderer rightfoot = new ModelRenderer(this, 92, 0);
-		rightfoot.addBox(-2F, 5F, -1.5F, 4, 8, 4);
-		rightfoot.setRotationPoint(-2F, 11F, -0.5F);
-		setRotation(rightfoot, 0F, 0F, 0F);
-		ModelRenderer leftfoot = new ModelRenderer(this, 108, 0);
-		leftfoot.addBox(-2F, 5F, -1.5F, 4, 8, 4);
-		leftfoot.setRotationPoint(2F, 11F, -0.5F);
-		setRotation(leftfoot, 0F, 0F, 0F);
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		convertToChild(head, righthorn1);
-		convertToChild(head, righthorn2);
-		convertToChild(head, righthorn3);
-		convertToChild(head, righthorn4);
-		convertToChild(head, lefthorn1);
-		convertToChild(head, lefthorn2);
-		convertToChild(head, lefthorn3);
-		convertToChild(head, lefthorn4);
-		convertToChild(head, rightear);
-		convertToChild(head, leftear);
-		convertToChild(head, righthairclip);
-		convertToChild(head, righthair);
-		convertToChild(head, lefthairclip);
-		convertToChild(head, lefthair);
-		convertToChild(rightarm, righthand);
-		convertToChild(leftarm, lefthand);
-		convertToChild(rightleg, rightfoot);
-		convertToChild(leftleg, leftfoot);
+		PartDefinition baphomet = partdefinition.addOrReplaceChild("baphomet", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition head = baphomet.addOrReplaceChild("head", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("headeyes", CubeListBuilder.create()
+				.texOffs(24, 0).addBox(-3.0F, -6.0F, -3.1F, 6.0F, 6.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("headaccessory", CubeListBuilder.create()
+				.texOffs(36, 0).addBox(-3.5F, -6.5F, -3.5F, 7.0F, 7.0F, 7.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("neck", CubeListBuilder.create()
+				.texOffs(0, 12).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("bodytop", CubeListBuilder.create()
+				.texOffs(0, 16).addBox(-2.5F, 0.0F, -1.5F, 5.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("bodymiddle", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-2.0F, 4.5F, -1.5F, 4.0F, 3.0F, 2.0F), PartPose.offset(0.0F, -22.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("bodymiddlebutton", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-0.5F, 5.0F, -1.6F, 1.0F, 2.0F, 0.0F), PartPose.offset(0.0F, -22.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("bodybottom", CubeListBuilder.create()
+				.texOffs(0, 30).addBox(-3.0F, 8.0F, -2.5F, 6.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+
+		PartDefinition rightarm = baphomet.addOrReplaceChild("rightarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.1745F));
+
+		rightarm.addOrReplaceChild("righthand", CubeListBuilder.create()
+				.texOffs(64, 39).addBox(-2.5F, 6.0F, -1.5F, 3.0F, 5.0F, 3.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.1745F));
+
+		PartDefinition leftarm = baphomet.addOrReplaceChild("leftarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(0.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.1745F));
+
+		leftarm.addOrReplaceChild("lefthand", CubeListBuilder.create()
+				.texOffs(76, 39).addBox(-0.5F, 6.0F, -1.5F, 3.0F, 5.0F, 3.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.1745F));
+
+		PartDefinition rightleg = baphomet.addOrReplaceChild("rightleg", CubeListBuilder.create()
+				.texOffs(24, 12).addBox(-1.5F, -1.0F, -1.0F, 3.0F, 14.0F, 3.0F), PartPose.offset(-2.0F, -13.0F, -0.5F));
+
+		rightleg.addOrReplaceChild("rightfoot", CubeListBuilder.create()
+				.texOffs(92, 0).addBox(-2.0F, 5.0F, -1.5F, 4.0F, 8.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition leftleg = baphomet.addOrReplaceChild("leftleg", CubeListBuilder.create()
+				.texOffs(24, 12).addBox(-1.5F, -1.0F, -1.0F, 3.0F, 14.0F, 3.0F), PartPose.offset(2.0F, -13.0F, -0.5F));
+
+		leftleg.addOrReplaceChild("leftfoot", CubeListBuilder.create()
+				.texOffs(108, 0).addBox(-2.0F, 5.0F, -1.5F, 4.0F, 8.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		// Head children: horns
+		head.addOrReplaceChild("righthorn1", CubeListBuilder.create()
+				.texOffs(36, 34).addBox(-3.0F, -8.0F, 0.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("righthorn2", CubeListBuilder.create()
+				.texOffs(36, 38).addBox(-4.0F, -9.0F, 1.0F, 2.0F, 2.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("righthorn3", CubeListBuilder.create()
+				.texOffs(36, 44).addBox(-3.0F, -8.0F, 4.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("righthorn4", CubeListBuilder.create()
+				.texOffs(36, 48).addBox(-1.5F, -6.5F, 4.5F, 1.0F, 1.0F, 1.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("lefthorn1", CubeListBuilder.create()
+				.texOffs(36, 34).mirror().addBox(1.0F, -8.0F, 0.0F, 2.0F, 2.0F, 2.0F).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("lefthorn2", CubeListBuilder.create()
+				.texOffs(36, 38).mirror().addBox(2.0F, -9.0F, 1.0F, 2.0F, 2.0F, 4.0F).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("lefthorn3", CubeListBuilder.create()
+				.texOffs(36, 44).mirror().addBox(1.0F, -8.0F, 4.0F, 2.0F, 2.0F, 2.0F).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("lefthorn4", CubeListBuilder.create()
+				.texOffs(36, 48).mirror().addBox(0.5F, -6.5F, 4.5F, 1.0F, 1.0F, 1.0F).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		// Head children: ears
+		head.addOrReplaceChild("rightear", CubeListBuilder.create()
+				.texOffs(36, 46).addBox(-4.0F, -5.0F, -1.0F, 0.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.5236F, 0.0F));
+
+		head.addOrReplaceChild("leftear", CubeListBuilder.create()
+				.texOffs(36, 46).mirror().addBox(4.0F, -5.0F, -1.0F, 0.0F, 4.0F, 4.0F).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.5236F, 0.0F));
+
+		// Head children: hair
+		head.addOrReplaceChild("righthairclip", CubeListBuilder.create()
+				.texOffs(36, 14).addBox(-5.5F, -5.0F, 2.5333F, 3.0F, 5.0F, 3.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.1745F));
+
+		head.addOrReplaceChild("lefthairclip", CubeListBuilder.create()
+				.texOffs(48, 14).addBox(2.5F, -5.0F, 2.5F, 3.0F, 5.0F, 3.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, -0.1745F));
+
+		head.addOrReplaceChild("righthair", CubeListBuilder.create()
+				.texOffs(36, 22).addBox(-5.0F, -4.5F, 3.0F, 2.0F, 10.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.1745F));
+
+		head.addOrReplaceChild("lefthair", CubeListBuilder.create()
+				.texOffs(36, 22).addBox(3.0F, -4.5F, 3.0F, 2.0F, 10.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, -0.1745F));
+
+		// Mantle, cloaks, waist
+		baphomet.addOrReplaceChild("mantle", CubeListBuilder.create()
+				.texOffs(64, 0).addBox(-5.0F, 0.0F, -0.5F, 10.0F, 3.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("mantlefront", CubeListBuilder.create()
+				.texOffs(64, 6).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 3.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("cloak1", CubeListBuilder.create()
+				.texOffs(64, 12).addBox(-4.5F, 1.0F, -0.5F, 9.0F, 4.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.2618F, 0.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("cloak2", CubeListBuilder.create()
+				.texOffs(64, 19).addBox(-5.0F, 4.5F, 0.5F, 10.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("cloak3", CubeListBuilder.create()
+				.texOffs(64, 28).addBox(-5.5F, 10.0F, 2.0F, 11.0F, 8.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+
+		baphomet.addOrReplaceChild("waist", CubeListBuilder.create()
+				.texOffs(64, 47).addBox(-3.5F, 7.5F, -3.0F, 7.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+
+		return LayerDefinition.create(meshdefinition, 128, 64);
 	}
 
 	@Override
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		head.render(scale);
-		headaccessory.render(scale);
-		neck.render(scale);
-		bodytop.render(scale);
-		bodymiddle.render(scale);
-		bodymiddlebutton.render(scale);
-		bodybottom.render(scale);
-		rightarm.render(scale);
-		leftarm.render(scale);
-		rightleg.render(scale);
-		leftleg.render(scale);
-		mantle.render(scale);
-		mantlefront.render(scale);
-		cloak1.render(scale);
-		cloak2.render(scale);
-		cloak3.render(scale);
-		waist.render(scale);
-
-		if (entityIn.ticksExisted % 60 == 0 && limbSwingAmount <= 0.1F) {
-			headeyes.render(scale);
-		}
-	}
-
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
-		ItemStack itemstack = ((EntityLivingBase) entityIn).getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+	public void setupAnim(BaphometEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.HEAD);
 
 		// head
-		head.rotateAngleY = netHeadYaw / 57.295776F;
-		head.rotateAngleX = headPitch / 57.295776F;
-		headeyes.rotateAngleY = head.rotateAngleY;
-		headeyes.rotateAngleX = head.rotateAngleX;
-		headaccessory.rotateAngleY = head.rotateAngleY;
-		headaccessory.rotateAngleX = head.rotateAngleX;
+		head.yRot = netHeadYaw / 57.295776F;
+		head.xRot = headPitch / 57.295776F;
+		headeyes.yRot = head.yRot;
+		headeyes.xRot = head.xRot;
+		headaccessory.yRot = head.yRot;
+		headaccessory.xRot = head.xRot;
+
+		headeyes.visible = entity.tickCount % 60 == 0 && limbSwingAmount <= 0.1F;
 
 		// arms
 		if (itemstack.isEmpty()) {
-			rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
-			leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
+			rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
+			leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
 
-			rightarm.rotateAngleZ = 0.0F;
-			leftarm.rotateAngleZ = 0.0F;
+			rightarm.zRot = 0.0F;
+			leftarm.zRot = 0.0F;
 
-			if (swingProgress > -9990.0F) {
+			if (attackTime > 0.0F) {
 				holdingMelee();
 			}
 
-			rightarm.rotateAngleZ += (MathHelper.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
-			rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.025F;
-			leftarm.rotateAngleZ -= (MathHelper.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
-			leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.025F;
+			rightarm.zRot += (Mth.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
+			rightarm.xRot += Mth.sin(ageInTicks * 0.067F) * 0.025F;
+			leftarm.zRot -= (Mth.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.1745329F;
+			leftarm.xRot -= Mth.sin(ageInTicks * 0.067F) * 0.025F;
 		}
 
-		if (itemstack.getItem() == Items.ARROW) {
+		if (itemstack.is(Items.ARROW)) {
 			animationThrow();
 		}
 
 		// body
-		cloak1.rotateAngleZ = MathHelper.cos(limbSwing * 0.6162F) * 0.1F * limbSwingAmount;
-		cloak2.rotateAngleZ = MathHelper.cos(limbSwing * 0.6262F) * 0.1F * limbSwingAmount;
-		cloak3.rotateAngleZ = MathHelper.cos(limbSwing * 0.6362F) * 0.1F * limbSwingAmount;
+		cloak1.zRot = Mth.cos(limbSwing * 0.6162F) * 0.1F * limbSwingAmount;
+		cloak2.zRot = Mth.cos(limbSwing * 0.6262F) * 0.1F * limbSwingAmount;
+		cloak3.zRot = Mth.cos(limbSwing * 0.6362F) * 0.1F * limbSwingAmount;
 
-		// legs (walk_normal)
-		rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
-		leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount * 0.5F;
-        rightleg.rotateAngleY = 0.0F;
-        leftleg.rotateAngleY = 0.0F;
-        rightleg.rotateAngleZ = 0.0F;
-        leftleg.rotateAngleZ = 0.0F;
-		
-		if (isRiding) {
-			rightarm.rotateAngleX += -((float) Math.PI / 5F);
-			leftarm.rotateAngleX += -((float) Math.PI / 5F);
-			rightleg.rotateAngleX = -1.4137167F;
-			rightleg.rotateAngleY = ((float) Math.PI / 10F);
-			rightleg.rotateAngleZ = 0.07853982F;
-			leftleg.rotateAngleX = -1.4137167F;
-			leftleg.rotateAngleY = -((float) Math.PI / 10F);
-			leftleg.rotateAngleZ = -0.07853982F;
+		// legs
+		rightleg.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
+		leftleg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount * 0.5F;
+		rightleg.yRot = 0.0F;
+		leftleg.yRot = 0.0F;
+		rightleg.zRot = 0.0F;
+		leftleg.zRot = 0.0F;
+
+		if (riding) {
+			rightarm.xRot += -((float) Math.PI / 5F);
+			leftarm.xRot += -((float) Math.PI / 5F);
+			rightleg.xRot = -1.4137167F;
+			rightleg.yRot = ((float) Math.PI / 10F);
+			rightleg.zRot = 0.07853982F;
+			leftleg.xRot = -1.4137167F;
+			leftleg.yRot = -((float) Math.PI / 10F);
+			leftleg.zRot = -0.07853982F;
 		}
 	}
 
@@ -290,27 +236,38 @@ public class BaphometModel extends EntityModel<BaphometEntity> implements Headed
 		float f6;
 		float f7;
 
-		f6 = 1.0F - swingProgress;
+		f6 = 1.0F - attackTime;
 		f6 *= f6;
 		f6 *= f6;
 		f6 = 1.0F - f6;
-		f7 = MathHelper.sin(f6 * (float) Math.PI);
-		float f8 = MathHelper.sin(swingProgress * (float) Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+		f7 = Mth.sin(f6 * (float) Math.PI);
+		float f8 = Mth.sin(attackTime * (float) Math.PI) * -(head.xRot - 0.7F) * 0.75F;
 
-		rightarm.rotateAngleX = (float) ((double) rightarm.rotateAngleX - ((double) f7 * 1.2D + (double) f8));
-		rightarm.rotateAngleX += (bodytop.rotateAngleY * 2.0F);
-		rightarm.rotateAngleZ = (MathHelper.sin(swingProgress * (float) Math.PI) * -0.4F);
+		rightarm.xRot = (float) ((double) rightarm.xRot - ((double) f7 * 1.2D + (double) f8));
+		rightarm.xRot += (bodytop.yRot * 2.0F);
+		rightarm.zRot = (Mth.sin(attackTime * (float) Math.PI) * -0.4F);
 	}
 
 	private void animationThrow() {
-		rightarm.rotateAngleX = -1.0472F;
+		rightarm.xRot = -1.0472F;
 	}
 
-	public ModelRenderer getRightArm() {
-		return rightarm;
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
-	public ModelRenderer getLeftArm() {
-		return leftarm;
+	@Override
+	public ModelPart getHead() {
+		return head;
+	}
+
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftarm : this.rightarm;
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		getArm(arm).translateAndRotate(poseStack);
 	}
 }
