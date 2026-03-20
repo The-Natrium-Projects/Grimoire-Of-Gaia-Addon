@@ -1,377 +1,296 @@
 package net.sodiumzh.gogaddon.client.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.sodiumzh.gogaddon.entity.GorgonEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class GorgonModel extends EntityModel<GorgonEntity> implements HeadedModel, ArmedModel {
+	private final ModelPart root;
+	private final ModelPart head;
+	private final ModelPart headeyes;
+	private final ModelPart headaccessory;
+	private final ModelPart bodytop;
+	private final ModelPart rightarm;
+	private final ModelPart leftarm;
+	private final ModelPart tail1;
+	private final ModelPart tail2;
+	private final ModelPart tail3;
+	private final ModelPart tail4;
+	private final ModelPart tail5;
+	private final ModelPart tail6;
+	private final ModelPart tail7;
+	private final ModelPart tail8;
+	private final ModelPart snake1tongue;
+	private final ModelPart snake2tongue;
+	private final ModelPart snake3tongue;
+	private final ModelPart rightsnaketongue;
+	private final ModelPart leftsnaketongue;
 
-	private ModelRenderer head;
-	private ModelRenderer headeyes;
-	private ModelRenderer headaccessory;
-	private ModelRenderer neck;
-	private ModelRenderer bodytop;
-	private ModelRenderer bodymid;
-	private ModelRenderer bodymidbutton;
-	private ModelRenderer bodybottom;
-	private ModelRenderer rightchest;
-	private ModelRenderer leftchest;
-	private ModelRenderer rightarm;
-	private ModelRenderer leftarm;
-	private ModelRenderer hair;
-	private ModelRenderer rightear;
-	private ModelRenderer leftear;
-	private ModelRenderer snake1;
-	private ModelRenderer snake2;
-	private ModelRenderer snake3;
-	private ModelRenderer rightsnake1;
-	private ModelRenderer rightsnake2;
-	private ModelRenderer leftsnake1;
-	private ModelRenderer leftsnake2;
-	private ModelRenderer snake1tongue;
-	private ModelRenderer snake2tongue;
-	private ModelRenderer snake3tongue;
-	private ModelRenderer rightsnaketongue;
-	private ModelRenderer leftsnaketongue;
-	private ModelRenderer rightbang;
-	private ModelRenderer leftbang;
-	private ModelRenderer waist1;
-	private ModelRenderer waist2;
-	private ModelRenderer tail1;
-	private ModelRenderer tail2;
-	private ModelRenderer tail3;
-	private ModelRenderer tail4;
-	private ModelRenderer tail5;
-	private ModelRenderer tail6;
-	private ModelRenderer tail7;
-	private ModelRenderer tail8;
-	
 	private static final double CYCLES_PER_BLOCK = 0.1D;
-	private float[][] undulationCycle = new float[][] {
-		{   5F,   0F,-11.25F,  -45F,-22.5F,    0F, 22.5F,   45F}, 
-		{  10F,  10F,     0F,-22.5F,  -45F,-22.5F,    0F, 22.5F}, 
-		{   5F,  20F, 11.25F,    0F,-22.5F,  -45F,-22.5F,    0F}, 
-		{   0F,  10F , 22.5F, 22.5F,    0F,-22.5F,  -45F,-22.5F}, 
-		{  -5F,   0F, 11.25F,   45F, 22.5F,    0F,-22.5F,  -45F}, 
-		{ -10F, -10F,     0F, 22.5F,   45F, 22.5F,    0F,-22.5F}, 
-		{  -5F, -20F,-11.25F,    0F, 22.5F,   45F, 22.5F,    0F}, 
-		{   0F, -10F, -22.5F,-22.5F,    0F, 22.5F,   45F, 22.5F}, 
-		};
+	private final float[][] undulationCycle = new float[][] {
+		{   5F,   0F,-11.25F,  -45F,-22.5F,    0F, 22.5F,   45F},
+		{  10F,  10F,     0F,-22.5F,  -45F,-22.5F,    0F, 22.5F},
+		{   5F,  20F, 11.25F,    0F,-22.5F,  -45F,-22.5F,    0F},
+		{   0F,  10F, 22.5F, 22.5F,    0F,-22.5F,  -45F,-22.5F},
+		{  -5F,   0F, 11.25F,   45F, 22.5F,    0F,-22.5F,  -45F},
+		{ -10F, -10F,     0F, 22.5F,   45F, 22.5F,    0F,-22.5F},
+		{  -5F, -20F,-11.25F,    0F, 22.5F,   45F, 22.5F,    0F},
+		{   0F, -10F, -22.5F,-22.5F,    0F, 22.5F,   45F, 22.5F},
+	};
 
+	public GorgonModel(ModelPart root) {
+		this.root = root.getChild("gorgon");
+		this.head = this.root.getChild("head");
+		this.headeyes = this.root.getChild("headeyes");
+		this.headaccessory = this.root.getChild("headaccessory");
+		this.bodytop = this.root.getChild("bodytop");
+		this.rightarm = this.root.getChild("rightarm");
+		this.leftarm = this.root.getChild("leftarm");
+		this.tail1 = this.root.getChild("tail1");
+		this.tail2 = this.tail1.getChild("tail2");
+		this.tail3 = this.tail2.getChild("tail3");
+		this.tail4 = this.tail3.getChild("tail4");
+		this.tail5 = this.tail4.getChild("tail5");
+		this.tail6 = this.tail5.getChild("tail6");
+		this.tail7 = this.tail6.getChild("tail7");
+		this.tail8 = this.tail7.getChild("tail8");
+		this.snake1tongue = this.head.getChild("snake1").getChild("snake1tongue");
+		this.snake2tongue = this.head.getChild("snake2").getChild("snake2tongue");
+		this.snake3tongue = this.head.getChild("snake3").getChild("snake3tongue");
+		this.rightsnaketongue = this.head.getChild("rightsnake1").getChild("rightsnake2").getChild("rightsnaketongue");
+		this.leftsnaketongue = this.head.getChild("leftsnake1").getChild("leftsnake2").getChild("leftsnaketongue");
+	}
 
-	public GorgonModel(float scaleFactor) {
-		textureWidth = 128;
-		textureHeight = 64;
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-3F, -6F, -3F, 6, 6, 6, scaleFactor);
-		head.setRotationPoint(0F, 1F, 0F);
-		setRotation(head, 0F, 0F, 0F);
-		headeyes = new ModelRenderer(this, 24, 0);
-		headeyes.addBox(-3F, -6F, -3.1F, 6, 6, 0, scaleFactor);
-		headeyes.setRotationPoint(0F, 1F, 0F);
-		setRotation(headeyes, 0F, 0F, 0F);
-		headaccessory = new ModelRenderer(this, 36, 0);
-		headaccessory.addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7, scaleFactor);
-		headaccessory.setRotationPoint(0F, 1F, 0F);
-		setRotation(headaccessory, 0F, 0F, 0F);
-		neck = new ModelRenderer(this, 0, 12);
-		neck.addBox(-1F, -1F, -1F, 2, 2, 2, scaleFactor);
-		neck.setRotationPoint(0F, 1F, 0F);
-		setRotation(neck, 0F, 0F, 0F);
-		bodytop = new ModelRenderer(this, 0, 16);
-		bodytop.addBox(-2.5F, 0F, -1.5F, 5, 6, 3, scaleFactor);
-		bodytop.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodytop, -0.0872665F, 0F, 0F);
-		bodymid = new ModelRenderer(this, 0, 25);
-		bodymid.addBox(-2F, 5.5F, -1.5F, 4, 3, 2, scaleFactor);
-		bodymid.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodymid, 0F, 0F, 0F);
-		bodymidbutton = new ModelRenderer(this, 0, 25);
-		bodymidbutton.addBox(-0.5F, 6F, -1.6F, 1, 2, 0, scaleFactor);
-		bodymidbutton.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodymidbutton, 0F, 0F, 0F);
-		bodybottom = new ModelRenderer(this, 0, 30);
-		bodybottom.addBox(-3F, 8F, -2F, 6, 3, 3, scaleFactor);
-		bodybottom.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodybottom, 0F, 0F, 0F);
-		rightchest = new ModelRenderer(this, 0, 36);
-		rightchest.addBox(-1F, -1F, -1F, 2, 2, 2, scaleFactor);
-		rightchest.setRotationPoint(-1.3F, 3F, -1.5F);
-		setRotation(rightchest, 0.7853982F, 0.1745329F, 0.0872665F);
-		leftchest = new ModelRenderer(this, 0, 36);
-		leftchest.mirror = true;
-		leftchest.addBox(-1F, -1F, -1F, 2, 2, 2, scaleFactor);
-		leftchest.setRotationPoint(1.3F, 3F, -1.5F);
-		setRotation(leftchest, 0.7853982F, -0.1745329F, -0.0872665F);
-		rightarm = new ModelRenderer(this, 16, 12);
-		rightarm.addBox(-2F, -1F, -1F, 2, 12, 2, scaleFactor);
-		rightarm.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(rightarm, 0F, 0F, 0.2617994F);
-		leftarm = new ModelRenderer(this, 24, 12);
-		leftarm.mirror = true;
-		leftarm.addBox(0F, -1F, -1F, 2, 12, 2, scaleFactor);
-		leftarm.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(leftarm, 0F, 0F, -0.2617994F);
-		hair = new ModelRenderer(this, 36, 14);
-		hair.addBox(-4F, -7F, -4F, 8, 8, 8, scaleFactor);
-		hair.setRotationPoint(0F, 1F, 0F);
-		setRotation(hair, 0F, 0F, 0F);
-		rightear = new ModelRenderer(this, 36, 32);
-		rightear.addBox(0F, -1F, 0F, 0, 3, 4, scaleFactor);
-		rightear.setRotationPoint(-3F, -2F, -3F);
-		setRotation(rightear, 0F, -0.5235988F, 0F);
-		leftear = new ModelRenderer(this, 36, 32);
-		leftear.addBox(0F, -1F, 0F, 0, 3, 4, scaleFactor);
-		leftear.setRotationPoint(3F, -2F, -3F);
-		setRotation(leftear, 0F, 0.5235988F, 0F);
-		snake1 = new ModelRenderer(this, 36, 30);
-		snake1.addBox(-1F, -4F, -1F, 2, 4, 2);
-		snake1.setRotationPoint(0F, -5F, -1.5F);
-		setRotation(snake1, 0F, 0F, 0F);
-		snake2 = new ModelRenderer(this, 36, 30);
-		snake2.addBox(-1F, -3.5F, -1F, 2, 4, 2);
-		snake2.setRotationPoint(-3F, -5F, 0F);
-		setRotation(snake2, 0F, 0F, 0F);
-		snake3 = new ModelRenderer(this, 36, 30);
-		snake3.addBox(-1F, -3.5F, -1F, 2, 4, 2);
-		snake3.setRotationPoint(3F, -5F, 0F);
-		setRotation(snake3, 0F, 0F, 0F);
-		rightsnake1 = new ModelRenderer(this, 52, 30);
-		rightsnake1.addBox(-6F, -5.5F, -1.5F, 2, 2, 2);
-		rightsnake1.setRotationPoint(0F, 1F, 0F);
-		setRotation(rightsnake1, 0F, 0F, 0F);
-		rightsnake2 = new ModelRenderer(this, 44, 30);
-		rightsnake2.addBox(-1F, -1F, -1F, 2, 2, 2);
-		rightsnake2.setRotationPoint(-6F, -4.5F, -1.5F);
-		setRotation(rightsnake2, 0F, 0F, 0F);
-		leftsnake1 = new ModelRenderer(this, 52, 30);
-		leftsnake1.addBox(4F, -5.5F, -1.5F, 2, 2, 2);
-		leftsnake1.setRotationPoint(0F, 1F, 0F);
-		setRotation(leftsnake1, 0F, 0F, 0F);
-		leftsnake2 = new ModelRenderer(this, 44, 30);
-		leftsnake2.addBox(-1F, -1F, -1F, 2, 2, 2);
-		leftsnake2.setRotationPoint(6F, -4.5F, -1.5F);
-		setRotation(leftsnake2, 0F, 0F, 0F);
-		leftsnake1 = new ModelRenderer(this, 52, 30);
-		leftsnake1.addBox(4F, -5.5F, -1.5F, 2, 2, 2, scaleFactor);
-		leftsnake1.setRotationPoint(0F, 1F, 0F);
-		setRotation(leftsnake1, 0F, 0F, 0F);
-		leftsnake2 = new ModelRenderer(this, 44, 30);
-		leftsnake2.addBox(5F, -6.5F, -2.5F, 2, 2, 2, scaleFactor);
-		leftsnake2.setRotationPoint(0F, 1F, 0F);
-		setRotation(leftsnake2, 0F, 0F, 0F);
-		snake1tongue = new ModelRenderer(this, 59, 30);
-		snake1tongue.addBox(-0.5F, 0F, -1F, 1, 0, 1, scaleFactor);
-		snake1tongue.setRotationPoint(0F, -7F, -2.5F);
-		snake1tongue.mirror = true;
-		setRotation(snake1tongue, 0.7853982F, 0F, 0F);
-		snake2tongue = new ModelRenderer(this, 59, 30);
-		snake2tongue.addBox(-0.5F, 0F, -1F, 1, 0, 1, scaleFactor);
-		snake2tongue.setRotationPoint(-3F, -6.5F, -1F);
-		setRotation(snake2tongue, 0.7853982F, 0F, 0F);
-		snake3tongue = new ModelRenderer(this, 59, 30);
-		snake3tongue.addBox(-0.5F, 0F, -1F, 1, 0, 1, scaleFactor);
-		snake3tongue.setRotationPoint(3F, -6.5F, -1F);
-		setRotation(snake3tongue, 0.7853982F, 0F, 0F);
-		rightsnaketongue = new ModelRenderer(this, 59, 30);
-		rightsnaketongue.addBox(-0.5F, 0F, -1F, 1, 0, 1, scaleFactor);
-		rightsnaketongue.setRotationPoint(-6F, -3.5F, -2.5F);
-		setRotation(rightsnaketongue, 0.7853982F, 0F, 0F);
-		leftsnaketongue = new ModelRenderer(this, 59, 30);
-		leftsnaketongue.addBox(-0.5F, 0F, -1F, 1, 0, 1, scaleFactor);
-		leftsnaketongue.setRotationPoint(6F, -3.5F, -2.5F);
-		setRotation(leftsnaketongue, 0.7853982F, 0F, 0F);
-		rightbang = new ModelRenderer(this, 36, 39);
-		rightbang.addBox(-0.5F, 0F, -0.5F, 1, 6, 1, scaleFactor);
-		rightbang.setRotationPoint(-3F, -3F, -3F);
-		setRotation(rightbang, 0F, 0F, 0F);
-		leftbang = new ModelRenderer(this, 36, 39);
-		leftbang.addBox(-0.5F, 0F, -0.5F, 1, 6, 1, scaleFactor);
-		leftbang.setRotationPoint(3F, -3F, -3F);
-		setRotation(leftbang, 0F, 0F, 0F);
-		waist1 = new ModelRenderer(this, 68, 0);
-		waist1.addBox(-4F, -1.5F, -3.5F, 5, 7, 6, scaleFactor);
-		waist1.setRotationPoint(0F, 11F, 0F);
-		setRotation(waist1, 0F, 0F, 0F);
-		waist2 = new ModelRenderer(this, 68, 13);
-		waist2.addBox(-1F, -1.5F, -3F, 5, 2, 5, scaleFactor);
-		waist2.setRotationPoint(0F, 11F, 0F);
-		setRotation(waist2, 0F, 0F, 0.3490659F);
-		tail1 = new ModelRenderer(this, 90, 0);
-		tail1.addBox(-3.5F, -1F, -2.5F, 7, 4, 4, scaleFactor);
-		tail1.setRotationPoint(0F, 11F, 0F);
-		setRotation(tail1, 0F, 0F, 0F);
-		tail2 = new ModelRenderer(this, 90, 8);
-		tail2.addBox(-3F, 0F, 0F, 6, 4, 4, scaleFactor);
-		tail2.setRotationPoint(0F, 14F, -2.5F);
-		setRotation(tail2, 0F, 0F, 0F);
-		tail3 = new ModelRenderer(this, 90, 16);
-		tail3.addBox(-2.5F, 0F, 0F, 5, 4, 4, scaleFactor);
-		tail3.setRotationPoint(0F, 18F, -2.5F);
-		setRotation(tail3, 0F, 0F, 0F);
-		tail4 = new ModelRenderer(this, 90, 16);
-		tail4.addBox(-2.5F, 0F, 0F, 5, 4, 4, scaleFactor);
-		tail4.setRotationPoint(0F, 22F, -2.5F);
-		setRotation(tail4, 0F, 0F, 0F);
-		tail5 = new ModelRenderer(this, 90, 24);
-		tail5.addBox(-2F, 0F, 0.5F, 4, 4, 3, scaleFactor);
-		tail5.setRotationPoint(0F, 26F, -2.5F);
-		setRotation(tail5, 0F, 0F, 0F);
-		tail6 = new ModelRenderer(this, 90, 24);
-		tail6.addBox(-2F, 0F, 0F, 4, 4, 3, scaleFactor);
-		tail6.setRotationPoint(0F, 30F, -2F);
-		setRotation(tail6, 0F, 0F, 0F);
-		tail7 = new ModelRenderer(this, 90, 31);
-		tail7.addBox(-1.5F, 0F, 0.5F, 3, 3, 2, scaleFactor);
-		tail7.setRotationPoint(0F, 34F, -2F);
-		setRotation(tail7, 0F, 0F, 0F);
-		tail8 = new ModelRenderer(this, 90, 36);
-		tail8.addBox(-1F, 0F, 0F, 2, 2, 2, scaleFactor);
-		tail8.setRotationPoint(0F, 37F, -1.5F);
-		setRotation(tail8, 0F, 0F, 0F);
-		
-		convertToChild(head, hair);
-		convertToChild(head, rightear);
-		convertToChild(head, leftear);
-		convertToChild(snake1, snake1tongue);
-		convertToChild(snake2, snake2tongue);
-		convertToChild(snake3, snake3tongue);
-		convertToChild(rightsnake2, rightsnaketongue);
-		convertToChild(leftsnake2, leftsnaketongue);
-		convertToChild(head, snake1);
-		convertToChild(head, snake2);
-		convertToChild(head, snake3);
-		convertToChild(rightsnake1, rightsnake2);
-		convertToChild(leftsnake1, leftsnake2);
-		convertToChild(head, rightsnake1);
-		convertToChild(head, leftsnake1);
-		convertToChild(head, rightbang);
-		convertToChild(head, leftbang);
-		
-		convertToChild(tail7, tail8);
-		convertToChild(tail6, tail7);
-		convertToChild(tail5, tail6);
-		convertToChild(tail4, tail5);
-		convertToChild(tail3, tail4);
-		convertToChild(tail2, tail3);
-		convertToChild(tail1, tail2);
+		PartDefinition gorgon = partdefinition.addOrReplaceChild("gorgon", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition head = gorgon.addOrReplaceChild("head", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("headeyes", CubeListBuilder.create()
+				.texOffs(24, 0).addBox(-3.0F, -6.0F, -3.1F, 6.0F, 6.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("headaccessory", CubeListBuilder.create()
+				.texOffs(36, 0).addBox(-3.5F, -6.5F, -3.5F, 7.0F, 7.0F, 7.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("neck", CubeListBuilder.create()
+				.texOffs(0, 12).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("bodytop", CubeListBuilder.create()
+				.texOffs(0, 16).addBox(-2.5F, 0.0F, -1.5F, 5.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("bodymid", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-2.0F, 5.5F, -1.5F, 4.0F, 3.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("bodymidbutton", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-0.5F, 6.0F, -1.6F, 1.0F, 2.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("bodybottom", CubeListBuilder.create()
+				.texOffs(0, 30).addBox(-3.0F, 8.0F, -2.0F, 6.0F, 3.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("rightchest", CubeListBuilder.create()
+				.texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-1.3F, -21.0F, -1.5F, 0.7854F, 0.1745F, 0.0873F));
+
+		gorgon.addOrReplaceChild("leftchest", CubeListBuilder.create()
+				.texOffs(0, 36).mirror().addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F).mirror(false), PartPose.offsetAndRotation(1.3F, -21.0F, -1.5F, 0.7854F, -0.1745F, -0.0873F));
+
+		gorgon.addOrReplaceChild("rightarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.2618F));
+
+		gorgon.addOrReplaceChild("leftarm", CubeListBuilder.create()
+				.texOffs(24, 12).mirror().addBox(0.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F).mirror(false), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.2618F));
+
+		// Head children: hair
+		head.addOrReplaceChild("hair", CubeListBuilder.create()
+				.texOffs(36, 14).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 8.0F, 8.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		// Head children: ears
+		head.addOrReplaceChild("rightear", CubeListBuilder.create()
+				.texOffs(36, 32).addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 4.0F), PartPose.offsetAndRotation(-3.0F, -3.0F, -3.0F, 0.0F, -0.5236F, 0.0F));
+
+		head.addOrReplaceChild("leftear", CubeListBuilder.create()
+				.texOffs(36, 32).addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 4.0F), PartPose.offsetAndRotation(3.0F, -3.0F, -3.0F, 0.0F, 0.5236F, 0.0F));
+
+		// Head children: top snakes
+		PartDefinition snake1 = head.addOrReplaceChild("snake1", CubeListBuilder.create()
+				.texOffs(36, 30).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F), PartPose.offset(0.0F, -6.0F, -1.5F));
+
+		snake1.addOrReplaceChild("snake1tongue", CubeListBuilder.create()
+				.texOffs(59, 30).mirror().addBox(-0.5F, 0.0F, -1.0F, 1.0F, 0.0F, 1.0F).mirror(false), PartPose.offsetAndRotation(0.0F, -2.0F, -1.0F, 0.7854F, 0.0F, 0.0F));
+
+		PartDefinition snake2 = head.addOrReplaceChild("snake2", CubeListBuilder.create()
+				.texOffs(36, 30).addBox(-1.0F, -3.5F, -1.0F, 2.0F, 4.0F, 2.0F), PartPose.offset(-3.0F, -6.0F, 0.0F));
+
+		snake2.addOrReplaceChild("snake2tongue", CubeListBuilder.create()
+				.texOffs(59, 30).addBox(-0.5F, 0.0F, -1.0F, 1.0F, 0.0F, 1.0F), PartPose.offsetAndRotation(0.0F, -1.5F, -1.0F, 0.7854F, 0.0F, 0.0F));
+
+		PartDefinition snake3 = head.addOrReplaceChild("snake3", CubeListBuilder.create()
+				.texOffs(36, 30).addBox(-1.0F, -3.5F, -1.0F, 2.0F, 4.0F, 2.0F), PartPose.offset(3.0F, -6.0F, 0.0F));
+
+		snake3.addOrReplaceChild("snake3tongue", CubeListBuilder.create()
+				.texOffs(59, 30).addBox(-0.5F, 0.0F, -1.0F, 1.0F, 0.0F, 1.0F), PartPose.offsetAndRotation(0.0F, -1.5F, -1.0F, 0.7854F, 0.0F, 0.0F));
+
+		// Head children: right snake chain
+		PartDefinition rightsnake1 = head.addOrReplaceChild("rightsnake1", CubeListBuilder.create()
+				.texOffs(52, 30).addBox(-6.0F, -5.5F, -1.5F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition rightsnake2 = rightsnake1.addOrReplaceChild("rightsnake2", CubeListBuilder.create()
+				.texOffs(44, 30).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(-6.0F, -5.5F, -1.5F));
+
+		rightsnake2.addOrReplaceChild("rightsnaketongue", CubeListBuilder.create()
+				.texOffs(59, 30).addBox(-0.5F, 0.0F, -1.0F, 1.0F, 0.0F, 1.0F), PartPose.offsetAndRotation(0.0F, 1.0F, -1.0F, 0.7854F, 0.0F, 0.0F));
+
+		// Head children: left snake chain
+		PartDefinition leftsnake1 = head.addOrReplaceChild("leftsnake1", CubeListBuilder.create()
+				.texOffs(52, 30).addBox(4.0F, -5.5F, -1.5F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition leftsnake2 = leftsnake1.addOrReplaceChild("leftsnake2", CubeListBuilder.create()
+				.texOffs(44, 30).addBox(5.0F, -6.5F, -2.5F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		leftsnake2.addOrReplaceChild("leftsnaketongue", CubeListBuilder.create()
+				.texOffs(59, 30).addBox(-0.5F, 0.0F, -1.0F, 1.0F, 0.0F, 1.0F), PartPose.offsetAndRotation(6.0F, -4.5F, -2.5F, 0.7854F, 0.0F, 0.0F));
+
+		// Head children: bangs
+		head.addOrReplaceChild("rightbang", CubeListBuilder.create()
+				.texOffs(36, 39).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 6.0F, 1.0F), PartPose.offset(-3.0F, -4.0F, -3.0F));
+
+		head.addOrReplaceChild("leftbang", CubeListBuilder.create()
+				.texOffs(36, 39).addBox(-0.5F, 0.0F, -0.5F, 1.0F, 6.0F, 1.0F), PartPose.offset(3.0F, -4.0F, -3.0F));
+
+		// Waist
+		gorgon.addOrReplaceChild("waist1", CubeListBuilder.create()
+				.texOffs(68, 0).addBox(-4.0F, -1.5F, -3.5F, 5.0F, 7.0F, 6.0F), PartPose.offset(0.0F, -13.0F, 0.0F));
+
+		gorgon.addOrReplaceChild("waist2", CubeListBuilder.create()
+				.texOffs(68, 13).addBox(-1.0F, -1.5F, -3.0F, 5.0F, 2.0F, 5.0F), PartPose.offsetAndRotation(0.0F, -13.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
+
+		// Tail chain
+		PartDefinition tail1 = gorgon.addOrReplaceChild("tail1", CubeListBuilder.create()
+				.texOffs(90, 0).addBox(-3.5F, -1.0F, -2.5F, 7.0F, 4.0F, 4.0F), PartPose.offset(0.0F, -13.0F, 0.0F));
+
+		PartDefinition tail2 = tail1.addOrReplaceChild("tail2", CubeListBuilder.create()
+				.texOffs(90, 8).addBox(-3.0F, 0.0F, 0.0F, 6.0F, 4.0F, 4.0F), PartPose.offset(0.0F, 3.0F, -2.5F));
+
+		PartDefinition tail3 = tail2.addOrReplaceChild("tail3", CubeListBuilder.create()
+				.texOffs(90, 16).addBox(-2.5F, 0.0F, 0.0F, 5.0F, 4.0F, 4.0F), PartPose.offset(0.0F, 4.0F, 0.0F));
+
+		PartDefinition tail4 = tail3.addOrReplaceChild("tail4", CubeListBuilder.create()
+				.texOffs(90, 16).addBox(-2.5F, 0.0F, 0.0F, 5.0F, 4.0F, 4.0F), PartPose.offset(0.0F, 4.0F, 0.0F));
+
+		PartDefinition tail5 = tail4.addOrReplaceChild("tail5", CubeListBuilder.create()
+				.texOffs(90, 24).addBox(-2.0F, 0.0F, 0.5F, 4.0F, 4.0F, 3.0F), PartPose.offset(0.0F, 4.0F, 0.0F));
+
+		PartDefinition tail6 = tail5.addOrReplaceChild("tail6", CubeListBuilder.create()
+				.texOffs(90, 24).addBox(-2.0F, 0.0F, 0.0F, 4.0F, 4.0F, 3.0F), PartPose.offset(0.0F, 4.0F, 0.5F));
+
+		PartDefinition tail7 = tail6.addOrReplaceChild("tail7", CubeListBuilder.create()
+				.texOffs(90, 31).addBox(-1.5F, 0.0F, 0.5F, 3.0F, 3.0F, 2.0F), PartPose.offset(0.0F, 4.0F, 0.0F));
+
+		tail7.addOrReplaceChild("tail8", CubeListBuilder.create()
+				.texOffs(90, 36).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, 3.0F, 0.5F));
+
+		return LayerDefinition.create(meshdefinition, 128, 64);
 	}
 
 	@Override
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		head.render(scale);
-		headaccessory.render(scale);
-		neck.render(scale);
-		bodytop.render(scale);
-		bodymid.render(scale);
-		bodymidbutton.render(scale);
-		bodybottom.render(scale);
-		rightchest.render(scale);
-		leftchest.render(scale);
-		rightarm.render(scale);
-		leftarm.render(scale);
-		waist1.render(scale);
-		waist2.render(scale);
-		tail1.render(scale);
-		
-		if (entityIn.ticksExisted % 60 == 0 && ageInTicks <= 0.1F) {
-			headeyes.render(scale);
-		}
-	}
-
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+	public void setupAnim(GorgonEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// head
-		head.rotateAngleY = netHeadYaw / 57.295776F;
-		head.rotateAngleX = headPitch / 57.295776F;
-		headeyes.rotateAngleY = head.rotateAngleY;
-		headeyes.rotateAngleX = head.rotateAngleX;
-		headaccessory.rotateAngleY = head.rotateAngleY;
-		headaccessory.rotateAngleX = head.rotateAngleX;
-		
-		snake1tongue.showModel = entityIn.ticksExisted % 60 == 0 && limbSwingAmount <= 0.1F;
-		snake2tongue.showModel = entityIn.ticksExisted % 120 == 0 && limbSwingAmount <= 0.1F;
-		snake3tongue.showModel = entityIn.ticksExisted % 180 == 0 && limbSwingAmount <= 0.1F;
-		rightsnaketongue.showModel = entityIn.ticksExisted % 180 == 0 && limbSwingAmount <= 0.1F;
-		leftsnaketongue.showModel = entityIn.ticksExisted % 120 == 0 && limbSwingAmount <= 0.1F;
+		head.yRot = netHeadYaw / 57.295776F;
+		head.xRot = headPitch / 57.295776F;
+		headeyes.yRot = head.yRot;
+		headeyes.xRot = head.xRot;
+		headaccessory.yRot = head.yRot;
+		headaccessory.xRot = head.xRot;
+
+		headeyes.visible = entity.tickCount % 60 == 0 && limbSwingAmount <= 0.1F;
+
+		snake1tongue.visible = entity.tickCount % 60 == 0 && limbSwingAmount <= 0.1F;
+		snake2tongue.visible = entity.tickCount % 120 == 0 && limbSwingAmount <= 0.1F;
+		snake3tongue.visible = entity.tickCount % 180 == 0 && limbSwingAmount <= 0.1F;
+		rightsnaketongue.visible = entity.tickCount % 180 == 0 && limbSwingAmount <= 0.1F;
+		leftsnaketongue.visible = entity.tickCount % 120 == 0 && limbSwingAmount <= 0.1F;
 
 		// arms
-		rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
-		leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
+		rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
+		leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
 
-		rightarm.rotateAngleZ = 0.0F;
-		leftarm.rotateAngleZ = 0.0F;
+		rightarm.zRot = 0.0F;
+		leftarm.zRot = 0.0F;
 
-		ItemStack itemstack = ((EntityLivingBase) entityIn).getHeldItemMainhand();
-		EntityGaiaGorgon entity = (EntityGaiaGorgon) entityIn;
-
-		if (entity.isSwingingArms() && (itemstack.getItem() == Items.BOW)) {
-			holdingBow(ageInTicks);
-		} else if (swingProgress > -9990.0F) {
+		// TODO: Add bow animation when entity supports isSwingingArms()
+		if (attackTime > 0.0F) {
 			holdingMelee();
 		}
 
-		rightarm.rotateAngleZ += (MathHelper.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.4363323F;
-		rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.025F;
-		leftarm.rotateAngleZ -= (MathHelper.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.4363323F;
-		leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.025F;
+		rightarm.zRot += (Mth.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.4363323F;
+		rightarm.xRot += Mth.sin(ageInTicks * 0.067F) * 0.025F;
+		leftarm.zRot -= (Mth.cos(ageInTicks * 0.09F) * 0.025F + 0.025F) + 0.4363323F;
+		leftarm.xRot -= Mth.sin(ageInTicks * 0.067F) * 0.025F;
 
-		// legs
-		tail1.rotateAngleX = -0.1308997F;
-		tail2.rotateAngleX = +0.3926991F;
-		tail3.rotateAngleX = +0.3926991F;
-		tail4.rotateAngleX = +0.785398F;
-		tail8.rotateAngleX = +0.3926991F;
-		
-		updateDistanceMovedTotal(entityIn);
-		int cycleIndex = (int) ((getDistanceMovedTotal() * CYCLES_PER_BLOCK) % undulationCycle.length);
+		// tail
+		tail1.xRot = -0.1308997F;
+		tail2.xRot = +0.3926991F;
+		tail3.xRot = +0.3926991F;
+		tail4.xRot = +0.785398F;
+		tail8.xRot = +0.3926991F;
 
-		tail5.rotateAngleZ = degToRad(undulationCycle[cycleIndex][4]);
-		tail6.rotateAngleZ = degToRad(undulationCycle[cycleIndex][5]);
-		tail7.rotateAngleZ = degToRad(undulationCycle[cycleIndex][6]);
-		tail8.rotateAngleZ = degToRad(undulationCycle[cycleIndex][7]);
-	}
+		int cycleIndex = Math.abs((int) ((limbSwing * CYCLES_PER_BLOCK) % undulationCycle.length));
 
-	private void holdingBow(float ageInTicks) {
-		float f = MathHelper.sin(swingProgress * (float) Math.PI);
-		float f1 = MathHelper.sin((1.0F - (1.0F - swingProgress) * (1.0F - swingProgress)) * (float) Math.PI);
-
-		rightarm.rotateAngleZ = -0.3F;
-		leftarm.rotateAngleZ = 0.3F;
-		rightarm.rotateAngleY = -(0.1F - f * 0.6F);
-		leftarm.rotateAngleY = 0.3F - f * 0.6F;
-		rightarm.rotateAngleX = -((float) Math.PI / 2F);
-		leftarm.rotateAngleX = -((float) Math.PI / 2F);
-		rightarm.rotateAngleX -= f * 1.2F - f1 * 0.4F;
-		leftarm.rotateAngleX -= f * 1.2F - f1 * 0.4F;
-		rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-		leftarm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
-		rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-		leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+		tail5.zRot = undulationCycle[cycleIndex][4] * Mth.DEG_TO_RAD;
+		tail6.zRot = undulationCycle[cycleIndex][5] * Mth.DEG_TO_RAD;
+		tail7.zRot = undulationCycle[cycleIndex][6] * Mth.DEG_TO_RAD;
+		tail8.zRot = undulationCycle[cycleIndex][7] * Mth.DEG_TO_RAD;
 	}
 
 	public void holdingMelee() {
 		float f6;
 		float f7;
 
-		f6 = 1.0F - swingProgress;
+		f6 = 1.0F - attackTime;
 		f6 *= f6;
 		f6 *= f6;
 		f6 = 1.0F - f6;
-		f7 = MathHelper.sin(f6 * (float) Math.PI);
-		float f8 = MathHelper.sin(swingProgress * (float) Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+		f7 = Mth.sin(f6 * (float) Math.PI);
+		float f8 = Mth.sin(attackTime * (float) Math.PI) * -(head.xRot - 0.7F) * 0.75F;
 
-		rightarm.rotateAngleX = (float) ((double) rightarm.rotateAngleX - ((double) f7 * 1.2D + (double) f8));
-		rightarm.rotateAngleX += (bodytop.rotateAngleY * 2.0F);
-		rightarm.rotateAngleZ = (MathHelper.sin(swingProgress * (float) Math.PI) * -0.4F);
+		rightarm.xRot = (float) ((double) rightarm.xRot - ((double) f7 * 1.2D + (double) f8));
+		rightarm.xRot += (bodytop.yRot * 2.0F);
+		rightarm.zRot = (Mth.sin(attackTime * (float) Math.PI) * -0.4F);
 	}
 
-	public ModelRenderer getRightArm() {
-		return rightarm;
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
-	public ModelRenderer getLeftArm() {
-		return leftarm;
+	@Override
+	public ModelPart getHead() {
+		return head;
+	}
+
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftarm : this.rightarm;
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		getArm(arm).translateAndRotate(poseStack);
 	}
 }
