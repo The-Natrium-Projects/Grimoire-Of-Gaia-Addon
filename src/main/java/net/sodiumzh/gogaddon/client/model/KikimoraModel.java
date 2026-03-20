@@ -1,322 +1,281 @@
 package net.sodiumzh.gogaddon.client.model;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.sodiumzh.gogaddon.entity.KikimoraEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class KikimoraModel extends EntityModel<KikimoraEntity> implements HeadedModel, ArmedModel {
+	private final ModelPart root;
+	private final ModelPart head;
+	private final ModelPart headeyes;
+	private final ModelPart headaccessory;
+	private final ModelPart bodytop;
+	private final ModelPart rightarm;
+	private final ModelPart leftarm;
+	private final ModelPart rightarmlower;
+	private final ModelPart leftarmlower;
+	private final ModelPart rightleg;
+	private final ModelPart leftleg;
+	private final ModelPart rightear;
+	private final ModelPart leftear;
+	private final ModelPart rightskirt01;
+	private final ModelPart leftskirt01;
+	private final ModelPart rightskirt02;
+	private final ModelPart leftskirt02;
+	private final ModelPart rightskirt03;
+	private final ModelPart leftskirt03;
+	private final ModelPart tail01;
+	private final ModelPart tail02;
+	private final ModelPart tail03;
+	private final ModelPart tail04;
+	private final ModelPart tail05;
 
-	ModelRenderer head;
-	ModelRenderer headeyes;
-	ModelRenderer headaccessory;
-	ModelRenderer neck;
-	ModelRenderer bodytop;
-	ModelRenderer bodymiddle;
-	ModelRenderer bodymiddlebutton;
-	ModelRenderer bodybottom;
-	ModelRenderer rightchest;
-	ModelRenderer leftchest;
-	ModelRenderer rightarm;
-	ModelRenderer leftarm;
-	ModelRenderer rightarmlower;
-	ModelRenderer leftarmlower;
-	ModelRenderer rightleg;
-	ModelRenderer leftleg;
-	ModelRenderer rightear;
-	ModelRenderer leftear;
-	ModelRenderer skirtribbon;
-	ModelRenderer rightskirt01;
-	ModelRenderer leftskirt01;
-	ModelRenderer rightskirt02;
-	ModelRenderer leftskirt02;
-	ModelRenderer rightskirt03;
-	ModelRenderer leftskirt03;
-	ModelRenderer tail01;
-	ModelRenderer tail02;
-	ModelRenderer tail03;
-	ModelRenderer tail04;
-	ModelRenderer tail05;
+	public KikimoraModel(ModelPart root) {
+		this.root = root.getChild("kikimora");
+		this.head = this.root.getChild("head");
+		this.headeyes = this.root.getChild("headeyes");
+		this.headaccessory = this.root.getChild("headaccessory");
+		this.bodytop = this.root.getChild("bodytop");
+		this.rightarm = this.root.getChild("rightarm");
+		this.leftarm = this.root.getChild("leftarm");
+		this.rightarmlower = this.rightarm.getChild("rightarmlower");
+		this.leftarmlower = this.leftarm.getChild("leftarmlower");
+		this.rightleg = this.root.getChild("rightleg");
+		this.leftleg = this.root.getChild("leftleg");
+		this.rightear = this.head.getChild("rightear");
+		this.leftear = this.head.getChild("leftear");
+		this.rightskirt01 = this.root.getChild("rightskirt01");
+		this.leftskirt01 = this.root.getChild("leftskirt01");
+		this.rightskirt02 = this.rightleg.getChild("rightskirt02");
+		this.leftskirt02 = this.leftleg.getChild("leftskirt02");
+		this.rightskirt03 = this.rightskirt02.getChild("rightskirt03");
+		this.leftskirt03 = this.leftskirt02.getChild("leftskirt03");
+		this.tail01 = this.root.getChild("tail01");
+		this.tail02 = this.tail01.getChild("tail02");
+		this.tail03 = this.tail02.getChild("tail03");
+		this.tail04 = this.tail03.getChild("tail04");
+		this.tail05 = this.tail04.getChild("tail05");
+	}
 
-	public KikimoraModel() {
-		textureWidth = 128;
-		textureHeight = 64;
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-3F, -6F, -3F, 6, 6, 6);
-		head.setRotationPoint(0F, 1F, 0F);
-		setRotation(head, 0F, 0F, 0F);
-		headeyes = new ModelRenderer(this, 24, 0);
-		headeyes.addBox(-3F, -6F, -3.1F, 6, 6, 0);
-		headeyes.setRotationPoint(0F, 1F, 0F);
-		setRotation(headeyes, 0F, 0F, 0F);
-		headaccessory = new ModelRenderer(this, 36, 0);
-		headaccessory.addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7);
-		headaccessory.setRotationPoint(0F, 1F, 0F);
-		setRotation(headaccessory, 0F, 0F, 0F);
-		neck = new ModelRenderer(this, 0, 12);
-		neck.addBox(-1F, -1F, -1F, 2, 2, 2);
-		neck.setRotationPoint(0F, 1F, 0F);
-		setRotation(neck, 0F, 0F, 0F);
-		bodytop = new ModelRenderer(this, 0, 16);
-		bodytop.addBox(-2.5F, 0F, -1.5F, 5, 6, 3);
-		bodytop.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodytop, -0.0872665F, 0F, 0F);
-		bodymiddle = new ModelRenderer(this, 0, 25);
-		bodymiddle.addBox(-2F, 5.5F, -1.5F, 4, 3, 2);
-		bodymiddle.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodymiddle, 0F, 0F, 0F);
-		bodymiddlebutton = new ModelRenderer(this, 0, 25);
-		bodymiddlebutton.addBox(-0.5F, 6F, -1.6F, 1, 2, 0);
-		bodymiddlebutton.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodymiddlebutton, 0F, 0F, 0F);
-		bodybottom = new ModelRenderer(this, 0, 30);
-		bodybottom.addBox(-3F, 8F, -2.5F, 6, 3, 3);
-		bodybottom.setRotationPoint(0F, 1F, 0F);
-		setRotation(bodybottom, 0.0872665F, 0F, 0F);
-		rightchest = new ModelRenderer(this, 0, 36);
-		rightchest.addBox(-1F, -1F, -1F, 2, 2, 2);
-		rightchest.setRotationPoint(-1.3F, 3F, -1.5F);
-		setRotation(rightchest, 0.7853982F, 0.1745329F, 0.0872665F);
-		leftchest = new ModelRenderer(this, 0, 36);
-		leftchest.mirror = true;
-		leftchest.addBox(-1F, -1F, -1F, 2, 2, 2);
-		leftchest.setRotationPoint(1.3F, 3F, -1.5F);
-		setRotation(leftchest, 0.7853982F, -0.1745329F, -0.0872665F);
-		rightarm = new ModelRenderer(this, 16, 12);
-		rightarm.addBox(-2F, -1F, -1F, 2, 6, 2);
-		rightarm.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(rightarm, 0F, 0F, 0F);
-		leftarm = new ModelRenderer(this, 16, 12);
-		leftarm.mirror = true;
-		leftarm.addBox(0F, -1F, -1F, 2, 6, 2);
-		leftarm.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(leftarm, 0F, 0F, 0F);
-		rightarmlower = new ModelRenderer(this, 16, 20);
-		rightarmlower.addBox(-1F, 0F, -2F, 2, 6, 2);
-		rightarmlower.setRotationPoint(-3.5F, 7.5F, 1F);
-		setRotation(rightarmlower, 0F, 0F, 0F);
-		leftarmlower = new ModelRenderer(this, 16, 20);
-		leftarmlower.mirror = true;
-		leftarmlower.addBox(-1F, 0F, -2F, 2, 6, 2);
-		leftarmlower.setRotationPoint(3.5F, 7.5F, 1F);
-		setRotation(leftarmlower, 0F, 0F, 0F);
-		rightleg = new ModelRenderer(this, 24, 12);
-		rightleg.addBox(-1.5F, -1F, -1.5F, 3, 14, 3);
-		rightleg.setRotationPoint(-2F, 11F, 0F);
-		setRotation(rightleg, 0F, -0.0872665F, 0F);
-		leftleg = new ModelRenderer(this, 24, 12);
-		leftleg.mirror = true;
-		leftleg.addBox(-1.5F, -1F, -1.5F, 3, 14, 3);
-		leftleg.setRotationPoint(2F, 11F, 0F);
-		setRotation(leftleg, 0F, 0.0872665F, 0F);
-		ModelRenderer hat = new ModelRenderer(this, 36, 14);
-		hat.addBox(-4F, -5F, -4F, 8, 4, 8);
-		hat.setRotationPoint(0F, -2F, 0F);
-		setRotation(hat, -0.7853982F, 0F, 0F);
-		rightear = new ModelRenderer(this, 36, 26);
-		rightear.addBox(0F, 0F, -1.5F, 3, 4, 3);
-		rightear.setRotationPoint(-3.5F, -4F, 0F);
-		setRotation(rightear, 0F, 0F, 0.5235988F);
-		leftear = new ModelRenderer(this, 36, 26);
-		leftear.mirror = true;
-		leftear.addBox(-3F, 0F, -1.5F, 3, 4, 3);
-		leftear.setRotationPoint(3.5F, -4F, 0F);
-		setRotation(leftear, 0F, 0F, -0.5235988F);
-		ModelRenderer rightpauldronoverlay = new ModelRenderer(this, 36, 33);
-		rightpauldronoverlay.addBox(-2.5F, -1.5F, -2F, 4, 4, 4);
-		rightpauldronoverlay.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(rightpauldronoverlay, 0F, 0F, 0.2617994F);
-		ModelRenderer leftpauldronoverlay = new ModelRenderer(this, 36, 33);
-		leftpauldronoverlay.mirror = true;
-		leftpauldronoverlay.addBox(-1.5F, -1.5F, -2F, 4, 4, 4);
-		leftpauldronoverlay.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(leftpauldronoverlay, 0F, 0F, -0.2617994F);
-		ModelRenderer rightpauldron = new ModelRenderer(this, 36, 41);
-		rightpauldron.addBox(-2.5F, -1F, -1.5F, 3, 3, 3);
-		rightpauldron.setRotationPoint(-2.5F, 2.5F, 0F);
-		setRotation(rightpauldron, 0F, 0F, 0F);
-		ModelRenderer leftpauldron = new ModelRenderer(this, 36, 41);
-		leftpauldron.mirror = true;
-		leftpauldron.addBox(-0.5F, -1F, -1.5F, 3, 3, 3);
-		leftpauldron.setRotationPoint(2.5F, 2.5F, 0F);
-		setRotation(leftpauldron, 0F, 0F, 0F);
-		ModelRenderer rightcufflink = new ModelRenderer(this, 36, 47);
-		rightcufflink.addBox(-1F, -5F, -1F, 2, 4, 2);
-		rightcufflink.setRotationPoint(-3.5F, 13.5F, 0F);
-		setRotation(rightcufflink, -0.1745329F, 0F, -0.1745329F);
-		ModelRenderer leftcufflink = new ModelRenderer(this, 36, 47);
-		leftcufflink.mirror = true;
-		leftcufflink.addBox(-1F, -5F, -1F, 2, 4, 2);
-		leftcufflink.setRotationPoint(3.5F, 13.5F, 0F);
-		setRotation(leftcufflink, -0.1745329F, 0F, 0.1745329F);
-		skirtribbon = new ModelRenderer(this, 84, 0);
-		skirtribbon.addBox(-3.5F, 1F, 7.5F, 7, 2, 5);
-		skirtribbon.setRotationPoint(0F, 1F, 0F);
-		setRotation(skirtribbon, -1.047198F, 0F, 0F);
-		rightskirt01 = new ModelRenderer(this, 84, 7);
-		rightskirt01.addBox(-4F, -1.5F, -3.5F, 4, 3, 7);
-		rightskirt01.setRotationPoint(0F, 11F, 0F);
-		setRotation(rightskirt01, 0F, 0F, 0F);
-		leftskirt01 = new ModelRenderer(this, 84, 7);
-		leftskirt01.mirror = true;
-		leftskirt01.addBox(0F, -1.5F, -3.5F, 4, 3, 7);
-		leftskirt01.setRotationPoint(0F, 11F, 0F);
-		setRotation(leftskirt01, 0F, 0F, 0F);
-		rightskirt02 = new ModelRenderer(this, 84, 17);
-		rightskirt02.addBox(-4.5F, 1.5F, -4F, 5, 4, 8);
-		rightskirt02.setRotationPoint(0F, 11F, 0F);
-		setRotation(rightskirt02, 0F, 0F, 0F);
-		leftskirt02 = new ModelRenderer(this, 84, 17);
-		leftskirt02.mirror = true;
-		leftskirt02.addBox(-0.5F, 1.5F, -4F, 5, 4, 8);
-		leftskirt02.setRotationPoint(0F, 11F, 0F);
-		setRotation(leftskirt02, 0F, 0F, 0F);
-		rightskirt03 = new ModelRenderer(this, 84, 29);
-		rightskirt03.addBox(-5F, 5.5F, -4.5F, 6, 5, 9);
-		rightskirt03.setRotationPoint(0F, 11F, 0F);
-		setRotation(rightskirt03, 0F, 0F, 0F);
-		leftskirt03 = new ModelRenderer(this, 84, 29);
-		leftskirt03.mirror = true;
-		leftskirt03.addBox(-1F, 5.5F, -4.5F, 6, 5, 9);
-		leftskirt03.setRotationPoint(0F, 11F, 0F);
-		setRotation(leftskirt03, 0F, 0F, 0F);
-		tail01 = new ModelRenderer(this, 68, 0);
-		tail01.addBox(-1.5F, -1.5F, 0F, 3, 3, 3);
-		tail01.setRotationPoint(0F, 9F, 1F);
-		setRotation(tail01, 0F, 0F, 0F);
-		tail02 = new ModelRenderer(this, 68, 6);
-		tail02.addBox(-2F, -2F, 0F, 4, 4, 4);
-		tail02.setRotationPoint(0F, 9F, 4F);
-		setRotation(tail02, 0F, 0F, 0F);
-		tail03 = new ModelRenderer(this, 68, 14);
-		tail03.addBox(-2F, -2F, 0F, 4, 4, 4);
-		tail03.setRotationPoint(0F, 9F, 8F);
-		setRotation(tail03, 0F, 0F, 0F);
-		tail04 = new ModelRenderer(this, 68, 22);
-		tail04.addBox(-1.5F, -1.5F, 0F, 3, 3, 3);
-		tail04.setRotationPoint(0F, 9F, 12F);
-		setRotation(tail04, 0F, 0F, 0F);
-		tail05 = new ModelRenderer(this, 68, 28);
-		tail05.addBox(-1.5F, -1.5F, 0F, 3, 3, 3);
-		tail05.setRotationPoint(0F, 9F, 15F);
-		setRotation(tail05, 0F, 0F, 0F);
+		PartDefinition kikimora = partdefinition.addOrReplaceChild("kikimora", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		convertToChild(head, hat);
-		convertToChild(head, rightear);
-		convertToChild(head, leftear);
-		convertToChild(rightpauldron, rightpauldronoverlay);
-		convertToChild(rightarm, rightpauldron);
-		convertToChild(leftpauldron, leftpauldronoverlay);
-		convertToChild(leftarm, leftpauldron);
-		convertToChild(rightarmlower, rightcufflink);
-		convertToChild(rightarm, rightarmlower);
-		convertToChild(leftarmlower, leftcufflink);
-		convertToChild(leftarm, leftarmlower);
-		convertToChild(rightskirt02, rightskirt03);
-		convertToChild(rightleg, rightskirt02);
-		convertToChild(leftskirt02, leftskirt03);
-		convertToChild(leftleg, leftskirt02);
-		convertToChild(tail04, tail05);
-		convertToChild(tail03, tail04);
-		convertToChild(tail02, tail03);
-		convertToChild(tail01, tail02);
+		// Head
+		PartDefinition head = kikimora.addOrReplaceChild("head", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		kikimora.addOrReplaceChild("headeyes", CubeListBuilder.create()
+				.texOffs(24, 0).addBox(-3.0F, -6.0F, -3.1F, 6.0F, 6.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		kikimora.addOrReplaceChild("headaccessory", CubeListBuilder.create()
+				.texOffs(36, 0).addBox(-3.5F, -6.5F, -3.5F, 7.0F, 7.0F, 7.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		// Head children: hat and ears
+		head.addOrReplaceChild("hat", CubeListBuilder.create()
+				.texOffs(36, 14).addBox(-4.0F, -5.0F, -4.0F, 8.0F, 4.0F, 8.0F), PartPose.offsetAndRotation(0.0F, -3.0F, 0.0F, -0.7854F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("rightear", CubeListBuilder.create()
+				.texOffs(36, 26).addBox(0.0F, 0.0F, -1.5F, 3.0F, 4.0F, 3.0F), PartPose.offsetAndRotation(-3.5F, -5.0F, 0.0F, 0.0F, 0.0F, 0.5236F));
+
+		head.addOrReplaceChild("leftear", CubeListBuilder.create()
+				.texOffs(36, 26).mirror().addBox(-3.0F, 0.0F, -1.5F, 3.0F, 4.0F, 3.0F).mirror(false), PartPose.offsetAndRotation(3.5F, -5.0F, 0.0F, 0.0F, 0.0F, -0.5236F));
+
+		// Neck
+		kikimora.addOrReplaceChild("neck", CubeListBuilder.create()
+				.texOffs(0, 12).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		// Body
+		kikimora.addOrReplaceChild("bodytop", CubeListBuilder.create()
+				.texOffs(0, 16).addBox(-2.5F, 0.0F, -1.5F, 5.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
+
+		kikimora.addOrReplaceChild("bodymiddle", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-2.0F, 5.5F, -1.5F, 4.0F, 3.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		kikimora.addOrReplaceChild("bodymiddlebutton", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-0.5F, 6.0F, -1.6F, 1.0F, 2.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		kikimora.addOrReplaceChild("bodybottom", CubeListBuilder.create()
+				.texOffs(0, 30).addBox(-3.0F, 8.0F, -2.5F, 6.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
+
+		// Chests
+		kikimora.addOrReplaceChild("rightchest", CubeListBuilder.create()
+				.texOffs(0, 36).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-1.3F, -21.0F, -1.5F, 0.7854F, 0.1745F, 0.0873F));
+
+		kikimora.addOrReplaceChild("leftchest", CubeListBuilder.create()
+				.texOffs(0, 36).mirror().addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F).mirror(false), PartPose.offsetAndRotation(1.3F, -21.0F, -1.5F, 0.7854F, -0.1745F, -0.0873F));
+
+		// Right arm and children
+		PartDefinition rightarm = kikimora.addOrReplaceChild("rightarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 6.0F, 2.0F), PartPose.offset(-2.5F, -21.5F, 0.0F));
+
+		PartDefinition rightpauldron = rightarm.addOrReplaceChild("rightpauldron", CubeListBuilder.create()
+				.texOffs(36, 41).addBox(-2.5F, -1.0F, -1.5F, 3.0F, 3.0F, 3.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		rightpauldron.addOrReplaceChild("rightpauldronoverlay", CubeListBuilder.create()
+				.texOffs(36, 33).addBox(-2.5F, -1.5F, -2.0F, 4.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2618F));
+
+		PartDefinition rightarmlower = rightarm.addOrReplaceChild("rightarmlower", CubeListBuilder.create()
+				.texOffs(16, 20).addBox(-1.0F, 0.0F, -2.0F, 2.0F, 6.0F, 2.0F), PartPose.offset(-1.0F, 5.0F, 1.0F));
+
+		rightarmlower.addOrReplaceChild("rightcufflink", CubeListBuilder.create()
+				.texOffs(36, 47).addBox(-1.0F, -5.0F, -1.0F, 2.0F, 4.0F, 2.0F), PartPose.offsetAndRotation(0.0F, 6.0F, -1.0F, -0.1745F, 0.0F, -0.1745F));
+
+		// Left arm and children
+		PartDefinition leftarm = kikimora.addOrReplaceChild("leftarm", CubeListBuilder.create()
+				.texOffs(16, 12).mirror().addBox(0.0F, -1.0F, -1.0F, 2.0F, 6.0F, 2.0F).mirror(false), PartPose.offset(2.5F, -21.5F, 0.0F));
+
+		PartDefinition leftpauldron = leftarm.addOrReplaceChild("leftpauldron", CubeListBuilder.create()
+				.texOffs(36, 41).mirror().addBox(-0.5F, -1.0F, -1.5F, 3.0F, 3.0F, 3.0F).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		leftpauldron.addOrReplaceChild("leftpauldronoverlay", CubeListBuilder.create()
+				.texOffs(36, 33).mirror().addBox(-1.5F, -1.5F, -2.0F, 4.0F, 4.0F, 4.0F).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.2618F));
+
+		PartDefinition leftarmlower = leftarm.addOrReplaceChild("leftarmlower", CubeListBuilder.create()
+				.texOffs(16, 20).mirror().addBox(-1.0F, 0.0F, -2.0F, 2.0F, 6.0F, 2.0F).mirror(false), PartPose.offset(1.0F, 5.0F, 1.0F));
+
+		leftarmlower.addOrReplaceChild("leftcufflink", CubeListBuilder.create()
+				.texOffs(36, 47).mirror().addBox(-1.0F, -5.0F, -1.0F, 2.0F, 4.0F, 2.0F).mirror(false), PartPose.offsetAndRotation(0.0F, 6.0F, -1.0F, -0.1745F, 0.0F, 0.1745F));
+
+		// Legs
+		PartDefinition rightleg = kikimora.addOrReplaceChild("rightleg", CubeListBuilder.create()
+				.texOffs(24, 12).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 14.0F, 3.0F), PartPose.offsetAndRotation(-2.0F, -13.0F, 0.0F, 0.0F, -0.0873F, 0.0F));
+
+		PartDefinition leftleg = kikimora.addOrReplaceChild("leftleg", CubeListBuilder.create()
+				.texOffs(24, 12).mirror().addBox(-1.5F, -1.0F, -1.5F, 3.0F, 14.0F, 3.0F).mirror(false), PartPose.offsetAndRotation(2.0F, -13.0F, 0.0F, 0.0F, 0.0873F, 0.0F));
+
+		// Leg children: skirts
+		PartDefinition rightskirt02 = rightleg.addOrReplaceChild("rightskirt02", CubeListBuilder.create()
+				.texOffs(84, 17).addBox(-4.5F, 1.5F, -4.0F, 5.0F, 4.0F, 8.0F), PartPose.offset(2.0F, 0.0F, 0.0F));
+
+		rightskirt02.addOrReplaceChild("rightskirt03", CubeListBuilder.create()
+				.texOffs(84, 29).addBox(-5.0F, 5.5F, -4.5F, 6.0F, 5.0F, 9.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition leftskirt02 = leftleg.addOrReplaceChild("leftskirt02", CubeListBuilder.create()
+				.texOffs(84, 17).mirror().addBox(-0.5F, 1.5F, -4.0F, 5.0F, 4.0F, 8.0F).mirror(false), PartPose.offset(-2.0F, 0.0F, 0.0F));
+
+		leftskirt02.addOrReplaceChild("leftskirt03", CubeListBuilder.create()
+				.texOffs(84, 29).mirror().addBox(-1.0F, 5.5F, -4.5F, 6.0F, 5.0F, 9.0F).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		// Standalone skirts
+		kikimora.addOrReplaceChild("rightskirt01", CubeListBuilder.create()
+				.texOffs(84, 7).addBox(-4.0F, -1.5F, -3.5F, 4.0F, 3.0F, 7.0F), PartPose.offset(0.0F, -13.0F, 0.0F));
+
+		kikimora.addOrReplaceChild("leftskirt01", CubeListBuilder.create()
+				.texOffs(84, 7).mirror().addBox(0.0F, -1.5F, -3.5F, 4.0F, 3.0F, 7.0F).mirror(false), PartPose.offset(0.0F, -13.0F, 0.0F));
+
+		// Skirt ribbon
+		kikimora.addOrReplaceChild("skirtribbon", CubeListBuilder.create()
+				.texOffs(84, 0).addBox(-3.5F, 1.0F, 7.5F, 7.0F, 2.0F, 5.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -1.0472F, 0.0F, 0.0F));
+
+		// Tail chain
+		PartDefinition tail01 = kikimora.addOrReplaceChild("tail01", CubeListBuilder.create()
+				.texOffs(68, 0).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(0.0F, -15.0F, 1.0F));
+
+		PartDefinition tail02 = tail01.addOrReplaceChild("tail02", CubeListBuilder.create()
+				.texOffs(68, 6).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 3.0F));
+
+		PartDefinition tail03 = tail02.addOrReplaceChild("tail03", CubeListBuilder.create()
+				.texOffs(68, 14).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 4.0F));
+
+		PartDefinition tail04 = tail03.addOrReplaceChild("tail04", CubeListBuilder.create()
+				.texOffs(68, 22).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(0.0F, 0.0F, 4.0F));
+
+		tail04.addOrReplaceChild("tail05", CubeListBuilder.create()
+				.texOffs(68, 28).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(0.0F, 0.0F, 3.0F));
+
+		return LayerDefinition.create(meshdefinition, 128, 64);
 	}
 
 	@Override
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		head.render(scale);
-		headaccessory.render(scale);
-		neck.render(scale);
-		bodytop.render(scale);
-		bodymiddle.render(scale);
-		bodymiddlebutton.render(scale);
-		bodybottom.render(scale);
-		rightchest.render(scale);
-		leftchest.render(scale);
-		rightarm.render(scale);
-		leftarm.render(scale);
-		rightleg.render(scale);
-		leftleg.render(scale);
-		rightskirt01.render(scale);
-		leftskirt01.render(scale);
-		skirtribbon.render(scale);
-		tail01.render(scale);
-
-		if (entityIn.ticksExisted % 60 == 0 && limbSwingAmount <= 0.1F) {
-			headeyes.render(scale);
-		}
-	}
-
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+	public void setupAnim(KikimoraEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// head
-		head.rotateAngleY = netHeadYaw / 57.295776F;
-		head.rotateAngleX = headPitch / 57.295776F;
-		headeyes.rotateAngleY = head.rotateAngleY;
-		headeyes.rotateAngleX = head.rotateAngleX;
-		headaccessory.rotateAngleY = head.rotateAngleY;
-		headaccessory.rotateAngleX = head.rotateAngleX;
+		head.yRot = netHeadYaw / 57.295776F;
+		head.xRot = headPitch / 57.295776F;
+		headeyes.yRot = head.yRot;
+		headeyes.xRot = head.xRot;
+		headaccessory.yRot = head.yRot;
+		headaccessory.xRot = head.xRot;
 
+		headeyes.visible = entity.tickCount % 60 == 0 && limbSwingAmount <= 0.1F;
+
+		// ears
 		float earDefaultAngleZ = 0.5235988F;
 
-		rightear.rotateAngleZ = MathHelper.cos(degToRad((float) entityIn.ticksExisted * 7)) * degToRad(4);
-		rightear.rotateAngleZ += earDefaultAngleZ;
-		leftear.rotateAngleZ = MathHelper.cos(degToRad((float) entityIn.ticksExisted * 7)) * -degToRad(4);
-		leftear.rotateAngleZ += -earDefaultAngleZ;
+		rightear.zRot = Mth.cos(entity.tickCount * 7 * Mth.DEG_TO_RAD) * (4 * Mth.DEG_TO_RAD);
+		rightear.zRot += earDefaultAngleZ;
+		leftear.zRot = Mth.cos(entity.tickCount * 7 * Mth.DEG_TO_RAD) * -(4 * Mth.DEG_TO_RAD);
+		leftear.zRot += -earDefaultAngleZ;
 
 		// arms
-		rightarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
-		leftarm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
+		rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
+		leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
 
-		rightarm.rotateAngleZ = 0.0F;
-		leftarm.rotateAngleZ = 0.0F;
+		rightarm.zRot = 0.0F;
+		leftarm.zRot = 0.0F;
 
-		if (swingProgress > -9990.0F) {
+		if (attackTime > 0.0F) {
 			holdingMelee();
 		}
 
 		float armDefaultAngleY = 0.349066F;
 		float armDefaultAngleZ = 0.174533F;
 
-		rightarm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-		rightarm.rotateAngleY = +armDefaultAngleY;
-		rightarm.rotateAngleZ += (MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F) + armDefaultAngleZ;
+		rightarm.xRot += Mth.sin(ageInTicks * 0.067F) * 0.05F;
+		rightarm.yRot = +armDefaultAngleY;
+		rightarm.zRot += (Mth.cos(ageInTicks * 0.09F) * 0.05F + 0.05F) + armDefaultAngleZ;
 
-		leftarm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
-		leftarm.rotateAngleY = -armDefaultAngleY;
-		leftarm.rotateAngleZ -= (MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F) + armDefaultAngleZ;
+		leftarm.xRot -= Mth.sin(ageInTicks * 0.067F) * 0.05F;
+		leftarm.yRot = -armDefaultAngleY;
+		leftarm.zRot -= (Mth.cos(ageInTicks * 0.09F) * 0.05F + 0.05F) + armDefaultAngleZ;
 
-		rightarmlower.rotateAngleX = -armDefaultAngleY;
-		leftarmlower.rotateAngleX = -armDefaultAngleY;
+		rightarmlower.xRot = -armDefaultAngleY;
+		leftarmlower.xRot = -armDefaultAngleY;
 
-		// body
-		tail02.rotateAngleX = -0.3926991F;
-		tail03.rotateAngleX = -0.785398F;
-		tail04.rotateAngleX = +0.3926991F;
-		tail05.rotateAngleX = +0.785398F;
+		// tail
+		tail02.xRot = -0.3926991F;
+		tail03.xRot = -0.785398F;
+		tail04.xRot = +0.3926991F;
+		tail05.xRot = +0.785398F;
 
-		tail02.rotateAngleY = MathHelper.cos(degToRad((float) entityIn.ticksExisted * 7)) * degToRad(1);
-		tail03.rotateAngleY = MathHelper.cos(degToRad((float) entityIn.ticksExisted * 7)) * degToRad(5);
-		tail04.rotateAngleY = MathHelper.cos(degToRad((float) entityIn.ticksExisted * 7)) * degToRad(10);
-		tail05.rotateAngleY = MathHelper.cos(degToRad((float) entityIn.ticksExisted * 7)) * degToRad(15);
+		tail02.yRot = Mth.cos(entity.tickCount * 7 * Mth.DEG_TO_RAD) * (1 * Mth.DEG_TO_RAD);
+		tail03.yRot = Mth.cos(entity.tickCount * 7 * Mth.DEG_TO_RAD) * (5 * Mth.DEG_TO_RAD);
+		tail04.yRot = Mth.cos(entity.tickCount * 7 * Mth.DEG_TO_RAD) * (10 * Mth.DEG_TO_RAD);
+		tail05.yRot = Mth.cos(entity.tickCount * 7 * Mth.DEG_TO_RAD) * (15 * Mth.DEG_TO_RAD);
 
 		// legs
-		rightleg.rotateAngleX = (MathHelper.cos(limbSwing * 0.6662F) * 0.5F * limbSwingAmount) * 0.5F;
-		leftleg.rotateAngleX = (MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.5F * limbSwingAmount) * 0.5F;
-        rightleg.rotateAngleY = -0.0872665F;
-        leftleg.rotateAngleY = 0.0872665F;
-        rightleg.rotateAngleZ = 0.0F;
-        leftleg.rotateAngleZ = 0.0F;
+		rightleg.xRot = (Mth.cos(limbSwing * 0.6662F) * 0.5F * limbSwingAmount) * 0.5F;
+		leftleg.xRot = (Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.5F * limbSwingAmount) * 0.5F;
+		rightleg.yRot = -0.0872665F;
+		leftleg.yRot = 0.0872665F;
+		rightleg.zRot = 0.0F;
+		leftleg.zRot = 0.0F;
 
-		if (isRiding) {
-			rightarm.rotateAngleX += -((float) Math.PI / 5F);
-			leftarm.rotateAngleX += -((float) Math.PI / 5F);
-			rightleg.rotateAngleX = -1.4137167F;
-			rightleg.rotateAngleY = ((float) Math.PI / 10F);
-			rightleg.rotateAngleZ = 0.07853982F;
-			leftleg.rotateAngleX = -1.4137167F;
-			leftleg.rotateAngleY = -((float) Math.PI / 10F);
-			leftleg.rotateAngleZ = -0.07853982F;
+		if (riding) {
+			rightarm.xRot += -((float) Math.PI / 5F);
+			leftarm.xRot += -((float) Math.PI / 5F);
+			rightleg.xRot = -1.4137167F;
+			rightleg.yRot = ((float) Math.PI / 10F);
+			rightleg.zRot = 0.07853982F;
+			leftleg.xRot = -1.4137167F;
+			leftleg.yRot = -((float) Math.PI / 10F);
+			leftleg.zRot = -0.07853982F;
 		}
 	}
 
@@ -324,23 +283,34 @@ public class KikimoraModel extends EntityModel<KikimoraEntity> implements Headed
 		float f6;
 		float f7;
 
-		f6 = 1.0F - swingProgress;
+		f6 = 1.0F - attackTime;
 		f6 *= f6;
 		f6 *= f6;
 		f6 = 1.0F - f6;
-		f7 = MathHelper.sin(f6 * (float) Math.PI);
-		float f8 = MathHelper.sin(swingProgress * (float) Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+		f7 = Mth.sin(f6 * (float) Math.PI);
+		float f8 = Mth.sin(attackTime * (float) Math.PI) * -(head.xRot - 0.7F) * 0.75F;
 
-		rightarm.rotateAngleX = (float) ((double) rightarm.rotateAngleX - ((double) f7 * 1.2D + (double) f8));
-		rightarm.rotateAngleX += (bodytop.rotateAngleY * 2.0F);
-		rightarm.rotateAngleZ = (MathHelper.sin(swingProgress * (float) Math.PI) * -0.4F);
+		rightarm.xRot = (float) ((double) rightarm.xRot - ((double) f7 * 1.2D + (double) f8));
+		rightarm.xRot += (bodytop.yRot * 2.0F);
+		rightarm.zRot = (Mth.sin(attackTime * (float) Math.PI) * -0.4F);
 	}
 
-	public ModelRenderer getRightArm() {
-		return rightarm;
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
-	public ModelRenderer getLeftArm() {
-		return leftarm;
+	@Override
+	public ModelPart getHead() {
+		return head;
+	}
+
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftarm : this.rightarm;
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		getArm(arm).translateAndRotate(poseStack);
 	}
 }
