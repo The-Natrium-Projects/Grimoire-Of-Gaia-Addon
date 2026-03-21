@@ -252,7 +252,6 @@ public class DhampirModel extends EntityModel<DhampirEntity> implements HeadedMo
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
-		root.translateAndRotate(poseStack);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }

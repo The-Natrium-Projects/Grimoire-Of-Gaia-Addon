@@ -311,7 +311,6 @@ public class KikimoraModel extends EntityModel<KikimoraEntity> implements Headed
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
-		root.translateAndRotate(poseStack);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }

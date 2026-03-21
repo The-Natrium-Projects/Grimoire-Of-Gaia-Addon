@@ -223,7 +223,6 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
-		root.translateAndRotate(poseStack);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }
