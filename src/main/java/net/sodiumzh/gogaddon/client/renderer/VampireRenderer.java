@@ -26,10 +26,10 @@ public class VampireRenderer extends MobRenderer<VampireEntity, VampireModel> {
 
     public VampireRenderer(EntityRendererProvider.Context context) {
         super(context, new VampireModel(context.bakeLayer(LAYER_LOCATION)), 0.5F);
-        this.addLayer(new CustomHeadLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
-        this.addLayer(new ItemInHandLayer(this, context.getItemInHandRenderer()));
+        this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
+        this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
         this.addLayer(new GOGAddonEyesLayer<>(this, EYES_LAYER));
-        this.addLayer(new AuraLayer(this, () -> {
+        this.addLayer(new AuraLayer<>(this, () -> {
             return new VampireModel(context.bakeLayer(LAYER_LOCATION));
         }));
     }

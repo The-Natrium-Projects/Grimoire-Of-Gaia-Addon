@@ -20,8 +20,8 @@ public class KikimoraRenderer extends MobRenderer<KikimoraEntity, KikimoraModel>
 
     public KikimoraRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new KikimoraModel(pContext.bakeLayer(LAYER_LOCATION)), 0.5F);
-        this.addLayer(new CustomHeadLayer(this, pContext.getModelSet(), pContext.getItemInHandRenderer()));
-        this.addLayer(new ItemInHandLayer(this, pContext.getItemInHandRenderer()));
+        this.addLayer(new CustomHeadLayer<>(this, pContext.getModelSet(), pContext.getItemInHandRenderer()));
+        this.addLayer(new ItemInHandLayer<>(this, pContext.getItemInHandRenderer()));
     }
 
     @Override

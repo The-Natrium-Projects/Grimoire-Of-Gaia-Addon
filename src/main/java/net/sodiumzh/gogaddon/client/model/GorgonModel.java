@@ -211,6 +211,8 @@ public class GorgonModel extends EntityModel<GorgonEntity> implements HeadedMode
 
 	@Override
 	public void setupAnim(GorgonEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+		root.y = 26.0F;
 		// head
 		head.yRot = netHeadYaw / 57.295776F;
 		head.xRot = headPitch / 57.295776F;

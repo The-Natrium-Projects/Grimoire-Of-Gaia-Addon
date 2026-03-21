@@ -28,10 +28,10 @@ public class GorgonRenderer extends MobRenderer<GorgonEntity, GorgonModel> {
 
     public GorgonRenderer(EntityRendererProvider.Context context) {
         super(context, new GorgonModel(context.bakeLayer(LAYER_LOCATION)), 0.5F);
-        this.addLayer(new CustomHeadLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
-        this.addLayer(new ItemInHandLayer(this, context.getItemInHandRenderer()));
+        this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
+        this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
         this.addLayer(new GOGAddonEyesLayer<>(this, EYES_LAYER));
-        this.addLayer(new AuraLayer(this, () -> {
+        this.addLayer(new AuraLayer<>(this, () -> {
             return new GorgonModel(context.bakeLayer(LAYER_LOCATION));
         }));
     }
