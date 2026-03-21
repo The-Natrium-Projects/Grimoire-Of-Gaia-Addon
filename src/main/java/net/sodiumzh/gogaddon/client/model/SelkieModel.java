@@ -236,6 +236,7 @@ public class SelkieModel extends EntityModel<SelkieEntity> implements HeadedMode
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		root.translateAndRotate(poseStack);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }

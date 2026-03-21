@@ -293,6 +293,7 @@ public class GorgonModel extends EntityModel<GorgonEntity> implements HeadedMode
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		root.translateAndRotate(poseStack);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }
