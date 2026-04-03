@@ -268,6 +268,7 @@ public class BaphometModel extends EntityModel<BaphometEntity> implements Headed
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		poseStack.translate(0, 1.5, 0.0);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }

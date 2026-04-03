@@ -143,7 +143,7 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
 	@Override
 	public void setupAnim(VampireEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// anchor (bobbing)
-		root.y = 6.0F + Mth.cos((1.5F + ageInTicks) * 0.5F) * 0.5F;
+		root.y = 6.0F + Mth.cos((1.5F + ageInTicks) * 0.1F) * 0.5F;
 
 		// head
 		head.yRot = netHeadYaw / 57.295776F;
@@ -223,6 +223,7 @@ public class VampireModel extends EntityModel<VampireEntity> implements HeadedMo
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		poseStack.translate(0, 0.5, 0.0);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }

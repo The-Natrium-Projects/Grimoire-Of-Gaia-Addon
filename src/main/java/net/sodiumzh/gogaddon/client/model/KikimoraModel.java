@@ -16,6 +16,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.gogaddon.entity.KikimoraEntity;
+import org.joml.Quaternionf;
 
 @OnlyIn(Dist.CLIENT)
 public class KikimoraModel extends EntityModel<KikimoraEntity> implements HeadedModel, ArmedModel {
@@ -311,6 +312,7 @@ public class KikimoraModel extends EntityModel<KikimoraEntity> implements Headed
 
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		poseStack.translate(0, 1.5, -0.0625d);
 		getArm(arm).translateAndRotate(poseStack);
 	}
 }
