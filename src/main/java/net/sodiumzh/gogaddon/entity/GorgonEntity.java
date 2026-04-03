@@ -1,31 +1,27 @@
 package net.sodiumzh.gogaddon.entity;
 
 import gaia.entity.AbstractGaiaEntity;
-import gaia.util.SharedEntityData;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PowerableMob;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class VampireEntity extends AbstractGaiaEntity implements PowerableMob {
+public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob {
 
-    public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(VampireEntity.class,
+    public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(GorgonEntity.class,
         EntityDataSerializers.BOOLEAN);
 
-    public VampireEntity(EntityType<? extends VampireEntity> entityType, Level level) {
+    public GorgonEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(POWERED, false);
     }
 
     @Override
@@ -42,8 +38,13 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob {
     }
 
     @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(POWERED, false);
+    }
+    @Override
     public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense3();
+        return 0;
     }
 
     @Override
@@ -65,4 +66,5 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob {
             this.updatePowered();
         }
     }
+
 }

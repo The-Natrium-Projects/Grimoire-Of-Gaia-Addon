@@ -5,8 +5,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.gogaddon.GOGAddon;
-import net.sodiumzh.gogaddon.entity.GOGAddonMobReg;
-import net.sodiumzh.gogaddon.entity.VampireEntity;
+import net.sodiumzh.gogaddon.entity.*;
 
 public class GOGAddonEntityTypes {
 
@@ -16,6 +15,24 @@ public class GOGAddonEntityTypes {
         () -> EntityType.Builder.of(VampireEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
         .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
 
+    public static final GOGAddonMobReg<BaphometEntity> BAPHOMET = new GOGAddonMobReg.Builder<>("baphomet",
+        () -> EntityType.Builder.of(BaphometEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
 
+    public static final GOGAddonMobReg<GorgonEntity> GORGON = new GOGAddonMobReg.Builder<>("gorgon",
+        () -> EntityType.Builder.of(GorgonEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
+
+    public static final GOGAddonMobReg<DhampirEntity> DHAMPIR = new GOGAddonMobReg.Builder<>("dhampir",
+        () -> EntityType.Builder.of(DhampirEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
+
+    public static final GOGAddonMobReg<KikimoraEntity> KIKIMORA = new GOGAddonMobReg.Builder<>("kikimora",
+        () -> EntityType.Builder.of(KikimoraEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
+
+    public static final GOGAddonMobReg<SelkieEntity> SELKIE = new GOGAddonMobReg.Builder<>("selkie",
+        () -> EntityType.Builder.of(SelkieEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
 
 }

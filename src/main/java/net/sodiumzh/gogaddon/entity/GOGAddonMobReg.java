@@ -40,7 +40,7 @@ public class GOGAddonMobReg<T extends Mob> {
     }
 
     public EntityType<? extends T> getEntityType() {
-        return (EntityType)this.entityType.get();
+        return this.entityType.get();
     }
 
     public GaiaMobType getGaiaSoundType() {
