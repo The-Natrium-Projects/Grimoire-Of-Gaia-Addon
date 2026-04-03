@@ -121,6 +121,11 @@ public class BaphometEntity extends AbstractGaiaEntity implements RangedAttackMo
         return List.of(MobEffects.WITHER, MobEffects.WEAKNESS);
     }
 
+    @Override
+    public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
+
+    }
+
     protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
         if (pRandom.nextFloat() < 0.5f)
             this.setItemInHand(InteractionHand.MAIN_HAND, GaiaRegistry.BROOM.get().getDefaultInstance());

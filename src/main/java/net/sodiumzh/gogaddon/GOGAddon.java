@@ -2,8 +2,11 @@ package net.sodiumzh.gogaddon;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.sodiumzh.gogaddon.registry.GOGAddonConfigs;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityAttributes;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityTypes;
 
@@ -13,6 +16,9 @@ public class GOGAddon {
 
     public GOGAddon() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GOGAddonConfigs.CONFIG);
+        bus.addListener(GOGAddonConfigs::loadConfig);
 
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
         GOGAddonEntityAttributes.COLLETION.merge();

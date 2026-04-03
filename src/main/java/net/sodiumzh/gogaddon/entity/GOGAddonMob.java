@@ -24,6 +24,12 @@ public interface GOGAddonMob {
     void onHurt(float amount, DamageSource damageSource);
 
     /**
+     * Actions on dealing damage to a target. Handled in event listener and doesn't need to manually
+     * handle in entity classes.
+     */
+    void onDealDamage(LivingEntity target, float amount, DamageSource damageSource);
+
+    /**
      * Check if the mob can be damaged.
      */
     boolean canHurt(float amount, DamageSource damageSource);
