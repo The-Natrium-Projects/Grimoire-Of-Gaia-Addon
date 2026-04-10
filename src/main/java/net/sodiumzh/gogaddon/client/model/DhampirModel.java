@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.gogaddon.entity.DhampirEntity;
+import net.sodiumzh.gogaddon.entity.mob.DhampirEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class DhampirModel extends EntityModel<DhampirEntity> implements HeadedModel, ArmedModel {

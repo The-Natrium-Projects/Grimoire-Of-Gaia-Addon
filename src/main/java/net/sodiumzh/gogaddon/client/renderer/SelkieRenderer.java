@@ -7,10 +7,8 @@ import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.gogaddon.GOGAddon;
-import net.sodiumzh.gogaddon.client.model.BaphometModel;
 import net.sodiumzh.gogaddon.client.model.SelkieModel;
-import net.sodiumzh.gogaddon.entity.BaphometEntity;
-import net.sodiumzh.gogaddon.entity.SelkieEntity;
+import net.sodiumzh.gogaddon.entity.mob.SelkieEntity;
 
 public class SelkieRenderer extends MobRenderer<SelkieEntity, SelkieModel> {
 

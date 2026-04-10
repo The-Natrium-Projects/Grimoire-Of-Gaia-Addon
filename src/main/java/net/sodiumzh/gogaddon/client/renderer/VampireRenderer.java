@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.gogaddon.GOGAddon;
 import net.sodiumzh.gogaddon.client.model.VampireModel;
 import net.sodiumzh.gogaddon.client.renderer.layer.GOGAddonEyesLayer;
-import net.sodiumzh.gogaddon.entity.VampireEntity;
+import net.sodiumzh.gogaddon.entity.mob.VampireEntity;
 
 public class VampireRenderer extends MobRenderer<VampireEntity, VampireModel> {
 

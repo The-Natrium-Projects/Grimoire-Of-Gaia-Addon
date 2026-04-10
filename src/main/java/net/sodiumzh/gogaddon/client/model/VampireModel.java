@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.gogaddon.entity.VampireEntity;
+import net.sodiumzh.gogaddon.entity.mob.VampireEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class VampireModel extends EntityModel<VampireEntity> implements HeadedModel, ArmedModel {

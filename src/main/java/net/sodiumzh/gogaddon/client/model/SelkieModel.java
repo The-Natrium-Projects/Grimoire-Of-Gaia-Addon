@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.gogaddon.entity.SelkieEntity;
+import net.sodiumzh.gogaddon.entity.mob.SelkieEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class SelkieModel extends EntityModel<SelkieEntity> implements HeadedModel, ArmedModel {

@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.gogaddon.GOGAddon;
 import net.sodiumzh.gogaddon.entity.*;
+import net.sodiumzh.gogaddon.entity.mob.*;
 
 public class GOGAddonEntityTypes {
 

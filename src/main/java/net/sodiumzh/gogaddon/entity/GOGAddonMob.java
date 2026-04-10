@@ -11,7 +11,12 @@ public interface GOGAddonMob {
     /**
      * Update the mob's state on aiStep. Should be invoked in aiStep() on both sides.
      */
-    void updateOnAiStep();
+    void updateState();
+
+    /**
+     * Update the mob's inventory. Should be invoked in aiStep() on server side.
+     */
+    void updateInventory();
 
     /**
      * Actions on attacking a target. Returns false if the attack should be cancelled.
@@ -32,7 +37,9 @@ public interface GOGAddonMob {
     /**
      * Check if the mob can be damaged.
      */
-    boolean canHurt(float amount, DamageSource damageSource);
+    default boolean canHurt(float amount, DamageSource damageSource) {
+        return true;
+    };
 
     List<MobEffect> immuneToEffects();
 }

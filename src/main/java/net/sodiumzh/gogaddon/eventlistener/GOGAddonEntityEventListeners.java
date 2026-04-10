@@ -15,4 +15,5 @@ public class GOGAddonEntityEventListeners {
             gogAddonMob.onDealDamage(event.getEntity(), event.getAmount(), event.getDamageSource());
         }
     }
+
 }

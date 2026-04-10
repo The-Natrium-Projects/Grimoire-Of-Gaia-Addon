@@ -8,11 +8,9 @@ import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.gogaddon.GOGAddon;
-import net.sodiumzh.gogaddon.client.model.BaphometModel;
 import net.sodiumzh.gogaddon.client.model.DhampirModel;
 import net.sodiumzh.gogaddon.client.renderer.layer.GOGAddonEyesLayer;
-import net.sodiumzh.gogaddon.entity.BaphometEntity;
-import net.sodiumzh.gogaddon.entity.DhampirEntity;
+import net.sodiumzh.gogaddon.entity.mob.DhampirEntity;
 
 public class DhampirRenderer extends MobRenderer<DhampirEntity, DhampirModel> {
 

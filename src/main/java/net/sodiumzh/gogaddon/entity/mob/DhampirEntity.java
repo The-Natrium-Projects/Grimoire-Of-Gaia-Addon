@@ -1,17 +1,13 @@
-package net.sodiumzh.gogaddon.entity;
+package net.sodiumzh.gogaddon.entity.mob;
 
 import gaia.entity.AbstractGaiaEntity;
-import gaia.entity.goal.MobAttackGoal;
-import gaia.registry.GaiaRegistry;
-import gaia.util.RangedUtil;
 import gaia.util.SharedEntityData;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.damagesource.DamageEffects;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,48 +15,32 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.sodiumzh.nfu.object.ServerOnly;
+import net.sodiumzh.gogaddon.entity.GOGAddonMob;
+import net.sodiumzh.gogaddon.registry.GOGAddonConfigs;
+import net.sodiumzh.gogaddon.registry.GOGAddonEntityTypes;
+import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BaphometEntity extends AbstractGaiaEntity implements RangedAttackMob, GOGAddonMob {
+public class DhampirEntity extends AbstractGaiaEntity implements GOGAddonMob {
 
-    public BaphometEntity(EntityType<? extends BaphometEntity> entityType, Level level) {
+    protected double totalDamageDealt = 0d;
+
+    public DhampirEntity(EntityType<? extends DhampirEntity> entityType, Level level) {
         super(entityType, level);
     }
-
-    protected boolean isMelee = false;
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.275, 20, 60, 15.0F) {
-            @Override
-            public boolean canUse() {
-                return super.canUse() && !BaphometEntity.this.isMelee;
-            }
-            @Override
-            public boolean canContinueToUse() {
-                return super.canContinueToUse() && !BaphometEntity.this.isMelee;
-            }
-        });
-        this.goalSelector.addGoal(1, new MobAttackGoal(this, 1.25, true) {
-            @Override
-            public boolean canUse() {
-                return super.canUse() && BaphometEntity.this.isMelee;
-            }
-            @Override
-            public boolean canContinueToUse() {
-                return super.canContinueToUse() && BaphometEntity.this.isMelee;
-            }
-        });
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0d, true));
         this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
@@ -74,36 +54,43 @@ public class BaphometEntity extends AbstractGaiaEntity implements RangedAttackMo
     }
 
     @Override
-    public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
-        if (pTarget.isAlive()) {
-            RangedUtil.fireball(pTarget, this, pVelocity);
-            this.swing(InteractionHand.MAIN_HAND);
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putDouble("totalDamageDealt", this.totalDamageDealt);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.totalDamageDealt = tag.getDouble("totalDamageDealt");
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
+    }
+
+    @Override
+    protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
+        this.setItemInHand(InteractionHand.MAIN_HAND, Items.STONE_SWORD.getDefaultInstance());
+    }
+
+    @Override
+    public void updateState() {
+        if (this.getHealth() <= this.getMaxHealth() * 0.25d) {
+            NFUEntityStatics.addEffectSafe(this, new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 20));
+            NFUEntityStatics.addEffectSafe(this, new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 20));
         }
     }
 
-    // GOGAddonMob interface //
-
     @Override
-    public void updateOnAiStep() {
-        if (!this.level().isClientSide()) {
-            this.isMelee = (this.getHealth() < this.getMaxHealth() * 0.75f);
-        }
+    public void updateInventory() {
+
     }
 
     @Override
     public void onAttack(LivingEntity target) {
-        switch (this.level().getDifficulty()) {
-            case NORMAL -> {
-                NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 * 20));
-                NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20));
-                break;
-            }
-            case HARD -> {
-                NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 20));
-                NFUEntityStatics.addEffectSafe(target, new MobEffectInstance(MobEffects.WEAKNESS, 20 * 20));
-                break;
-            }
-        }
+        GOGAddonStatics.addEffectByDifficulty(target, MobEffects.MOVEMENT_SLOWDOWN, 0, 10 * 20, 20 * 20);
     }
 
     @Override
@@ -113,32 +100,42 @@ public class BaphometEntity extends AbstractGaiaEntity implements RangedAttackMo
 
     @Override
     public boolean canHurt(float amount, DamageSource damageSource) {
-        return !damageSource.type().effects().equals(DamageEffects.BURNING);
+        return true;
     }
 
     @Override
     public List<MobEffect> immuneToEffects() {
-        return List.of(MobEffects.WITHER, MobEffects.WEAKNESS);
+        return List.of();
     }
 
     @Override
     public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
-
+        this.heal(amount);
+        if (amount > 1) {
+            NFUParticleStatics.sendHeartParticlesToEntityDefault(this, 0.0f, 2);
+        }
+        double convertDmg = GOGAddonConfigs.ValueCache.Gameplay.DHAMPIR_CONVERSION_DAMAGE;
+        double convertChance = GOGAddonConfigs.ValueCache.Gameplay.DHAMPIR_CONVERSION_CHANCE;
+        if (convertDmg >= 1d && convertChance > 0d) {
+            int convertAmount = (int)Math.round(Math.floor((this.totalDamageDealt + amount) / convertDmg) - Math.floor(this.totalDamageDealt / convertDmg));
+            for (int i = 0; i < convertAmount; ++i) {
+                if (this.getRandom().nextDouble() <= convertChance) {
+                    this.convertTo(GOGAddonEntityTypes.VAMPIRE.getEntityType(), true);
+                    return;
+                }
+            }
+        }
+        this.totalDamageDealt += amount;
     }
-
-    protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
-        if (pRandom.nextFloat() < 0.5f)
-            this.setItemInHand(InteractionHand.MAIN_HAND, GaiaRegistry.BROOM.get().getDefaultInstance());
-    }
-
-    // GOGAddonMob interface end //
 
     // COPY-PASTE TO ALL MOBS //
 
     @Override
     public void aiStep() {
         super.aiStep();
-        this.updateOnAiStep();
+        this.updateState();
+        if (!this.level().isClientSide)
+            this.updateInventory();
     }
 
     @Override
@@ -172,4 +169,11 @@ public class BaphometEntity extends AbstractGaiaEntity implements RangedAttackMo
     }
 
     // COPY-PASTE END //
+
+    public static boolean checkSpawnRules(EntityType<? extends DhampirEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        return checkDaysPassed(levelAccessor)
+            && checkAboveSeaLevel(levelAccessor, pos)
+            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+    }
+
 }

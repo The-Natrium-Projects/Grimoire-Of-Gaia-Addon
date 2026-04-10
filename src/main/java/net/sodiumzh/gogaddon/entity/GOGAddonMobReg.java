@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 public class GOGAddonMobReg<T extends Mob> {
     protected final String name;
-    protected final RegistryObject<EntityType<? extends T>> entityType;
+    protected final RegistryObject<EntityType<T>> entityType;
     protected final GaiaMobType gaiaMobType;
     protected RegistryObject<Item> spawnEgg;
     protected RegistryObject<SoundEvent> SAY;
@@ -39,7 +39,7 @@ public class GOGAddonMobReg<T extends Mob> {
         return this.name;
     }
 
-    public EntityType<? extends T> getEntityType() {
+    public EntityType<T> getEntityType() {
         return this.entityType.get();
     }
 

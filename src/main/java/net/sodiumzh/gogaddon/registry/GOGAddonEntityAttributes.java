@@ -6,7 +6,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.gogaddon.GOGAddon;
-import net.sodiumzh.gogaddon.entity.DhampirEntity;
 import net.sodiumzh.nfu.entity.EntityAttributeProvider;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;

@@ -10,10 +10,8 @@ import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.sodiumzh.gogaddon.GOGAddon;
 import net.sodiumzh.gogaddon.client.model.GorgonModel;
-import net.sodiumzh.gogaddon.client.model.VampireModel;
 import net.sodiumzh.gogaddon.client.renderer.layer.GOGAddonEyesLayer;
-import net.sodiumzh.gogaddon.entity.GorgonEntity;
-import net.sodiumzh.gogaddon.entity.VampireEntity;
+import net.sodiumzh.gogaddon.entity.mob.GorgonEntity;
 
 public class GorgonRenderer extends MobRenderer<GorgonEntity, GorgonModel> {
 

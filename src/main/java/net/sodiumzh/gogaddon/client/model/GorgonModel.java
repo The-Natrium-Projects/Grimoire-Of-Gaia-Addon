@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.gogaddon.entity.GorgonEntity;
+import net.sodiumzh.gogaddon.entity.mob.GorgonEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class GorgonModel extends EntityModel<GorgonEntity> implements HeadedModel, ArmedModel {

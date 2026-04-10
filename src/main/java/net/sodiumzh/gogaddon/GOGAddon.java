@@ -8,6 +8,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.sodiumzh.gogaddon.registry.GOGAddonConfigs;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityAttributes;
+import net.sodiumzh.gogaddon.registry.GOGAddonEntityComponents;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityTypes;
 
 @Mod(GOGAddon.MOD_ID)
@@ -22,6 +23,7 @@ public class GOGAddon {
 
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
         GOGAddonEntityAttributes.COLLETION.merge();
+        GOGAddonEntityComponents.COLLECTION.merge();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }

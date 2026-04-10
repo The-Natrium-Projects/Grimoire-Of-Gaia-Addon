@@ -15,8 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.sodiumzh.gogaddon.entity.KikimoraEntity;
-import org.joml.Quaternionf;
+import net.sodiumzh.gogaddon.entity.mob.KikimoraEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class KikimoraModel extends EntityModel<KikimoraEntity> implements HeadedModel, ArmedModel {

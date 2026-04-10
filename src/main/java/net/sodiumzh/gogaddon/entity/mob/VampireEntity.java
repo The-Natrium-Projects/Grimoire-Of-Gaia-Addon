@@ -1,19 +1,28 @@
-package net.sodiumzh.gogaddon.entity;
+package net.sodiumzh.gogaddon.entity.mob;
 
 import gaia.entity.AbstractGaiaEntity;
 import gaia.util.SharedEntityData;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.PowerableMob;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.sodiumzh.gogaddon.entity.GOGAddonMob;
+import net.sodiumzh.nfu.util.NFUParticleStatics;
 
-public class VampireEntity extends AbstractGaiaEntity implements PowerableMob {
+import java.util.List;
+
+public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, GOGAddonMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(VampireEntity.class,
         EntityDataSerializers.BOOLEAN);
@@ -46,6 +55,12 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob {
         return SharedEntityData.getBaseDefense3();
     }
 
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
+    }
+
     @Override
     public boolean isPowered() {
         return this.entityData.get(POWERED);
@@ -59,10 +74,59 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob {
         this.setPowered(this.getHealth() <= this.getMaxHealth() / 2d);
     }
 
-    public void aiStep() {
-        super.aiStep();
+    @Override
+    public void updateState() {
         if (!this.level().isClientSide()) {
             this.updatePowered();
+            if (this.isSunBurnTick()) {
+                this.hurt(damageSources().onFire(), this.getMaxHealth() / 8f);
+                NFUParticleStatics.sendSmokeParticlesToEntityDefault(this, 0f, 20);
+            }
         }
+    }
+
+    @Override
+    public void updateInventory() {
+
+    }
+
+    @Override
+    public void die(DamageSource pDamageSource) {
+        super.die(pDamageSource);
+        if (this.isDeadOrDying()) {
+            Bat bat = EntityType.BAT.create(this.level());
+            if (bat != null) {
+                bat.setPos(this.position().add(0, 0.5d, 0));
+                this.level().addFreshEntity(bat);
+            }
+        }
+    }
+
+    @Override
+    public void onAttack(LivingEntity target) {
+
+    }
+
+    @Override
+    public void onHurt(float amount, DamageSource damageSource) {
+
+    }
+
+    @Override
+    public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
+        this.heal(amount * 2f);
+        NFUParticleStatics.sendHeartParticlesToEntityDefault(this, 0.0f, 2);
+    }
+
+
+    @Override
+    public List<MobEffect> immuneToEffects() {
+        return List.of();
+    }
+
+    public static boolean checkSpawnRules(EntityType<? extends VampireEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        return checkDaysPassed(levelAccessor)
+            && checkAboveSeaLevel(levelAccessor, pos)
+            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 }
