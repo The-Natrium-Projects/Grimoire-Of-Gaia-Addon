@@ -7,7 +7,10 @@ import gaia.registry.GaiaTags;
 import gaia.util.SharedEntityData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -16,7 +19,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
-public class KikimoraEntity extends AbstractAssistGaiaEntity implements IDayMob {
+import java.util.List;
+
+public class KikimoraEntity extends AbstractAssistGaiaEntity implements IGOGAddonMob, IDayMob {
 
     public KikimoraEntity(EntityType<? extends KikimoraEntity> entityType, Level level) {
         super(entityType, level);
@@ -49,4 +54,38 @@ public class KikimoraEntity extends AbstractAssistGaiaEntity implements IDayMob 
             && checkGaiaDaySpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 
+    @Override
+    public void updateState() {
+
+    }
+
+    @Override
+    public void updateInventory() {
+
+    }
+
+    @Override
+    public void onAttack(LivingEntity target) {
+
+    }
+
+    @Override
+    public void onHurt(float amount, DamageSource damageSource) {
+
+    }
+
+    @Override
+    public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
+
+    }
+
+    @Override
+    public List<MobEffect> immuneToEffects() {
+        return null;
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+
+    }
 }

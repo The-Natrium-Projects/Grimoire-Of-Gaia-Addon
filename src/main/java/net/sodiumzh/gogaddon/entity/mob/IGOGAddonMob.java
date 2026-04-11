@@ -1,4 +1,4 @@
-package net.sodiumzh.gogaddon.entity;
+package net.sodiumzh.gogaddon.entity.mob;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
 
-public interface GOGAddonMob {
+public interface IGOGAddonMob {
 
     /**
      * Update the mob's state on aiStep. Should be invoked in aiStep() on both sides.
@@ -41,5 +41,9 @@ public interface GOGAddonMob {
         return true;
     };
 
-    List<MobEffect> immuneToEffects();
+    default List<MobEffect> immuneToEffects() {
+        return List.of();
+    }
+
+    void onDeath(DamageSource damageSource);
 }

@@ -3,7 +3,9 @@ package net.sodiumzh.gogaddon.entity.mob;
 import gaia.entity.AbstractGaiaEntity;
 import gaia.util.SharedEntityData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.sodiumzh.gogaddon.entity.GOGAddonMob;
 import net.sodiumzh.gogaddon.registry.GOGAddonConfigs;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityTypes;
 import net.sodiumzh.gogaddon.util.GOGAddonStatics;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DhampirEntity extends AbstractGaiaEntity implements GOGAddonMob {
+public class DhampirEntity extends AbstractGaiaEntity implements IGOGAddonMob {
 
     protected double totalDamageDealt = 0d;
 
@@ -99,11 +100,6 @@ public class DhampirEntity extends AbstractGaiaEntity implements GOGAddonMob {
     }
 
     @Override
-    public boolean canHurt(float amount, DamageSource damageSource) {
-        return true;
-    }
-
-    @Override
     public List<MobEffect> immuneToEffects() {
         return List.of();
     }
@@ -120,12 +116,25 @@ public class DhampirEntity extends AbstractGaiaEntity implements GOGAddonMob {
             int convertAmount = (int)Math.round(Math.floor((this.totalDamageDealt + amount) / convertDmg) - Math.floor(this.totalDamageDealt / convertDmg));
             for (int i = 0; i < convertAmount; ++i) {
                 if (this.getRandom().nextDouble() <= convertChance) {
-                    this.convertTo(GOGAddonEntityTypes.VAMPIRE.getEntityType(), true);
+                    VampireEntity vampireEntity = this.convertTo(GOGAddonEntityTypes.VAMPIRE.getEntityType(), true);
+                    if (vampireEntity != null) {
+                        vampireEntity.playSound(SoundEvents.ENCHANTMENT_TABLE_USE, 1.5f, 1.0f);
+                        NFUParticleStatics.sendParticlesToEntity(vampireEntity, ParticleTypes.EXPLOSION, 0d, 1.5d, 5, 1.0d);
+                        NFUParticleStatics.sendGlintParticlesToEntityDefault(vampireEntity, 0f, 20);
+                        vampireEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 5 * 20));
+                        vampireEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, 2));
+                        vampireEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, 2));
+                    }
                     return;
                 }
             }
         }
         this.totalDamageDealt += amount;
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+
     }
 
     // COPY-PASTE TO ALL MOBS //
@@ -166,6 +175,14 @@ public class DhampirEntity extends AbstractGaiaEntity implements GOGAddonMob {
         SpawnGroupData res = super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData, tag);
         this.populateDefaultEquipmentSlots(this.getRandom(), difficultyInstance);
         return res;
+    }
+
+    @Override
+    public void die(DamageSource pDamageSource) {
+        super.die(pDamageSource);
+        if (this.isDeadOrDying()) {
+            this.onDeath(pDamageSource);
+        }
     }
 
     // COPY-PASTE END //

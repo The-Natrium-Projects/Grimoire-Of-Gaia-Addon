@@ -22,7 +22,7 @@ public class GOGAddonConfigs {
                 .defineInRange("dhampirConversionChance", 0.1d, 0d, 1d);
         DHAMPIR_CONVERSION_DAMAGE = BUILDER.comment("Dhampir will try converting to Vampire "
             + "after dealing this amount of damage.")
-                .defineInRange("dhampirConversionDamage", 20d, 1d, Double.MAX_VALUE);
+                .defineInRange("dhampirConversionDamage", 50d, 1d, Double.MAX_VALUE);
         BUILDER.pop();
         CONFIG = BUILDER.build();
     }
@@ -30,7 +30,7 @@ public class GOGAddonConfigs {
     public static class ValueCache {
         public static class Gameplay {
             public static double DHAMPIR_CONVERSION_CHANCE = 0.1d;
-            public static double DHAMPIR_CONVERSION_DAMAGE = 20d;
+            public static double DHAMPIR_CONVERSION_DAMAGE = 50d;
         }
 
         public static void refresh() {

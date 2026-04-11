@@ -1,3 +1,10 @@
 {
-  "entity.gogaddon.baphomet": "Baphomet"
+  "entity.gogaddon.baphomet": "Baphomet",
+  "entity.gogaddon.dhampir": "Dhampir",
+  "entity.gogaddon.futakuchi_onna": "Futakuchi-Onna",
+  "entity.gogaddon.gorgon": "Gorgon",
+  "entity.gogaddon.kikimora": "Kikimora",
+  "entity.gogaddon.sahuagin": "Sahuagin",
+  "entity.gogaddon.selkie": "Selkie",
+  "entity.gogaddon.vampire": "Vampire"
 }

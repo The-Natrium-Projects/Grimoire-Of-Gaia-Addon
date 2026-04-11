@@ -28,14 +28,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.sodiumzh.gogaddon.ai.goal.SelectedMeleeAttackGoal;
 import net.sodiumzh.gogaddon.ai.goal.SelectedRangedAttackGoal;
-import net.sodiumzh.gogaddon.entity.GOGAddonMob;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
 import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, GOGAddonMob, IMeleeAndRangedAttackMob {
+public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, IGOGAddonMob, IMeleeAndRangedAttackMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(GorgonEntity.class,
         EntityDataSerializers.BOOLEAN);
@@ -189,6 +188,19 @@ public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, GO
     @Override
     public List<MobEffect> immuneToEffects() {
         return null;
+    }
+
+    @Override
+    public void die(DamageSource pDamageSource) {
+        super.die(pDamageSource);
+        if (this.isDeadOrDying()) {
+            this.onDeath(pDamageSource);
+        }
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+
     }
 
     // COPY-PASTE END //

@@ -51,7 +51,7 @@ public class GOGAddonEntityAttributes {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(GOGAddonEntityTypes.VAMPIRE.getEntityType(), DEFAULT_TIER_3.get().get().build());
-        event.put(GOGAddonEntityTypes.BAPHOMET.getEntityType(), DEFAULT_TIER_2.get().get().build());
+        event.put(GOGAddonEntityTypes.BAPHOMET.getEntityType(), DEFAULT_TIER_3.get().get().build());
         event.put(GOGAddonEntityTypes.DHAMPIR.getEntityType(), DEFAULT_TIER_2.get().get().build());
         event.put(GOGAddonEntityTypes.GORGON.getEntityType(), DEFAULT_TIER_3.get().get().build());
         event.put(GOGAddonEntityTypes.SELKIE.getEntityType(), DEFAULT_TIER_1.get().get().build());

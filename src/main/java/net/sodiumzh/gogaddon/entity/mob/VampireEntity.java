@@ -17,12 +17,12 @@ import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.sodiumzh.gogaddon.entity.GOGAddonMob;
+import net.minecraft.world.phys.Vec3;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import java.util.List;
 
-public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, GOGAddonMob {
+public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, IGOGAddonMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(VampireEntity.class,
         EntityDataSerializers.BOOLEAN);
@@ -76,6 +76,10 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, G
 
     @Override
     public void updateState() {
+        Vec3 vec3 = this.getDeltaMovement();
+        if (!this.onGround() && vec3.y < 0.0D)
+            this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
+
         if (!this.level().isClientSide()) {
             this.updatePowered();
             if (this.isSunBurnTick()) {
@@ -91,14 +95,11 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, G
     }
 
     @Override
-    public void die(DamageSource pDamageSource) {
-        super.die(pDamageSource);
-        if (this.isDeadOrDying()) {
-            Bat bat = EntityType.BAT.create(this.level());
-            if (bat != null) {
-                bat.setPos(this.position().add(0, 0.5d, 0));
-                this.level().addFreshEntity(bat);
-            }
+    public void onDeath(DamageSource pDamageSource) {
+        Bat bat = EntityType.BAT.create(this.level());
+        if (bat != null) {
+            bat.setPos(this.position().add(0, 0.5d, 0));
+            this.level().addFreshEntity(bat);
         }
     }
 
@@ -115,14 +116,25 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, G
     @Override
     public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
         this.heal(amount * 2f);
-        NFUParticleStatics.sendHeartParticlesToEntityDefault(this, 0.0f, 2);
+        int heartAmount = Math.round(amount);
+        if (heartAmount > 0)
+            NFUParticleStatics.sendHeartParticlesToEntityDefault(this, 0.0f, heartAmount);
     }
-
 
     @Override
     public List<MobEffect> immuneToEffects() {
         return List.of();
     }
+
+    @Override
+    public void die(DamageSource pDamageSource) {
+        super.die(pDamageSource);
+        if (this.isDeadOrDying()) {
+            this.onDeath(pDamageSource);
+        }
+    }
+
+    // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends VampireEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return checkDaysPassed(levelAccessor)
