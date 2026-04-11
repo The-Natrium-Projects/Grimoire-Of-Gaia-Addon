@@ -10,27 +10,9 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.sodiumzh.gogaddon.entity.mob.SahuaginEntity;
 
 public class SahuaginModel extends EntityModel<SahuaginEntity> implements HeadedModel, ArmedModel {
-    @Override
-    public void translateToHand(HumanoidArm pSide, PoseStack pPoseStack) {
 
-    }
-
-    @Override
-    public void setupAnim(SahuaginEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-
-    }
-
-    @Override
-    public ModelPart getHead() {
-        return null;
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-
-    }
     // 1.7.2 format. Port to 1.20.1.
-    /*ModelRenderer head;
+    ModelRenderer head;
     ModelRenderer headaccessory;
     ModelRenderer hair1;
     ModelRenderer hair2;
@@ -358,5 +340,27 @@ public class SahuaginModel extends EntityModel<SahuaginEntity> implements Headed
             this.rightarmlower1.rotateAngleZ = this.rightarm.rotateAngleZ;
             this.rightarmlower2.rotateAngleZ = this.rightarm.rotateAngleZ;
         }
-    }*/
+    }
+
+    // 1.20.1 required methods below. Should be implemented.
+
+    @Override
+    public void translateToHand(HumanoidArm pSide, PoseStack pPoseStack) {
+        // To be implemented
+    }
+
+    @Override
+    public ModelPart getHead() {
+        // To be implemented
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
+        // To be implemented
+    }
+
+    @Override
+    public void setupAnim(SahuaginEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+        // To be implemented
+    }
 }

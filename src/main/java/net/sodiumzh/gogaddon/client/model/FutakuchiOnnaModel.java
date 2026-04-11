@@ -11,27 +11,9 @@ import net.sodiumzh.gogaddon.entity.mob.DhampirEntity;
 import net.sodiumzh.gogaddon.entity.mob.FutakuchiOnnaEntity;
 
 public class FutakuchiOnnaModel extends EntityModel<FutakuchiOnnaEntity> implements HeadedModel, ArmedModel {
-    @Override
-    public void translateToHand(HumanoidArm pSide, PoseStack pPoseStack) {
 
-    }
-
-    @Override
-    public void setupAnim(FutakuchiOnnaEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-
-    }
-
-    @Override
-    public ModelPart getHead() {
-        return null;
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-
-    }
     // This is 1.7.2 format. Port to 1.20.1.
-    /*ModelRenderer head;
+    ModelRenderer head;
     ModelRenderer headaccessory;
     ModelRenderer hair1;
     ModelRenderer hair2;
@@ -253,5 +235,27 @@ public class FutakuchiOnnaModel extends EntityModel<FutakuchiOnnaEntity> impleme
         this.leftleg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float)Math.PI) * 0.8F * par2;
         this.rightsandal.rotateAngleX = this.rightleg.rotateAngleX;
         this.leftsandal.rotateAngleX = this.leftleg.rotateAngleX;
-    }*/
+    }
+
+    // 1.20.1 required methods below. Should be implemented.
+
+    @Override
+    public void setupAnim(FutakuchiOnnaEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+        // To be implemented
+    }
+
+    @Override
+    public void translateToHand(HumanoidArm pSide, PoseStack pPoseStack) {
+        // To be implemented
+    }
+
+    @Override
+    public ModelPart getHead() {
+        // To be implemented
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
+        // To be implemented
+    }
 }
