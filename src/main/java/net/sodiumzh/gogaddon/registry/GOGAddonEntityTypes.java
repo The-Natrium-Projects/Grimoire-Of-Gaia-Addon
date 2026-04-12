@@ -5,7 +5,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.sodiumzh.gogaddon.GOGAddon;
-import net.sodiumzh.gogaddon.entity.*;
+import net.sodiumzh.gogaddon.entity.GOGAddonMobReg;
 import net.sodiumzh.gogaddon.entity.mob.*;
 
 public class GOGAddonEntityTypes {
@@ -36,4 +36,11 @@ public class GOGAddonEntityTypes {
         () -> EntityType.Builder.of(SelkieEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
         .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
 
+    public static final GOGAddonMobReg<FutakuchiOnnaEntity> FUTAKUCHI_ONNA = new GOGAddonMobReg.Builder<>("futakuchi_onna",
+        () -> EntityType.Builder.of(FutakuchiOnnaEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
+
+    public static final GOGAddonMobReg<SahuaginEntity> SAHUAGIN = new GOGAddonMobReg.Builder<>("sahuagin",
+        () -> EntityType.Builder.of(SahuaginEntity::new, MobCategory.MONSTER).clientTrackingRange(8))
+        .withEggColors(0xc9b161, 0xd54242).withDefaultSounds().build();
 }

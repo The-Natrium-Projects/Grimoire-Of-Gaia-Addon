@@ -9,10 +9,15 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
+import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -25,6 +30,17 @@ public class SahuaginEntity extends AbstractGaiaEntity implements IGOGAddonMob, 
     @Override
     public float getBaseDefense() {
         return 0;
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0d, true));
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[0]));
+        this.targetSelector.addGoal(2, this.targetPlayerGoal = new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
     @Override
@@ -87,10 +103,8 @@ public class SahuaginEntity extends AbstractGaiaEntity implements IGOGAddonMob, 
     // GOGAddonMob interface end //
 
     // Spawn rules for registration
-    public static boolean checkSpawnRules(EntityType<? extends VampireEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return checkDaysPassed(levelAccessor)
-            && checkAboveSeaLevel(levelAccessor, pos)
-            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+    public static boolean checkSpawnRules(EntityType<? extends SahuaginEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 
     // COPY-PASTE TO ALL MOBS //

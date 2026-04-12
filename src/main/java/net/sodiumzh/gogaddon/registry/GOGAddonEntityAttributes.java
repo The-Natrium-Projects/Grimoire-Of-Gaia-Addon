@@ -56,5 +56,7 @@ public class GOGAddonEntityAttributes {
         event.put(GOGAddonEntityTypes.GORGON.getEntityType(), DEFAULT_TIER_3.get().get().build());
         event.put(GOGAddonEntityTypes.SELKIE.getEntityType(), DEFAULT_TIER_1.get().get().build());
         event.put(GOGAddonEntityTypes.KIKIMORA.getEntityType(), DEFAULT_TIER_1.get().get().build());
+        event.put(GOGAddonEntityTypes.FUTAKUCHI_ONNA.getEntityType(), DEFAULT_TIER_1.get().get().build());
+        event.put(GOGAddonEntityTypes.SAHUAGIN.getEntityType(), DEFAULT_TIER_1.get().get().build());
     }
 }

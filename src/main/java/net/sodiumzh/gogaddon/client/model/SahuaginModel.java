@@ -6,361 +6,263 @@ import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.sodiumzh.gogaddon.entity.mob.SahuaginEntity;
 
+@OnlyIn(Dist.CLIENT)
 public class SahuaginModel extends EntityModel<SahuaginEntity> implements HeadedModel, ArmedModel {
+	private final ModelPart root;
+	private final ModelPart head;
+	private final ModelPart headaccessory;
+	private final ModelPart hair1;
+	private final ModelPart hair2;
+	private final ModelPart rightear;
+	private final ModelPart leftear;
+	private final ModelPart bodytop;
+	private final ModelPart rightarm;
+	private final ModelPart rightarmlower1;
+	private final ModelPart rightarmlower2;
+	private final ModelPart righthand;
+	private final ModelPart leftarm;
+	private final ModelPart leftarmlower1;
+	private final ModelPart leftarmlower2;
+	private final ModelPart lefthand;
+	private final ModelPart tail1;
+	private final ModelPart tail2;
+	private final ModelPart tail3;
+	private final ModelPart rightleg;
+	private final ModelPart rightleglower1;
+	private final ModelPart rightleglower2;
+	private final ModelPart rightfoot;
+	private final ModelPart leftleg;
+	private final ModelPart leftleglower1;
+	private final ModelPart leftleglower2;
+	private final ModelPart leftfoot;
 
-    // 1.7.2 format. Port to 1.20.1.
-    ModelRenderer head;
-    ModelRenderer headaccessory;
-    ModelRenderer hair1;
-    ModelRenderer hair2;
-    ModelRenderer rightear;
-    ModelRenderer leftear;
-    ModelRenderer bodytop;
-    ModelRenderer bodymiddle;
-    ModelRenderer bodymiddlebutton;
-    ModelRenderer bodybottom;
-    ModelRenderer rightchest;
-    ModelRenderer leftchest;
-    public static ModelRenderer rightarm;
-    ModelRenderer rightarmlower1;
-    ModelRenderer rightarmlower2;
-    ModelRenderer righthand;
-    ModelRenderer leftarm;
-    ModelRenderer leftarmlower1;
-    ModelRenderer leftarmlower2;
-    ModelRenderer lefthand;
-    ModelRenderer tail1;
-    ModelRenderer tail2;
-    ModelRenderer tail3;
-    ModelRenderer waist;
-    ModelRenderer rightleg;
-    ModelRenderer rightleglower1;
-    ModelRenderer rightleglower2;
-    ModelRenderer rightfoot;
-    ModelRenderer leftleg;
-    ModelRenderer leftleglower1;
-    ModelRenderer leftleglower2;
-    ModelRenderer leftfoot;
+	public SahuaginModel(ModelPart root) {
+		this.root = root.getChild("sahuagin");
+		this.head = this.root.getChild("head");
+		this.headaccessory = this.root.getChild("headaccessory");
+		this.hair1 = this.root.getChild("hair1");
+		this.hair2 = this.root.getChild("hair2");
+		this.rightear = this.root.getChild("rightear");
+		this.leftear = this.root.getChild("leftear");
+		this.bodytop = this.root.getChild("bodytop");
+		this.rightarm = this.root.getChild("rightarm");
+		this.rightarmlower1 = this.root.getChild("rightarmlower1");
+		this.rightarmlower2 = this.root.getChild("rightarmlower2");
+		this.righthand = this.root.getChild("righthand");
+		this.leftarm = this.root.getChild("leftarm");
+		this.leftarmlower1 = this.root.getChild("leftarmlower1");
+		this.leftarmlower2 = this.root.getChild("leftarmlower2");
+		this.lefthand = this.root.getChild("lefthand");
+		this.tail1 = this.root.getChild("tail1");
+		this.tail2 = this.root.getChild("tail2");
+		this.tail3 = this.root.getChild("tail3");
+		this.rightleg = this.root.getChild("rightleg");
+		this.rightleglower1 = this.root.getChild("rightleglower1");
+		this.rightleglower2 = this.root.getChild("rightleglower2");
+		this.rightfoot = this.root.getChild("rightfoot");
+		this.leftleg = this.root.getChild("leftleg");
+		this.leftleglower1 = this.root.getChild("leftleglower1");
+		this.leftleglower2 = this.root.getChild("leftleglower2");
+		this.leftfoot = this.root.getChild("leftfoot");
+	}
 
-    public ModelGaiaSahuagin() {
-        this.textureWidth = 128;
-        this.textureHeight = 64;
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-        this.head = new ModelRenderer(this, 0, 0);
-        this.head.addBox(-3F, -6F, -3F, 6, 6, 6);
-        this.head.setRotationPoint(0F, 1F, 0F);
-        this.head.setTextureSize(64, 32);
-        this.head.mirror = true;
-        this.setRotation(head, 0F, 0F, 0F);
-        this.headaccessory = new ModelRenderer(this, 36, 0);
-        this.headaccessory.addBox(-3.5F, -6.5F, -3.5F, 7, 7, 7);
-        this.headaccessory.setRotationPoint(0F, 1F, 0F);
-        this.headaccessory.setTextureSize(64, 32);
-        this.headaccessory.mirror = true;
-        this.setRotation(headaccessory, 0F, 0F, 0F);
-        this.hair1 = new ModelRenderer(this, 36, 14);
-        this.hair1.addBox(-4F, -6F, 1F, 8, 8, 3);
-        this.hair1.setRotationPoint(0F, 1F, 0F);
-        this.hair1.setTextureSize(64, 32);
-        this.hair1.mirror = true;
-        this.setRotation(hair1, 0F, 0F, 0F);
-        this.hair2 = new ModelRenderer(this, 36, 25);
-        this.hair2.addBox(-4.5F, -1F, 1.5F, 9, 9, 3);
-        this.hair2.setRotationPoint(0F, 1F, 0F);
-        this.hair2.setTextureSize(64, 32);
-        this.hair2.mirror = true;
-        this.setRotation(hair2, 0F, 0F, 0F);
-        this.rightear = new ModelRenderer(this, 36, 32);
-        this.rightear.addBox(-4F, -5F, -1F, 0, 4, 5);
-        this.rightear.setRotationPoint(0F, 1F, 0F);
-        this.rightear.setTextureSize(64, 32);
-        this.rightear.mirror = true;
-        this.setRotation(rightear, 0F, -0.5235988F, 0F);
-        this.leftear = new ModelRenderer(this, 36, 32);
-        this.leftear.addBox(4F, -5F, -1F, 0, 4, 5);
-        this.leftear.setRotationPoint(0F, 1F, 0F);
-        this.leftear.setTextureSize(64, 32);
-        this.leftear.mirror = true;
-        this.setRotation(leftear, 0F, 0.5235988F, 0F);
-        this.bodytop = new ModelRenderer(this, 0, 12);
-        this.bodytop.addBox(-2.5F, 0F, -1.5F, 5, 5, 3);
-        this.bodytop.setRotationPoint(0F, 1F, 0F);
-        this.bodytop.setTextureSize(64, 32);
-        this.bodytop.mirror = true;
-        this.setRotation(bodytop, -0.0872665F, 0F, 0F);
-        this.bodymiddle = new ModelRenderer(this, 0, 20);
-        this.bodymiddle.addBox(-2F, 4.5F, -1.5F, 4, 3, 2);
-        this.bodymiddle.setRotationPoint(0F, 1F, 0F);
-        this.bodymiddle.setTextureSize(64, 32);
-        this.bodymiddle.mirror = true;
-        this.setRotation(bodymiddle, 0F, 0F, 0F);
-        this.bodymiddlebutton = new ModelRenderer(this, 0, 20);
-        this.bodymiddlebutton.addBox(-0.5F, 5F, -1.6F, 1, 2, 0);
-        this.bodymiddlebutton.setRotationPoint(0F, 1F, 0F);
-        this.bodymiddlebutton.setTextureSize(64, 32);
-        this.bodymiddlebutton.mirror = true;
-        this.setRotation(bodymiddlebutton, 0F, 0F, 0F);
-        this.bodybottom = new ModelRenderer(this, 0, 25);
-        this.bodybottom.addBox(-2.5F, 7F, -2.5F, 5, 3, 3);
-        this.bodybottom.setRotationPoint(0F, 1F, 0F);
-        this.bodybottom.setTextureSize(64, 32);
-        this.bodybottom.mirror = true;
-        this.setRotation(bodybottom, 0.0872665F, 0F, 0F);
-        this.rightchest = new ModelRenderer(this, 0, 31);
-        this.rightchest.addBox(-1F, -1F, -1F, 2, 2, 2);
-        this.rightchest.setRotationPoint(-1.3F, 3F, -1.5F);
-        this.rightchest.setTextureSize(64, 32);
-        this.rightchest.mirror = true;
-        this.setRotation(rightchest, 0.7853982F, 0.1745329F, 0.0872665F);
-        this.leftchest = new ModelRenderer(this, 8, 31);
-        this.leftchest.addBox(-1F, -1F, -1F, 2, 2, 2);
-        this.leftchest.setRotationPoint(1.3F, 3F, -1.5F);
-        this.leftchest.setTextureSize(64, 32);
-        this.leftchest.mirror = true;
-        this.setRotation(leftchest, 0.7853982F, -0.1745329F, -0.0872665F);
-        this.rightarm = new ModelRenderer(this, 16, 12);
-        this.rightarm.addBox(-2F, -1F, -1F, 2, 10, 2);
-        this.rightarm.setRotationPoint(-2.5F, 2.5F, 0F);
-        this.rightarm.setTextureSize(64, 32);
-        this.rightarm.mirror = true;
-        this.setRotation(rightarm, 0F, 0F, 0.2617994F);
-        this.rightarmlower1 = new ModelRenderer(this, 36, 41);
-        this.rightarmlower1.addBox(-4F, 2.5F, 0F, 2, 6, 0);
-        this.rightarmlower1.setRotationPoint(-2.5F, 2.5F, 0F);
-        this.rightarmlower1.setTextureSize(64, 32);
-        this.rightarmlower1.mirror = true;
-        this.setRotation(rightarmlower1, 0F, 0F, 0.2617994F);
-        this.rightarmlower2 = new ModelRenderer(this, 36, 47);
-        this.rightarmlower2.addBox(-2.5F, 4F, -1.5F, 2, 6, 3);
-        this.rightarmlower2.setRotationPoint(-2.5F, 2.5F, 0F);
-        this.rightarmlower2.setTextureSize(64, 32);
-        this.rightarmlower2.mirror = true;
-        this.setRotation(rightarmlower2, 0F, 0F, 0.2617994F);
-        this.righthand = new ModelRenderer(this, 36, 56);
-        this.righthand.addBox(-2.5F, 8.5F, -2F, 2, 4, 4);
-        this.righthand.setRotationPoint(-2.5F, 2.5F, 0F);
-        this.righthand.setTextureSize(64, 32);
-        this.righthand.mirror = true;
-        this.setRotation(righthand, 0F, 0F, 0.1745329F);
-        this.leftarm = new ModelRenderer(this, 16, 12);
-        this.leftarm.addBox(0F, -1F, -1F, 2, 10, 2);
-        this.leftarm.setRotationPoint(2.5F, 2.5F, 0F);
-        this.leftarm.setTextureSize(64, 32);
-        this.leftarm.mirror = true;
-        this.setRotation(leftarm, 0F, 0F, -0.2617994F);
-        this.leftarmlower1 = new ModelRenderer(this, 40, 41);
-        this.leftarmlower1.addBox(2F, 2.5F, 0F, 2, 6, 0);
-        this.leftarmlower1.setRotationPoint(2.5F, 2.5F, 0F);
-        this.leftarmlower1.setTextureSize(64, 32);
-        this.leftarmlower1.mirror = true;
-        this.setRotation(leftarmlower1, 0F, 0F, -0.2617994F);
-        this.leftarmlower2 = new ModelRenderer(this, 46, 47);
-        this.leftarmlower2.addBox(0.5F, 4F, -1.5F, 2, 6, 3);
-        this.leftarmlower2.setRotationPoint(2.5F, 2.5F, 0F);
-        this.leftarmlower2.setTextureSize(64, 32);
-        this.leftarmlower2.mirror = true;
-        this.setRotation(leftarmlower2, 0F, 0F, -0.2617994F);
-        this.lefthand = new ModelRenderer(this, 48, 56);
-        this.lefthand.addBox(0.5F, 8.5F, -2F, 2, 4, 4);
-        this.lefthand.setRotationPoint(2.5F, 2.5F, 0F);
-        this.lefthand.setTextureSize(64, 32);
-        this.lefthand.mirror = true;
-        this.setRotation(lefthand, 0F, 0F, -0.1745329F);
-        this.tail1 = new ModelRenderer(this, 64, 8);
-        this.tail1.addBox(-1.5F, -1.5F, 0F, 3, 5, 3);
-        this.tail1.setRotationPoint(0F, 9F, 1F);
-        this.tail1.setTextureSize(64, 32);
-        this.tail1.mirror = true;
-        this.setRotation(tail1, 0.1745329F, 0F, 0F);
-        this.tail2 = new ModelRenderer(this, 64, 16);
-        this.tail2.addBox(-1F, 3.5F, 0.5F, 2, 5, 2);
-        this.tail2.setRotationPoint(0F, 9F, 1F);
-        this.tail2.setTextureSize(64, 32);
-        this.tail2.mirror = true;
-        this.setRotation(tail2, 0.2617994F, 0F, 0F);
-        this.tail3 = new ModelRenderer(this, 64, 23);
-        this.tail3.addBox(-0.5F, 8.5F, 0.5F, 1, 4, 1);
-        this.tail3.setRotationPoint(0F, 9F, 1F);
-        this.tail3.setTextureSize(64, 32);
-        this.tail3.mirror = true;
-        this.setRotation(tail3, 0.3490659F, 0F, 0F);
-        this.waist = new ModelRenderer(this, 64, 0);
-        this.waist.addBox(-3F, 9F, -2F, 6, 4, 4);
-        this.waist.setRotationPoint(0F, 1F, 0F);
-        this.waist.setTextureSize(64, 32);
-        this.waist.mirror = true;
-        this.setRotation(waist, 0F, 0F, 0F);
-        this.rightleg = new ModelRenderer(this, 64, 28);
-        this.rightleg.addBox(-1F, 0F, -1F, 2, 13, 2);
-        this.rightleg.setRotationPoint(-1.5F, 11F, 0F);
-        this.rightleg.setTextureSize(64, 32);
-        this.rightleg.mirror = true;
-        this.setRotation(rightleg, 0F, 0F, 0F);
-        this.rightleglower1 = new ModelRenderer(this, 64, 43);
-        this.rightleglower1.addBox(-3F, 5F, 0F, 2, 6, 0);
-        this.rightleglower1.setRotationPoint(-1.5F, 11F, 0F);
-        this.rightleglower1.setTextureSize(64, 32);
-        this.rightleglower1.mirror = true;
-        this.setRotation(rightleglower1, 0F, 0F, 0F);
-        this.rightleglower2 = new ModelRenderer(this, 64, 49);
-        this.rightleglower2.addBox(-1.5F, 7F, -1.5F, 3, 5, 3);
-        this.rightleglower2.setRotationPoint(-1.5F, 11F, 0F);
-        this.rightleglower2.setTextureSize(64, 32);
-        this.rightleglower2.mirror = true;
-        this.setRotation(rightleglower2, 0F, 0F, 0F);
-        this.rightfoot = new ModelRenderer(this, 64, 57);
-        this.rightfoot.addBox(-2F, 12F, -3F, 4, 1, 6);
-        this.rightfoot.setRotationPoint(-1.5F, 11F, 0F);
-        this.rightfoot.setTextureSize(64, 32);
-        this.rightfoot.mirror = true;
-        this.setRotation(rightfoot, 0F, 0F, 0F);
-        this.leftleg = new ModelRenderer(this, 72, 28);
-        this.leftleg.addBox(-1F, 0F, -1F, 2, 13, 2);
-        this.leftleg.setRotationPoint(1.5F, 11F, 0F);
-        this.leftleg.setTextureSize(64, 32);
-        this.leftleg.mirror = true;
-        this.setRotation(leftleg, 0F, 0F, 0F);
-        this.leftleglower1 = new ModelRenderer(this, 68, 43);
-        this.leftleglower1.addBox(1F, 5F, 0F, 2, 6, 0);
-        this.leftleglower1.setRotationPoint(1.5F, 11F, 0F);
-        this.leftleglower1.setTextureSize(64, 32);
-        this.leftleglower1.mirror = true;
-        this.setRotation(leftleglower1, 0F, 0F, 0F);
-        this.leftleglower2 = new ModelRenderer(this, 64, 49);
-        this.leftleglower2.addBox(-1.5F, 7F, -1.5F, 3, 5, 3);
-        this.leftleglower2.setRotationPoint(1.5F, 11F, 0F);
-        this.leftleglower2.setTextureSize(64, 32);
-        this.leftleglower2.mirror = true;
-        this.setRotation(leftleglower2, 0F, 0F, 0F);
-        this.leftfoot = new ModelRenderer(this, 84, 57);
-        this.leftfoot.addBox(-2F, 12F, -3F, 4, 1, 6);
-        this.leftfoot.setRotationPoint(1.5F, 11F, 0F);
-        this.leftfoot.setTextureSize(64, 32);
-        this.leftfoot.mirror = true;
-        this.setRotation(leftfoot, 0F, 0F, 0F);
-    }
+		PartDefinition sahuagin = partdefinition.addOrReplaceChild("sahuagin", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-    public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-        super.render(entity, par2, par3, par4, par5, par6, par7);
-        this.setRotationAngles(par2, par3, par4, par5, par6, par7);
-        this.head.render(par7);
-        this.headaccessory.render(par7);
-        this.hair1.render(par7);
-        this.hair2.render(par7);
-        this.rightear.render(par7);
-        this.leftear.render(par7);
-        this.bodytop.render(par7);
-        this.bodymiddle.render(par7);
-        this.bodymiddlebutton.render(par7);
-        this.bodybottom.render(par7);
-        this.rightchest.render(par7);
-        this.leftchest.render(par7);
-        this.rightarm.render(par7);
-        this.rightarmlower1.render(par7);
-        this.rightarmlower2.render(par7);
-        this.righthand.render(par7);
-        this.leftarm.render(par7);
-        this.leftarmlower1.render(par7);
-        this.leftarmlower2.render(par7);
-        this.lefthand.render(par7);
-        this.tail1.render(par7);
-        this.tail2.render(par7);
-        this.tail3.render(par7);
-        this.waist.render(par7);
-        this.rightleg.render(par7);
-        this.rightleglower1.render(par7);
-        this.rightleglower2.render(par7);
-        this.rightfoot.render(par7);
-        this.leftleg.render(par7);
-        this.leftleglower1.render(par7);
-        this.leftleglower2.render(par7);
-        this.leftfoot.render(par7);
-    }
+		sahuagin.addOrReplaceChild("head", CubeListBuilder.create()
+				.texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
+		sahuagin.addOrReplaceChild("headaccessory", CubeListBuilder.create()
+				.texOffs(36, 0).addBox(-3.5F, -6.5F, -3.5F, 7.0F, 7.0F, 7.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6) {
-        this.head.rotateAngleY = par4 / 57.295776F;
-        this.head.rotateAngleX = par5 / 57.295776F;
-        this.headaccessory.rotateAngleY = this.head.rotateAngleY;
-        this.headaccessory.rotateAngleX = this.head.rotateAngleX;
-        this.hair1.rotateAngleY = this.head.rotateAngleY;
-        this.hair2.rotateAngleY = this.head.rotateAngleY;
-        this.rightear.rotateAngleY = this.head.rotateAngleY - 0.5235988F;
-        this.rightear.rotateAngleX = this.head.rotateAngleX;
-        this.leftear.rotateAngleY = this.head.rotateAngleY + 0.5235988F;
-        this.leftear.rotateAngleX = this.head.rotateAngleX;
-        this.rightarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F +(float)Math.PI) * 0.8F * par2 * 0.5F;
-        this.rightarmlower1.rotateAngleX = rightarm.rotateAngleX;
-        this.rightarmlower2.rotateAngleX = rightarm.rotateAngleX;
-        this.righthand.rotateAngleX = rightarm.rotateAngleX;
-        this.leftarm.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 0.8F * par2 * 0.5F;
-        this.leftarmlower1.rotateAngleX = this.leftarm.rotateAngleX;
-        this.leftarmlower2.rotateAngleX = this.leftarm.rotateAngleX;
-        this.lefthand.rotateAngleX = this.leftarm.rotateAngleX;
-        this.tail1.rotateAngleZ = MathHelper.cos(par1 * 0.6162F) * 0.1F * par2;
-        this.tail2.rotateAngleZ = MathHelper.cos(par1 * 0.6262F) * 0.1F * par2;
-        this.tail3.rotateAngleZ = MathHelper.cos(par1 * 0.6362F) * 0.1F * par2;
-        this.rightleg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 0.8F * par2;
-        this.rightleglower1.rotateAngleX = this.rightleg.rotateAngleX;
-        this.rightleglower2.rotateAngleX = this.rightleg.rotateAngleX;
-        this.rightfoot.rotateAngleX = this.rightleg.rotateAngleX;
-        this.leftleg.rotateAngleX = MathHelper.cos(par1 * 0.6662F +(float)Math.PI) * 0.8F * par2;
-        this.leftleglower1.rotateAngleX = this.leftleg.rotateAngleX;
-        this.leftleglower2.rotateAngleX = this.leftleg.rotateAngleX;
-        this.leftfoot.rotateAngleX = this.leftleg.rotateAngleX;
+		sahuagin.addOrReplaceChild("hair1", CubeListBuilder.create()
+				.texOffs(36, 14).addBox(-4.0F, -6.0F, 1.0F, 8.0F, 8.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-        float f6;
-        float f7;
+		sahuagin.addOrReplaceChild("hair2", CubeListBuilder.create()
+				.texOffs(36, 25).addBox(-4.5F, -1.0F, 1.5F, 9.0F, 9.0F, 3.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-        if (this.onGround > -9990.0F)
-        {
-            f6 = this.onGround;
-            f6 = 1.0F - this.onGround;
-            f6 *= f6;
-            f6 *= f6;
-            f6 = 1.0F - f6;
-            f7 = MathHelper.sin(f6 * (float)Math.PI);
-            float f8 = MathHelper.sin(this.onGround * (float)Math.PI) * -(this.head.rotateAngleX - 0.7F) * 0.75F;
+		sahuagin.addOrReplaceChild("rightear", CubeListBuilder.create()
+				.texOffs(36, 32).addBox(-4.0F, -5.0F, -1.0F, 0.0F, 4.0F, 5.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0F, -0.5236F, 0.0F));
 
-            this.rightarm.rotateAngleX = (float)((double)this.rightarm.rotateAngleX - ((double)f7 * 1.2D + (double)f8));
-            this.rightarmlower1.rotateAngleX = this.rightarm.rotateAngleX;
-            this.rightarmlower2.rotateAngleX = this.rightarm.rotateAngleX;
-            this.rightarm.rotateAngleY += (this.bodytop.rotateAngleY * 2.0F);
-            this.rightarmlower1.rotateAngleY = this.rightarm.rotateAngleY;
-            this.rightarmlower2.rotateAngleY = this.rightarm.rotateAngleY;
-            this.rightarm.rotateAngleZ = (MathHelper.sin(this.onGround * (float)Math.PI) * -0.4F) + 0.2617994F;
-            this.rightarmlower1.rotateAngleZ = this.rightarm.rotateAngleZ;
-            this.rightarmlower2.rotateAngleZ = this.rightarm.rotateAngleZ;
-        }
-    }
+		sahuagin.addOrReplaceChild("leftear", CubeListBuilder.create()
+				.texOffs(36, 32).mirror().addBox(4.0F, -5.0F, -1.0F, 0.0F, 4.0F, 5.0F).mirror(false), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0F, 0.5236F, 0.0F));
 
-    // 1.20.1 required methods below. Should be implemented.
+		sahuagin.addOrReplaceChild("bodytop", CubeListBuilder.create()
+				.texOffs(0, 12).addBox(-2.5F, 0.0F, -1.5F, 5.0F, 5.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
 
-    @Override
-    public void translateToHand(HumanoidArm pSide, PoseStack pPoseStack) {
-        // To be implemented
-    }
+		sahuagin.addOrReplaceChild("bodymiddle", CubeListBuilder.create()
+				.texOffs(0, 20).addBox(-2.0F, 4.5F, -1.5F, 4.0F, 3.0F, 2.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-    @Override
-    public ModelPart getHead() {
-        // To be implemented
-    }
+		sahuagin.addOrReplaceChild("bodymiddlebutton", CubeListBuilder.create()
+				.texOffs(0, 20).addBox(-0.5F, 5.0F, -1.6F, 1.0F, 2.0F, 0.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
 
-    @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-        // To be implemented
-    }
+		sahuagin.addOrReplaceChild("bodybottom", CubeListBuilder.create()
+				.texOffs(0, 25).addBox(-2.5F, 7.0F, -2.5F, 5.0F, 3.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -23.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
 
-    @Override
-    public void setupAnim(SahuaginEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        // To be implemented
-    }
+		sahuagin.addOrReplaceChild("rightchest", CubeListBuilder.create()
+				.texOffs(0, 31).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-1.3F, -21.0F, -1.5F, 0.7854F, 0.1745F, 0.0873F));
+
+		sahuagin.addOrReplaceChild("leftchest", CubeListBuilder.create()
+				.texOffs(8, 31).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(1.3F, -21.0F, -1.5F, 0.7854F, -0.1745F, -0.0873F));
+
+		sahuagin.addOrReplaceChild("rightarm", CubeListBuilder.create()
+				.texOffs(16, 12).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 10.0F, 2.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.2618F));
+
+		sahuagin.addOrReplaceChild("rightarmlower1", CubeListBuilder.create()
+				.texOffs(36, 41).addBox(-4.0F, 2.5F, 0.0F, 2.0F, 6.0F, 0.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.2618F));
+
+		sahuagin.addOrReplaceChild("rightarmlower2", CubeListBuilder.create()
+				.texOffs(36, 47).addBox(-2.5F, 4.0F, -1.5F, 2.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.2618F));
+
+		sahuagin.addOrReplaceChild("righthand", CubeListBuilder.create()
+				.texOffs(36, 56).addBox(-2.5F, 8.5F, -2.0F, 2.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(-2.5F, -21.5F, 0.0F, 0.0F, 0.0F, 0.1745F));
+
+		sahuagin.addOrReplaceChild("leftarm", CubeListBuilder.create()
+				.texOffs(16, 12).mirror().addBox(0.0F, -1.0F, -1.0F, 2.0F, 10.0F, 2.0F).mirror(false), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.2618F));
+
+		sahuagin.addOrReplaceChild("leftarmlower1", CubeListBuilder.create()
+				.texOffs(40, 41).addBox(2.0F, 2.5F, 0.0F, 2.0F, 6.0F, 0.0F), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.2618F));
+
+		sahuagin.addOrReplaceChild("leftarmlower2", CubeListBuilder.create()
+				.texOffs(46, 47).addBox(0.5F, 4.0F, -1.5F, 2.0F, 6.0F, 3.0F), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.2618F));
+
+		sahuagin.addOrReplaceChild("lefthand", CubeListBuilder.create()
+				.texOffs(48, 56).addBox(0.5F, 8.5F, -2.0F, 2.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(2.5F, -21.5F, 0.0F, 0.0F, 0.0F, -0.1745F));
+
+		sahuagin.addOrReplaceChild("tail1", CubeListBuilder.create()
+				.texOffs(64, 8).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 5.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -15.0F, 1.0F, 0.1745F, 0.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("tail2", CubeListBuilder.create()
+				.texOffs(64, 16).addBox(-1.0F, 3.5F, 0.5F, 2.0F, 5.0F, 2.0F), PartPose.offsetAndRotation(0.0F, -15.0F, 1.0F, 0.2618F, 0.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("tail3", CubeListBuilder.create()
+				.texOffs(64, 23).addBox(-0.5F, 8.5F, 0.5F, 1.0F, 4.0F, 1.0F), PartPose.offsetAndRotation(0.0F, -15.0F, 1.0F, 0.3491F, 0.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("waist", CubeListBuilder.create()
+				.texOffs(64, 0).addBox(-3.0F, 9.0F, -2.0F, 6.0F, 4.0F, 4.0F), PartPose.offset(0.0F, -23.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("rightleg", CubeListBuilder.create()
+				.texOffs(64, 28).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 13.0F, 2.0F), PartPose.offset(-1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("rightleglower1", CubeListBuilder.create()
+				.texOffs(64, 43).addBox(-3.0F, 5.0F, 0.0F, 2.0F, 6.0F, 0.0F), PartPose.offset(-1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("rightleglower2", CubeListBuilder.create()
+				.texOffs(64, 49).addBox(-1.5F, 7.0F, -1.5F, 3.0F, 5.0F, 3.0F), PartPose.offset(-1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("rightfoot", CubeListBuilder.create()
+				.texOffs(64, 57).addBox(-2.0F, 12.0F, -3.0F, 4.0F, 1.0F, 6.0F), PartPose.offset(-1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("leftleg", CubeListBuilder.create()
+				.texOffs(72, 28).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 13.0F, 2.0F), PartPose.offset(1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("leftleglower1", CubeListBuilder.create()
+				.texOffs(68, 43).addBox(1.0F, 5.0F, 0.0F, 2.0F, 6.0F, 0.0F), PartPose.offset(1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("leftleglower2", CubeListBuilder.create()
+				.texOffs(64, 49).mirror().addBox(-1.5F, 7.0F, -1.5F, 3.0F, 5.0F, 3.0F).mirror(false), PartPose.offset(1.5F, -13.0F, 0.0F));
+
+		sahuagin.addOrReplaceChild("leftfoot", CubeListBuilder.create()
+				.texOffs(84, 57).addBox(-2.0F, 12.0F, -3.0F, 4.0F, 1.0F, 6.0F), PartPose.offset(1.5F, -13.0F, 0.0F));
+
+		return LayerDefinition.create(meshdefinition, 128, 64);
+	}
+
+	@Override
+	public void setupAnim(SahuaginEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		// head
+		head.yRot = netHeadYaw / 57.295776F;
+		head.xRot = headPitch / 57.295776F;
+		headaccessory.yRot = head.yRot;
+		headaccessory.xRot = head.xRot;
+		hair1.yRot = head.yRot;
+		hair2.yRot = head.yRot;
+		rightear.yRot = head.yRot - 0.5235988F;
+		rightear.xRot = head.xRot;
+		leftear.yRot = head.yRot + 0.5235988F;
+		leftear.xRot = head.xRot;
+
+		// arms
+		rightarm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount * 0.5F;
+		rightarmlower1.xRot = rightarm.xRot;
+		rightarmlower2.xRot = rightarm.xRot;
+		righthand.xRot = rightarm.xRot;
+		leftarm.xRot = Mth.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount * 0.5F;
+		leftarmlower1.xRot = leftarm.xRot;
+		leftarmlower2.xRot = leftarm.xRot;
+		lefthand.xRot = leftarm.xRot;
+
+		// tail
+		tail1.zRot = Mth.cos(limbSwing * 0.6162F) * 0.1F * limbSwingAmount;
+		tail2.zRot = Mth.cos(limbSwing * 0.6262F) * 0.1F * limbSwingAmount;
+		tail3.zRot = Mth.cos(limbSwing * 0.6362F) * 0.1F * limbSwingAmount;
+
+		// legs
+		rightleg.xRot = Mth.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount;
+		rightleglower1.xRot = rightleg.xRot;
+		rightleglower2.xRot = rightleg.xRot;
+		rightfoot.xRot = rightleg.xRot;
+		leftleg.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount;
+		leftleglower1.xRot = leftleg.xRot;
+		leftleglower2.xRot = leftleg.xRot;
+		leftfoot.xRot = leftleg.xRot;
+
+		// melee attack animation
+		if (attackTime > 0.0F) {
+			holdingMelee();
+		}
+	}
+
+	private void holdingMelee() {
+		float f6 = 1.0F - attackTime;
+		f6 *= f6;
+		f6 *= f6;
+		f6 = 1.0F - f6;
+		float f7 = Mth.sin(f6 * (float) Math.PI);
+		float f8 = Mth.sin(attackTime * (float) Math.PI) * -(head.xRot - 0.7F) * 0.75F;
+
+		rightarm.xRot = (float) ((double) rightarm.xRot - ((double) f7 * 1.2D + (double) f8));
+		rightarmlower1.xRot = rightarm.xRot;
+		rightarmlower2.xRot = rightarm.xRot;
+		rightarm.yRot += (bodytop.yRot * 2.0F);
+		rightarmlower1.yRot = rightarm.yRot;
+		rightarmlower2.yRot = rightarm.yRot;
+		rightarm.zRot = (Mth.sin(attackTime * (float) Math.PI) * -0.4F) + 0.2617994F;
+		rightarmlower1.zRot = rightarm.zRot;
+		rightarmlower2.zRot = rightarm.zRot;
+	}
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart getHead() {
+		return head;
+	}
+
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftarm : this.rightarm;
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack poseStack) {
+		poseStack.translate(0, 1.5, 0.0);
+		getArm(arm).translateAndRotate(poseStack);
+	}
 }

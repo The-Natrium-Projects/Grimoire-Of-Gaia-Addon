@@ -1,5 +1,6 @@
 package net.sodiumzh.gogaddon.client.renderer;
 
+import gaia.client.renderer.layer.AuraLayer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -20,6 +21,9 @@ public class BaphometRenderer extends MobRenderer<BaphometEntity, BaphometModel>
         super(pContext, new BaphometModel(pContext.bakeLayer(LAYER_LOCATION)), 0.5F);
         this.addLayer(new CustomHeadLayer<>(this, pContext.getModelSet(), pContext.getItemInHandRenderer()));
         this.addLayer(new ItemInHandLayer<>(this, pContext.getItemInHandRenderer()));
+        this.addLayer(new AuraLayer<>(this, () -> {
+            return new BaphometModel(pContext.bakeLayer(LAYER_LOCATION));
+        }));
     }
 
     @Override
