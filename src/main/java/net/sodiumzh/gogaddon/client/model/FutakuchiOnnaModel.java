@@ -141,6 +141,7 @@ public class FutakuchiOnnaModel extends EntityModel<FutakuchiOnnaEntity> impleme
 	public void setupAnim(FutakuchiOnnaEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// head (yaw only, pitch stays at initial -0.2618)
 		head.yRot = netHeadYaw / 57.295776F;
+		if (!entity.hasTarget()) head.yRot += (float) Math.PI;	// Face forward when not having a target
 		headaccessory.yRot = head.yRot;
 		hair1.yRot = head.yRot;
 		hair2.yRot = head.yRot;

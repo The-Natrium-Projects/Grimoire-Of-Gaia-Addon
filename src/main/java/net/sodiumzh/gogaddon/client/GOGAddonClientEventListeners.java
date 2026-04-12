@@ -1,7 +1,5 @@
 package net.sodiumzh.gogaddon.client;
 
-import gaia.client.model.prop.AntHillModel;
-import jdk.jfr.Enabled;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,6 +20,8 @@ public class GOGAddonClientEventListeners {
         event.registerEntityRenderer(GOGAddonEntityTypes.DHAMPIR.getEntityType(), DhampirRenderer::new);
         event.registerEntityRenderer(GOGAddonEntityTypes.KIKIMORA.getEntityType(), KikimoraRenderer::new);
         event.registerEntityRenderer(GOGAddonEntityTypes.SELKIE.getEntityType(), SelkieRenderer::new);
+        event.registerEntityRenderer(GOGAddonEntityTypes.FUTAKUCHI_ONNA.getEntityType(), FutakuchiOnnaRenderer::new);
+        event.registerEntityRenderer(GOGAddonEntityTypes.SAHUAGIN.getEntityType(), SahuaginRenderer::new);
     }
 
     @SubscribeEvent
@@ -32,6 +32,8 @@ public class GOGAddonClientEventListeners {
         event.registerLayerDefinition(DhampirRenderer.LAYER_LOCATION, DhampirModel::createBodyLayer);
         event.registerLayerDefinition(KikimoraRenderer.LAYER_LOCATION, KikimoraModel::createBodyLayer);
         event.registerLayerDefinition(SelkieRenderer.LAYER_LOCATION, SelkieModel::createBodyLayer);
+        event.registerLayerDefinition(FutakuchiOnnaRenderer.LAYER_LOCATION, FutakuchiOnnaModel::createBodyLayer);
+        event.registerLayerDefinition(SahuaginRenderer.LAYER_LOCATION, SahuaginModel::createBodyLayer);
     }
 
 }
