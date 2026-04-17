@@ -1,7 +1,6 @@
 package net.sodiumzh.gogaddon.ai.goal;
 
 import gaia.entity.goal.MobAttackGoal;
-import net.minecraft.world.entity.PathfinderMob;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
 
 public class SelectedMeleeAttackGoal extends MobAttackGoal {

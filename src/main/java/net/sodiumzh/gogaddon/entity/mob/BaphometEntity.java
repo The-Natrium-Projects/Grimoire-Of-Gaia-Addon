@@ -6,6 +6,9 @@ import gaia.util.RangedUtil;
 import gaia.util.SharedEntityData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -15,7 +18,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
@@ -29,13 +35,22 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRangedAttackMob, IGOGAddonMob {
+public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRangedAttackMob, IGOGAddonMob, PowerableMob {
+
+    public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(BaphometEntity.class,
+        EntityDataSerializers.BOOLEAN);
 
     public BaphometEntity(EntityType<? extends BaphometEntity> entityType, Level level) {
         super(entityType, level);
     }
 
     protected boolean isMelee = false;
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(POWERED, false);
+    }
 
     @Override
     protected void registerGoals() {
@@ -47,6 +62,11 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[0]));
         this.targetSelector.addGoal(2, this.targetPlayerGoal = new NearestAttackableTargetGoal<>(this, Player.class, true));
+    }
+
+    @Override
+    public boolean isPowered() {
+        return this.entityData.get(POWERED);
     }
 
     @Override
@@ -65,6 +85,11 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
             RangedUtil.fireball(pTarget, this, pVelocity);
             this.swing(InteractionHand.MAIN_HAND);
         }
+    }
+
+    @Override
+    public int getGaiaLevel() {
+        return 3;
     }
 
     // GOGAddonMob interface //
@@ -171,8 +196,6 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
     // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends BaphometEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return AbstractGaiaEntity.checkDaysPassed(levelAccessor)
-            && checkAboveSeaLevel(levelAccessor, pos)
-            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+        return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 }

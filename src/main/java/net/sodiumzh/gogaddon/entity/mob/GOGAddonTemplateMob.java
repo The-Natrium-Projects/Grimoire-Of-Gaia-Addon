@@ -1,12 +1,10 @@
 package net.sodiumzh.gogaddon.entity.mob;
 
 import gaia.entity.AbstractGaiaEntity;
-import gaia.registry.GaiaRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;

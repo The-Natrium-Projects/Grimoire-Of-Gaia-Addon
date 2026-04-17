@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import java.util.List;
@@ -59,6 +60,11 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, I
     @Override
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public int getGaiaLevel() {
+        return 3;
     }
 
     @Override
@@ -137,8 +143,6 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, I
     // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends VampireEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return checkDaysPassed(levelAccessor)
-            && checkAboveSeaLevel(levelAccessor, pos)
-            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+        return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 }

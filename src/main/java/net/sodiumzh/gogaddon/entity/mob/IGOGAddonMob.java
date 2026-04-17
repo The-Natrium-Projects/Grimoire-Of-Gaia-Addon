@@ -4,6 +4,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public interface IGOGAddonMob {
@@ -41,6 +42,7 @@ public interface IGOGAddonMob {
         return true;
     };
 
+    @Nonnull
     default List<MobEffect> immuneToEffects() {
         return List.of();
     }

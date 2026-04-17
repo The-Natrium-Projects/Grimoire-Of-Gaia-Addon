@@ -10,7 +10,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +22,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.sodiumzh.gogaddon.ai.goal.SelectedMeleeAttackGoal;
 import net.sodiumzh.gogaddon.ai.goal.SelectedRangedAttackGoal;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
+import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 
 public class SelkieEntity extends AbstractGaiaEntity implements IMeleeAndRangedAttackMob, IDayMob {
 
@@ -57,10 +61,6 @@ public class SelkieEntity extends AbstractGaiaEntity implements IMeleeAndRangedA
     }
 
     public static boolean checkSpawnRules(EntityType<? extends SelkieEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return checkDaysPassed(levelAccessor)
-            && checkDaytime(levelAccessor)
-            && checkTagBlocks(levelAccessor, pos, GaiaTags.GAIA_SPAWABLE_ON)
-            && checkAboveY(pos, levelAccessor.getSeaLevel() - 8)
-            && checkGaiaDaySpawnRules(entityType, levelAccessor, spawnType, pos, random);
+        return GOGAddonStatics.MobStatics.dayGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 }

@@ -1,7 +1,6 @@
 package net.sodiumzh.gogaddon.ai.goal;
 
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
 
 public class SelectedRangedAttackGoal extends RangedAttackGoal {

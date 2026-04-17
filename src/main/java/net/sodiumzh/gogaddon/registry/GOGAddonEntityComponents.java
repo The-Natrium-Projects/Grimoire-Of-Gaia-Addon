@@ -8,7 +8,6 @@ import net.sodiumzh.gogaddon.entity.behavior.GOGAddonMobBehaviorComponent;
 import net.sodiumzh.nfu.NFULibrary;
 import net.sodiumzh.nfu.entity.component.EntityComponentInitEvent;
 import net.sodiumzh.nfu.entity.component.EntityComponentType;
-import net.sodiumzh.nfu.registry.NFUEntityComponents;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;

@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 
 import java.util.List;
 
@@ -47,11 +48,7 @@ public class KikimoraEntity extends AbstractAssistGaiaEntity implements IGOGAddo
     }
 
     public static boolean checkSpawnRules(EntityType<? extends KikimoraEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return checkDaysPassed(levelAccessor)
-            && checkDaytime(levelAccessor)
-            && checkTagBlocks(levelAccessor, pos, GaiaTags.GAIA_SPAWABLE_ON)
-            && checkAboveSeaLevel(levelAccessor, pos)
-            && checkGaiaDaySpawnRules(entityType, levelAccessor, spawnType, pos, random);
+        return GOGAddonStatics.MobStatics.dayGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 
     @Override

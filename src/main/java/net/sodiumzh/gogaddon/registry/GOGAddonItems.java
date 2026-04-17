@@ -1,6 +1,5 @@
 package net.sodiumzh.gogaddon.registry;
 
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

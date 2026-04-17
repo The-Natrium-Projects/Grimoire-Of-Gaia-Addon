@@ -16,7 +16,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -187,7 +190,7 @@ public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, IG
 
     @Override
     public List<MobEffect> immuneToEffects() {
-        return null;
+        return List.of();
     }
 
     @Override
@@ -206,8 +209,6 @@ public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, IG
     // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends GorgonEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return checkDaysPassed(levelAccessor)
-            && checkAboveSeaLevel(levelAccessor, pos)
-            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+        return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 }

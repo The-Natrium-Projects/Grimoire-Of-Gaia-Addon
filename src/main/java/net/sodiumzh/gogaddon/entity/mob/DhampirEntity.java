@@ -72,6 +72,11 @@ public class DhampirEntity extends AbstractGaiaEntity implements IGOGAddonMob {
     }
 
     @Override
+    public int getGaiaLevel() {
+        return 2;
+    }
+
+    @Override
     protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
         this.setItemInHand(InteractionHand.MAIN_HAND, Items.STONE_SWORD.getDefaultInstance());
     }
@@ -188,9 +193,7 @@ public class DhampirEntity extends AbstractGaiaEntity implements IGOGAddonMob {
     // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends DhampirEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
-        return checkDaysPassed(levelAccessor)
-            && checkAboveSeaLevel(levelAccessor, pos)
-            && checkMonsterSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+        return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
 
 }
