@@ -88,6 +88,72 @@ public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, IG
         this.setPowered(this.getHealth() <= this.getMaxHealth() / 2d);
     }
 
+    // GOGAddon mob interface start //
+
+    protected int inWaterTimer = 0;
+
+    @Override
+    public void updateState() {
+        if (!this.level().isClientSide) {
+            this.updatePowered();
+            if (this.getTarget() != null)
+                this.isMelee = this.getTarget().distanceToSqr(this) < 16d;
+            if (this.isInWaterRainOrBubble()) {
+                if (this.inWaterTimer >= 100 && this.inWaterTimer % 100 == 0)
+                    this.heal(this.getMaxHealth() / 10f);
+                this.inWaterTimer++;
+            } else this.inWaterTimer = 0;
+        }
+    }
+
+    @Override
+    public void updateInventory() {
+        if (this.isMelee() && this.getItemInHand(InteractionHand.MAIN_HAND).is(Items.BOW)) {
+            ItemStack sword = new ItemStack(Items.IRON_SWORD);
+            sword.enchant(Enchantments.SHARPNESS, 4);
+            this.setItemInHand(InteractionHand.MAIN_HAND, sword);
+        }
+        else if (!this.isMelee() && this.getItemInHand(InteractionHand.MAIN_HAND).is(Items.IRON_SWORD)) {
+            ItemStack bow = new ItemStack(Items.BOW);
+            bow.enchant(Enchantments.POWER_ARROWS, 4);
+            this.setItemInHand(InteractionHand.MAIN_HAND, bow);
+        }
+
+    }
+
+    @Override
+    public void onAttack(LivingEntity target) {
+        GOGAddonStatics.addEffectByDifficulty(target, MobEffects.MOVEMENT_SLOWDOWN, 0, 10 * 20, 20 * 20);
+        GOGAddonStatics.addEffectByDifficulty(target, MobEffects.WEAKNESS, 0, 10 * 20, 20 * 20, 1);
+    }
+
+    @Override
+    public boolean canHurt(float amount, DamageSource damageSource) {
+        if (this.isPowered() && damageSource.isIndirect()) return false;
+        return true;
+    }
+
+    @Override
+    public void onHurt(float amount, DamageSource damageSource) {
+
+    }
+
+    @Override
+    public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
+    }
+
+    @Override
+    public List<MobEffect> immuneToEffects() {
+        return List.of();
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+
+    }
+
+    // GOGAddon mob interface end //
+
     // COPY-PASTE TO ALL MOBS //
 
     @Override
@@ -142,68 +208,12 @@ public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, IG
         this.setItemInHand(InteractionHand.MAIN_HAND, defaultBow);
     }
 
-    protected int inWaterTimer = 0;
-
-    @Override
-    public void updateState() {
-        if (!this.level().isClientSide) {
-            this.updatePowered();
-            if (this.getTarget() != null)
-                this.isMelee = this.getTarget().distanceToSqr(this) < 16d;
-            if (this.isInWaterRainOrBubble()) {
-                if (this.inWaterTimer >= 100 && this.inWaterTimer % 100 == 0)
-                    this.heal(this.getMaxHealth() / 10f);
-                this.inWaterTimer++;
-            } else this.inWaterTimer = 0;
-        }
-    }
-
-    @Override
-    public void updateInventory() {
-        if (this.isMelee() && this.getItemInHand(InteractionHand.MAIN_HAND).is(Items.BOW)) {
-            ItemStack sword = new ItemStack(Items.IRON_SWORD);
-            sword.enchant(Enchantments.SHARPNESS, 4);
-            this.setItemInHand(InteractionHand.MAIN_HAND, sword);
-        }
-        else if (!this.isMelee() && this.getItemInHand(InteractionHand.MAIN_HAND).is(Items.IRON_SWORD)) {
-            ItemStack bow = new ItemStack(Items.BOW);
-            bow.enchant(Enchantments.POWER_ARROWS, 4);
-            this.setItemInHand(InteractionHand.MAIN_HAND, bow);
-        }
-
-    }
-
-    @Override
-    public void onAttack(LivingEntity target) {
-        GOGAddonStatics.addEffectByDifficulty(target, MobEffects.MOVEMENT_SLOWDOWN, 0, 10 * 20, 20 * 20);
-        GOGAddonStatics.addEffectByDifficulty(target, MobEffects.WEAKNESS, 0, 10 * 20, 20 * 20, 1);
-    }
-
-    @Override
-    public void onHurt(float amount, DamageSource damageSource) {
-
-    }
-
-    @Override
-    public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
-    }
-
-    @Override
-    public List<MobEffect> immuneToEffects() {
-        return List.of();
-    }
-
     @Override
     public void die(DamageSource pDamageSource) {
         super.die(pDamageSource);
         if (this.isDeadOrDying()) {
             this.onDeath(pDamageSource);
         }
-    }
-
-    @Override
-    public void onDeath(DamageSource damageSource) {
-
     }
 
     // COPY-PASTE END //

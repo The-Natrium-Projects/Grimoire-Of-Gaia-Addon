@@ -101,6 +101,12 @@ public class VampireEntity extends AbstractGaiaEntity implements PowerableMob, I
     }
 
     @Override
+    public boolean canHurt(float amount, DamageSource damageSource) {
+        if (this.isPowered() && damageSource.isIndirect()) return false;
+        return true;
+    }
+
+    @Override
     public void onDeath(DamageSource pDamageSource) {
         Bat bat = EntityType.BAT.create(this.level());
         if (bat != null) {

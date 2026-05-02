@@ -31,6 +31,7 @@ import net.sodiumzh.gogaddon.ai.goal.SelectedMeleeAttackGoal;
 import net.sodiumzh.gogaddon.ai.goal.SelectedRangedAttackGoal;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
 import net.sodiumzh.gogaddon.util.GOGAddonStatics;
+import net.sodiumzh.nfu.util.NFUEntityStatics;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -69,6 +70,14 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
         return this.entityData.get(POWERED);
     }
 
+    public void setPowered(boolean val) {
+        this.entityData.set(POWERED, val);
+    }
+
+    protected void updatePowered() {
+        this.setPowered(this.getHealth() <= this.getMaxHealth() / 2d);
+    }
+
     @Override
     public boolean isMelee() {
         return isMelee;
@@ -97,8 +106,12 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
     @Override
     public void updateState() {
         if (!this.level().isClientSide()) {
-            if (this.getTarget() != null)
+            this.updatePowered();
+            if (this.getTarget() != null) {
                 this.isMelee = this.getTarget().distanceToSqr(this) < 16d;
+                if (this.isMelee)
+                    NFUEntityStatics.addEffectSafe(this, new MobEffectInstance(MobEffects.DAMAGE_BOOST, 19, 1));
+            }
         }
     }
 
@@ -119,6 +132,7 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
 
     @Override
     public boolean canHurt(float amount, DamageSource damageSource) {
+        if (this.isPowered() && damageSource.isIndirect()) return false;
         return !damageSource.type().effects().equals(DamageEffects.BURNING);
     }
 
@@ -141,6 +155,11 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
     protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
         if (pRandom.nextFloat() < 0.5f)
             this.setItemInHand(InteractionHand.MAIN_HAND, GaiaRegistry.BROOM.get().getDefaultInstance());
+    }
+
+    @Override
+    public boolean fireImmune() {
+        return true;
     }
 
     // GOGAddonMob interface end //
