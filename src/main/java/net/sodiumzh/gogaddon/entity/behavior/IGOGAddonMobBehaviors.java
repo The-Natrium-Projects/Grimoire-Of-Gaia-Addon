@@ -23,73 +23,8 @@ public interface IGOGAddonMobBehaviors extends INBTSerializable<CompoundTag> {
 
     public void finishTick();
 
-    public boolean startAiStep();
+    public void startAiStep();
 
     public void finishAiStep();
 
-    public static class Placeholder implements IGOGAddonMobBehaviors {
-
-        private final AbstractGaiaEntity mob;
-        private final GOGAddonMobBehaviorComponent component;
-
-        public Placeholder(AbstractGaiaEntity mob, GOGAddonMobBehaviorComponent component) {
-            this.mob = mob;
-            this.component = component;
-        }
-
-        @Override
-        public AbstractGaiaEntity getMob() {
-            return mob;
-        }
-
-        @Override
-        public GOGAddonMobBehaviorComponent getComponent() {
-            return component;
-        }
-
-        @Override
-        public void initialize() {
-
-        }
-
-        @Override
-        public void joinLevel() {
-
-        }
-
-        @Override
-        public void setupGoals(AbstractGaiaEntity mob) {
-
-        }
-
-        @Override
-        public void startTick() {
-
-        }
-
-        @Override
-        public void finishTick() {
-
-        }
-
-        @Override
-        public boolean startAiStep() {
-            return false;
-        }
-
-        @Override
-        public void finishAiStep() {
-
-        }
-
-        @Override
-        public CompoundTag serializeNBT() {
-            return null;
-        }
-
-        @Override
-        public void deserializeNBT(CompoundTag nbt) {
-
-        }
-    }
 }
