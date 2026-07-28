@@ -188,9 +188,9 @@ dependencies {
 	//implementation fg.deobf("blank:nffservices-${minecraft_version}:${services_version}")
     //implementation fg.deobf("blank:nffgirls-${minecraft_version}:${girls_version}")
 
-	jarJar(group: 'net.sodiumzh', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
+	/*jarJar(group: 'net.sodiumzh', name: 'nfulib', version: "[${minecraft_version}-${nfu_version},)"){
 		jarJar.pin(it, "${minecraft_version}-${nfu_version}")
-	}
+	}*/
     implementation fg.deobf("curse.maven:hmag-537613:6198467")
     implementation fg.deobf("curse.maven:gog4-228948:5678610")
 
