@@ -41,6 +41,10 @@ public class GOGAddonRangedAttackGoal extends Goal {
 
     }
 
+    public AbstractGaiaEntity getMob() {
+        return mob;
+    }
+
     /**
      * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
      * method as well.

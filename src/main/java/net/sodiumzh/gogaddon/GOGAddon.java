@@ -22,7 +22,7 @@ public class GOGAddon {
         bus.addListener(GOGAddonConfigs::loadConfig);
 
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
-        GOGAddonEntityAttributes.COLLETION.merge();
+        GOGAddonEntityAttributes.COLLECTION.merge();
         GOGAddonEntityComponents.COLLECTION.merge();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

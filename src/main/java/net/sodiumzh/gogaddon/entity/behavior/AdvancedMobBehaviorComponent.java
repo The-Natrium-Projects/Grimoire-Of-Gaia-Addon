@@ -10,6 +10,7 @@ import net.sodiumzh.gogaddon.GOGAddon;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityComponents;
 import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
 import net.sodiumzh.nfu.entity.component.EntityComponentBase;
+import net.sodiumzh.nfu.exception.MissingRegistryEntryException;
 import net.sodiumzh.nfu.mixin.event.entity.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,23 +20,24 @@ import java.util.Optional;
 
 import static net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
 
-public class GOGAddonMobBehaviorComponent extends EntityComponentBase<AbstractGaiaEntity> {
+public class AdvancedMobBehaviorComponent extends EntityComponentBase<AbstractGaiaEntity> {
 
     @Nonnull
-    private IGOGAddonMobBehaviors behaviors;
+    private IAdvancedMobBehaviors<? extends AbstractGaiaEntity> behaviors;
     private boolean enabled;
 
-    public GOGAddonMobBehaviorComponent(AbstractGaiaEntity entity) {
+    public AdvancedMobBehaviorComponent(AbstractGaiaEntity entity) {
         super(entity);
-        this.behaviors = new IGOGAddonMobBehaviors.Placeholder(this.getEntity(), this);
+        this.behaviors = GOGAddonMobBehaviorMappings.get(entity.getType()).map(f -> f.apply(this))
+                .orElseThrow(() -> new MissingRegistryEntryException("Missing GOG-Addon mob behavior info. Must be registered in GOGAddonMobBehaviorMappings."));
     }
 
     @Nonnull
-    public IGOGAddonMobBehaviors getBehaviors() {
+    public IAdvancedMobBehaviors<? extends AbstractGaiaEntity> getBehaviors() {
         return behaviors;
     }
 
-    public void setBehaviors(@Nonnull IGOGAddonMobBehaviors behaviors) {
+    public void setBehaviors(@Nonnull IAdvancedMobBehaviors<? extends AbstractGaiaEntity> behaviors) {
         this.behaviors = behaviors;
     }
 
@@ -47,14 +49,13 @@ public class GOGAddonMobBehaviorComponent extends EntityComponentBase<AbstractGa
         this.enabled = enabled;
     }
 
-    public static Optional<GOGAddonMobBehaviorComponent> get(Entity e) {
-        return EntityComponentAPI.getComponentByPath(e, GOGAddonEntityComponents.ACCESSOR_GOGADDON_MOB_BEHAVIOR);
+    public static Optional<AdvancedMobBehaviorComponent> get(Entity e) {
+        return EntityComponentAPI.getComponentByPath(e, GOGAddonEntityComponents.ACCESSOR_ADVANCED_MOB_BEHAVIORS);
     }
 
-
-    public static Optional<GOGAddonMobBehaviors> getBehaviorsIfEnabled(Entity e) {
-        return get(e).filter(GOGAddonMobBehaviorComponent::isEnabled)
-            .map(c -> (GOGAddonMobBehaviors) c.getBehaviors());
+    public static Optional<IAdvancedMobBehaviors<? extends AbstractGaiaEntity>> getBehaviorsIfEnabled(Entity e) {
+        return get(e).filter(AdvancedMobBehaviorComponent::isEnabled)
+            .map(AdvancedMobBehaviorComponent::getBehaviors);
     }
 
     @Override
@@ -77,48 +78,44 @@ public class GOGAddonMobBehaviorComponent extends EntityComponentBase<AbstractGa
 
         @SubscribeEvent
         public static void onInitialize(EntityFinishConstructionEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(IGOGAddonMobBehaviors::finishAiStep);
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::finishAiStep);
         }
 
         @SubscribeEvent
         public static void onStartAiStep(LivingFinishAiStepEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(IGOGAddonMobBehaviors::startAiStep);
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::startAiStep);
         }
 
         @SubscribeEvent
         public static void onFinishAiStep(LivingFinishAiStepEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(IGOGAddonMobBehaviors::finishAiStep);
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::finishAiStep);
         }
 
         @SubscribeEvent
         public static void onStartTick(EntityStartTickEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(IGOGAddonMobBehaviors::startTick);
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::startTick);
         }
 
         @SubscribeEvent
         public static void onFinishTick(EntityFinishTickEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(IGOGAddonMobBehaviors::finishTick);
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::finishTick);
         }
 
         @SubscribeEvent
         public static void onSetupGoals(MobRegisterGoalsEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(bh -> {
-                    bh.getMob().goalSelector.removeAllGoals(g -> true);
-                    bh.getMob().targetSelector.removeAllGoals(g -> true);
-                    bh.setupGoals(bh.getComponent().getEntity());
-                });
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::setupGoals);
         }
 
         @SubscribeEvent
         public static void onJoinLevel(EntityJoinLevelEvent event) {
-            GOGAddonMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
-                .ifPresent(IGOGAddonMobBehaviors::joinLevel);
+            AdvancedMobBehaviorComponent.getBehaviorsIfEnabled(event.getEntity())
+                .ifPresent(IAdvancedMobBehaviors::joinLevel);
         }
 
     }

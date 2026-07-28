@@ -1,14 +1,13 @@
 package net.sodiumzh.gogaddon.entity.behavior;
 
 import gaia.entity.AbstractGaiaEntity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import org.jetbrains.annotations.ApiStatus;
 
 public interface IRangedAttackBehaviors extends RangedAttackMob {
 
-    public default IGOGAddonMobBehaviors asBehaviors() {
-        return (IGOGAddonMobBehaviors) this;
+    public default IAdvancedMobBehaviors asBehaviors() {
+        return (IAdvancedMobBehaviors) this;
     }
 
     @ApiStatus.NonExtendable

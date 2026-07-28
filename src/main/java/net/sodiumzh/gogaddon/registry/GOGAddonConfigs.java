@@ -20,7 +20,7 @@ public class GOGAddonConfigs {
         BUILDER.push("gameplay");
         MOBS_USE_ADVANCED_BEHAVIORS = BUILDER.comment("If true, the mobs will use advanced behaviors. " +
             "Otherwise, they will keep original Gaia AI.")
-            .define("mobsUseAdvancedBehaviors", true);
+            .define("mobsUseAdvancedBehaviors", false);
         DHAMPIR_CONVERSION_CHANCE = BUILDER.comment("The chance of Dhampir converting " +
             "to Vampire on each attempt.")
                 .defineInRange("dhampirConversionChance", 0.1d, 0d, 1d);
@@ -33,7 +33,7 @@ public class GOGAddonConfigs {
 
     public static class ValueCache {
         public static class Gameplay {
-            public static boolean MOBS_USE_ADVANCED_BEHAVIORS = true;
+            public static boolean MOBS_USE_ADVANCED_BEHAVIORS = false;
             public static double DHAMPIR_CONVERSION_CHANCE = 0.1d;
             public static double DHAMPIR_CONVERSION_DAMAGE = 50d;
         }
