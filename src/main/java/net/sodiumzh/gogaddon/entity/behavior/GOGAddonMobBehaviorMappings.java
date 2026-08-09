@@ -34,7 +34,7 @@ public class GOGAddonMobBehaviorMappings {
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            add(GaiaRegistry.VALKYRIE.getEntityType(), ValkyrieBehaviors::new);
+           // add(GaiaRegistry.VALKYRIE.getEntityType(), ValkyrieBehaviors::new);
         });
     }
 }
