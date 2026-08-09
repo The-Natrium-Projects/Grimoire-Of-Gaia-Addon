@@ -10,6 +10,7 @@ import net.sodiumzh.gogaddon.registry.GOGAddonConfigs;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityAttributes;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityComponents;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityTypes;
+import net.sodiumzh.gogaddon.registry.GOGAddonItems;
 
 @Mod(GOGAddon.MOD_ID)
 public class GOGAddon {
@@ -22,6 +23,7 @@ public class GOGAddon {
         bus.addListener(GOGAddonConfigs::loadConfig);
 
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
+        GOGAddonItems.ITEMS.register(bus);
         GOGAddonEntityAttributes.COLLETION.merge();
         GOGAddonEntityComponents.COLLECTION.merge();
         // Register ourselves for server and other game events we are interested in
