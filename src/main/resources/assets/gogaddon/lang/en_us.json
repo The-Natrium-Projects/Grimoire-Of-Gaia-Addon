@@ -2,6 +2,13 @@
   "item.gogaddon.ant_chitin": "Ant Chitin",
   "item.gogaddon.ant_chitin_fragment": "Ant Chitin Fragment",
   "item.gogaddon.ghost_fire": "Ghost Fire",
+  "item.gogaddon.mysterious_branch": "Mysterious Branch",
+  "item.gogaddon.shiny_scale": "Shiny Scale",
+  "item.gogaddon.enchanted_feather": "Enchanted Feather",
+  "item.gogaddon.explosive_core": "Explosive Core",
+  "item.gogaddon.enchanted_cobblestone": "Enchanted Cobblestone",
+
+  "block.gogaddon.enchanted_cobblestone": "Enchanted Cobblestone",
 
   "entity.gogaddon.baphomet": "Baphomet",
   "entity.gogaddon.dhampir": "Dhampir",

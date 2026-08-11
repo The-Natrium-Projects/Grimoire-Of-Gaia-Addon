@@ -3,6 +3,14 @@
   "entries": [
     "gogaddon:ant_chitin_fragment",
     "gogaddon:enchanted_cobblestone",
-    "gogaddon:enchanted_cobblestone_large"
+    "gogaddon:enchanted_cobblestone_large",
+    "gogaddon:shiny_scale",
+    "gogaddon:shiny_scale_large",
+    "gogaddon:ghost_fire",
+    "gogaddon:mysterious_branch",
+    "gogaddon:mysterious_branch_large",
+    "gogaddon:enchanted_feather",
+    "gogaddon:enchanted_feather_large",
+    "gogaddon:explosive_core"
   ]
 }

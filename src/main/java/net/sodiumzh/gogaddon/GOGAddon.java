@@ -6,6 +6,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.sodiumzh.gogaddon.registry.GOGAddonBlocks;
 import net.sodiumzh.gogaddon.registry.GOGAddonConfigs;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityAttributes;
 import net.sodiumzh.gogaddon.registry.GOGAddonEntityComponents;
@@ -23,6 +24,7 @@ public class GOGAddon {
         bus.addListener(GOGAddonConfigs::loadConfig);
 
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
+        GOGAddonBlocks.REG.register(bus);
         GOGAddonItems.REG.register(bus);
         GOGAddonEntityAttributes.COLLETION.merge();
         GOGAddonEntityComponents.COLLECTION.merge();
