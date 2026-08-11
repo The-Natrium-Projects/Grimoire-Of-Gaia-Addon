@@ -103,11 +103,11 @@ public class GOGAddonMobReg<T extends Mob> {
         this.gaiaMobType = mobType;
         if (!noSpawnEgg) {
             if (traderEgg) {
-                this.spawnEgg = GOGAddonItems.ITEMS.register("spawn_" + name, () -> {
+                this.spawnEgg = GOGAddonItems.REG.register("spawn_" + name, () -> {
                     return new MerchantSpawnItem(this.entityType, new Item.Properties());
                 });
             } else {
-                this.spawnEgg = GOGAddonItems.ITEMS.register(name + "_spawn_egg", () -> {
+                this.spawnEgg = GOGAddonItems.REG.register(name + "_spawn_egg", () -> {
                     return new ForgeSpawnEggItem(this.entityType, backgroundColor, highlightColor, new Item.Properties());
                 });
             }
