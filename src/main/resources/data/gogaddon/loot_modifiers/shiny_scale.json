@@ -6,7 +6,7 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "type": "grimoireofgaia:mermaid"
+        "type": "grimoireofgaia:siren"
       }
     },
     {
