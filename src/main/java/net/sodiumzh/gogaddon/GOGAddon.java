@@ -23,7 +23,7 @@ public class GOGAddon {
         bus.addListener(GOGAddonConfigs::loadConfig);
 
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
-        GOGAddonItems.ITEMS.register(bus);
+        GOGAddonItems.REG.register(bus);
         GOGAddonEntityAttributes.COLLETION.merge();
         GOGAddonEntityComponents.COLLECTION.merge();
         // Register ourselves for server and other game events we are interested in
