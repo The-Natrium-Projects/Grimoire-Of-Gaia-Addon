@@ -1,6 +1,6 @@
 {
   "type": "nfulib:add_item_for_entity",
-  "addition": "gogaddon:ghost_fire",
+  "addition": "gogaddon:golden_scale",
   "conditions": [
     {
       "condition": "minecraft:any_of",
@@ -9,14 +9,21 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "grimoireofgaia:banshee"
+            "type": "grimoireofgaia:spriggan"
           }
         },
         {
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "grimoireofgaia:yuki_onna"
+            "type": "grimoireofgaia:mermaid"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "grimoireofgaia:cobblestone_golem"
           }
         }
         ]
