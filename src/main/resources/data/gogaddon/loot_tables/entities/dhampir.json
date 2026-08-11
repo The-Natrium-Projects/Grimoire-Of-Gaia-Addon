@@ -18,7 +18,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "forge:nuggets/iron"
+          "name": "forge:nuggets/gold"
         }
       ],
       "rolls": 1.0
