@@ -2,6 +2,13 @@
   "item.gogaddon.ant_chitin": "蚂蚁壳质",
   "item.gogaddon.ant_chitin_fragment": "蚂蚁壳质碎片",
   "item.gogaddon.ghost_fire": "鬼火",
+  "item.gogaddon.mysterious_branch": "神秘树枝",
+  "item.gogaddon.shiny_scale": "闪耀鳞片",
+  "item.gogaddon.enchanted_feather": "附魔羽毛",
+  "item.gogaddon.explosive_core": "爆破核心",
+  "item.gogaddon.enchanted_cobblestone": "附魔圆石",
+
+  "block.gogaddon.enchanted_cobblestone": "附魔圆石",
 
   "entity.gogaddon.baphomet": "巴风特",
   "entity.gogaddon.dhampir": "半吸血鬼",
