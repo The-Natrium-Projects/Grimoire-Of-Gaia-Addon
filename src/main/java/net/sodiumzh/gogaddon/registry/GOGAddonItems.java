@@ -51,11 +51,8 @@ public class GOGAddonItems {
         () -> new NFUItem(new Item.Properties()));
     
     // Tier 3 Loots
-
-
-
-
-
+    public static final RegistryObject<NFUItem> HOLY_FEATHER = REG.register("holy_feather",
+        () -> new NFUItem(new Item.Properties()));
 
     @SubscribeEvent
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {
