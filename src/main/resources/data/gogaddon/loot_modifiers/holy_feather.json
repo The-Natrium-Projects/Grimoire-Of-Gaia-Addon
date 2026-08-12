@@ -3,30 +3,11 @@
   "addition": "gogaddon:holy_feather",
   "conditions": [
     {
-      "condition": "minecraft:any_of",
-      "terms": [
-        {
-          "condition": "minecraft:entity_properties",
-          "entity": "this",
-          "predicate": {
-            "type": "grimoireofgaia:valkyrie"
-          }
-        },
-        {
-          "condition": "minecraft:entity_properties",
-          "entity": "this",
-          "predicate": {
-            "type": "grimoireofgaia:sphinx"
-          }
-        },
-        {
-          "condition": "minecraft:entity_properties",
-          "entity": "this",
-          "predicate": {
-            "type": "grimoireofgaia:minotaur"
-          }
-        }
-        ]
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "grimoireofgaia:valkyrie"
+      }
     },
     {
       "condition": "minecraft:killed_by_player"
