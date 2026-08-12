@@ -14,10 +14,10 @@ import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 @Mod.EventBusSubscriber(modid = GOGAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GOGAddonEntityAttributes {
 
-    public static final NFURegistryEntryCollection<EntityAttributeProvider> COLLETION =
+    public static final NFURegistryEntryCollection<EntityAttributeProvider> COLLECTION =
         NFURegistryEntryCollection.create(NFURegistries.ENTITY_ATTRIBUTE_PROVIDERS, GOGAddon.MOD_ID);
 
-    public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_1 = COLLETION.register("default_tier_1",
+    public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_1 = COLLECTION.register("default_tier_1",
         () -> EntityAttributeProvider.monster()
             .add(Attributes.MAX_HEALTH, 40.0d)
             .add(Attributes.FOLLOW_RANGE, 40.0d)
@@ -27,7 +27,7 @@ public class GOGAddonEntityAttributes {
             .add(Attributes.ATTACK_KNOCKBACK, 0.3d)
             .add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.0d));
 
-    public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_2 = COLLETION.register("default_tier_2",
+    public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_2 = COLLECTION.register("default_tier_2",
         () -> EntityAttributeProvider.monster()
             .add(Attributes.MAX_HEALTH, 80.0d)
             .add(Attributes.FOLLOW_RANGE, 40.0d)
@@ -38,7 +38,7 @@ public class GOGAddonEntityAttributes {
             .add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.0d));
 
 
-    public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_3 = COLLETION.register("default_tier_3",
+    public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_3 = COLLECTION.register("default_tier_3",
         () -> EntityAttributeProvider.monster()
             .add(Attributes.MAX_HEALTH, 160.0)
             .add(Attributes.FOLLOW_RANGE, 40.0)
