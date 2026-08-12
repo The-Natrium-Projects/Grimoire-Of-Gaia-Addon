@@ -26,6 +26,7 @@ public class GOGAddon {
         GOGAddonEntityTypes.ENTITY_TYPES.register(bus);
         GOGAddonBlocks.REG.register(bus);
         GOGAddonItems.REG.register(bus);
+        GOGAddonEntityAttributes.COLLECTION.merge();
         GOGAddonEntityComponents.COLLECTION.merge();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
