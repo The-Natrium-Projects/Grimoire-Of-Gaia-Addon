@@ -5,7 +5,7 @@
     "type": "grimoireofgaia:succubus",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 16
+    "weight": 3
   },
   "whitelist": [
     "#minecraft:is_nether"

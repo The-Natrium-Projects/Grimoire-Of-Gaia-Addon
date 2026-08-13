@@ -9,7 +9,7 @@
     "type": "grimoireofgaia:flesh_lich",
     "maxCount": 2,
     "minCount": 1,
-    "weight": 40
+    "weight": 7
   },
   "whitelist": [
     "#minecraft:is_overworld"

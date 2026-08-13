@@ -5,7 +5,7 @@
     "type": "grimoireofgaia:wither_cow",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 12
+    "weight": 2
   },
   "whitelist": [
     "#minecraft:is_nether"

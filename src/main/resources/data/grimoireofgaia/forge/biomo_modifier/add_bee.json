@@ -12,7 +12,7 @@
     "type": "grimoireofgaia:bee",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 80
+    "weight": 13
   },
   "whitelist": [
     "#minecraft:is_overworld",

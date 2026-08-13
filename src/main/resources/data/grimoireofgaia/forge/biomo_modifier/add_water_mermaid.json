@@ -5,7 +5,7 @@
     "type": "grimoireofgaia:mermaid",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 40
+    "weight": 7
   },
   "whitelist": [
     "#minecraft:is_overworld",

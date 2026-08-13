@@ -7,7 +7,7 @@
     "type": "grimoireofgaia:yuki_onna",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 60
+    "weight": 10
   },
   "whitelist": [
     "#minecraft:is_overworld",

@@ -5,7 +5,7 @@
     "type": "grimoireofgaia:centaur",
     "maxCount": 6,
     "minCount": 4,
-    "weight": 20
+    "weight": 3
   },
   "whitelist": [
     "#minecraft:is_overworld",
