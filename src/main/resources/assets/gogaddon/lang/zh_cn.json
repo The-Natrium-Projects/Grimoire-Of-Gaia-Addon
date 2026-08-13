@@ -7,6 +7,8 @@
   "item.gogaddon.enchanted_feather": "附魔羽毛",
   "item.gogaddon.explosive_core": "爆破核心",
   "item.gogaddon.enchanted_cobblestone": "附魔圆石",
+  "item.gogaddon.golden_scale": "黄金鳞片",
+  "item.gogaddon.holy_feather": "神圣羽毛",
 
   "block.gogaddon.enchanted_cobblestone": "附魔圆石",
 
@@ -17,5 +19,7 @@
   "entity.gogaddon.kikimora": "奇奇莫拉",
   "entity.gogaddon.sahuagin": "沙华鱼人",
   "entity.gogaddon.selkie": "海豹人",
-  "entity.gogaddon.vampire": "吸血鬼"
+  "entity.gogaddon.vampire": "吸血鬼",
+
+  "tooltip.gogaddon.unimplemented_ingredient": "该材料功能尚未完成。用途将在未来更新中加入。"
 }

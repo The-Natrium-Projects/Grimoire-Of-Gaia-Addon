@@ -28,5 +28,7 @@
   "entity.gogaddon.kikimora": "Kikimora",
   "entity.gogaddon.sahuagin": "Sahuagin",
   "entity.gogaddon.selkie": "Selkie",
-  "entity.gogaddon.vampire": "Vampire"
+  "entity.gogaddon.vampire": "Vampire",
+
+  "tooltip.gogaddon.unimplemented_ingredient": "Not yet implemented. Usage will be added in future versions."
 }
