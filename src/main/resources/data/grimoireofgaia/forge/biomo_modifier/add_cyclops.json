@@ -7,7 +7,7 @@
     "type": "grimoireofgaia:cyclops",
     "maxCount": 6,
     "minCount": 4,
-    "weight": 40
+    "weight": 7
   },
   "whitelist": [
     "#minecraft:is_overworld",

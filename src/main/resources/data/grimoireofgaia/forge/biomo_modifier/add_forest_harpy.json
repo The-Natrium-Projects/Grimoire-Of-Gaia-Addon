@@ -5,7 +5,7 @@
     "type": "grimoireofgaia:harpy",
     "maxCount": 4,
     "minCount": 2,
-    "weight": 100
+    "weight": 17
   },
   "whitelist": [
     "#minecraft:is_overworld",

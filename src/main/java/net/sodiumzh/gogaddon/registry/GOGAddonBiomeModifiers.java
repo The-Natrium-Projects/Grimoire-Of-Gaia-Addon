@@ -60,35 +60,35 @@ public class GOGAddonBiomeModifiers {
     public static void registerSpawnBiomeModifiers(BootstapContext<BiomeModifier> context) {
         registerBiomeModifier(context, "add_baphomet",
             NETHER, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.BAPHOMET.getEntityType(), 2, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.BAPHOMET.getEntityType(), 1, 1, 1)
         );
         registerBiomeModifier(context, "add_dhampir",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.DHAMPIR.getEntityType(), 30, 1, 2)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.DHAMPIR.getEntityType(), 5, 1, 2)
         );
         registerBiomeModifier(context, "add_gorgon",
             OVERWORLD_SWAMP, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.GORGON.getEntityType(), 5, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.GORGON.getEntityType(), 1, 1, 1)
         );
         registerBiomeModifier(context, "add_futakuchi_onna",
             OVERWORLD_SPOOKY_FOREST, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.FUTAKUCHI_ONNA.getEntityType(), 60, 2, 3)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.FUTAKUCHI_ONNA.getEntityType(), 10, 2, 3)
         );
         registerBiomeModifier(context, "add_sahuagin",
             OVERWORLD_SWAMP, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.SAHUAGIN.getEntityType(), 60, 2, 3)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.SAHUAGIN.getEntityType(), 10, 2, 3)
         );
         registerBiomeModifier(context, "add_kikimora",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.KIKIMORA.getEntityType(), 60, 1, 2)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.KIKIMORA.getEntityType(), 10, 1, 2)
         );
         registerBiomeModifier(context, "add_vampire",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.VAMPIRE.getEntityType(), 5, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.VAMPIRE.getEntityType(), 1, 1, 1)
         );
         registerBiomeModifier(context, "add_selkie",
             OVERWORLD_SNOWY, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.SELKIE.getEntityType(), 30, 2, 3)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.SELKIE.getEntityType(), 5, 2, 3)
         );
 
     }

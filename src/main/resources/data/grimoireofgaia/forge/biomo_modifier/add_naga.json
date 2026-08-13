@@ -5,7 +5,7 @@
     "type": "grimoireofgaia:naga",
     "maxCount": 2,
     "minCount": 1,
-    "weight": 30
+    "weight": 5
   },
   "whitelist": [
     "#minecraft:is_overworld",

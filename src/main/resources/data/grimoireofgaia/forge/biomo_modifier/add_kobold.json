@@ -10,7 +10,7 @@
     "type": "grimoireofgaia:kobold",
     "maxCount": 6,
     "minCount": 4,
-    "weight": 60
+    "weight": 10
   },
   "whitelist": [
     "#minecraft:is_overworld",

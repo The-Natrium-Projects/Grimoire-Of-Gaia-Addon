@@ -7,7 +7,7 @@
     "type": "grimoireofgaia:oni",
     "maxCount": 6,
     "minCount": 4,
-    "weight": 80
+    "weight": 13
   },
   "whitelist": [
     "#minecraft:is_overworld",
