@@ -25,12 +25,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FutakuchiOnnaEntity extends AbstractGaiaEntity implements IGOGAddonMob {
+public class FutakuchiOnnaEntity extends GOGAddonMob {
 
     public static final EntityDataAccessor<Boolean> HAS_TARGET = SynchedEntityData.defineId(FutakuchiOnnaEntity.class,
         EntityDataSerializers.BOOLEAN);
 
-    public FutakuchiOnnaEntity(EntityType<? extends Monster> entityType, Level level) {
+    public FutakuchiOnnaEntity(EntityType<? extends FutakuchiOnnaEntity> entityType, Level level) {
         super(entityType, level);
     }
 

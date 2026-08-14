@@ -22,7 +22,7 @@ import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 
 import java.util.List;
 
-public class KikimoraEntity extends AbstractAssistGaiaEntity implements IGOGAddonMob, IDayMob {
+public class KikimoraEntity extends GOGAddonNeutralMob implements IDayMob {
 
     public KikimoraEntity(EntityType<? extends KikimoraEntity> entityType, Level level) {
         super(entityType, level);

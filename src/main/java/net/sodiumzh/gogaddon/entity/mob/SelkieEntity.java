@@ -7,6 +7,7 @@ import gaia.util.RangedUtil;
 import gaia.util.SharedEntityData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -24,7 +25,7 @@ import net.sodiumzh.gogaddon.ai.goal.SelectedRangedAttackGoal;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
 import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 
-public class SelkieEntity extends AbstractGaiaEntity implements IMeleeAndRangedAttackMob, IDayMob {
+public class SelkieEntity extends GOGAddonMob implements IMeleeAndRangedAttackMob, IDayMob {
 
     public SelkieEntity(EntityType<? extends SelkieEntity> entityType, Level level) {
         super(entityType, level);
@@ -62,5 +63,35 @@ public class SelkieEntity extends AbstractGaiaEntity implements IMeleeAndRangedA
 
     public static boolean checkSpawnRules(EntityType<? extends SelkieEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return GOGAddonStatics.MobStatics.dayGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
+    }
+
+    @Override
+    public void updateState() {
+
+    }
+
+    @Override
+    public void updateInventory() {
+
+    }
+
+    @Override
+    public void onAttack(LivingEntity target) {
+
+    }
+
+    @Override
+    public void onHurt(float amount, DamageSource damageSource) {
+
+    }
+
+    @Override
+    public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
+
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+
     }
 }
