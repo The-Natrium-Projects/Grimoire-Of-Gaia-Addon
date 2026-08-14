@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DhampirEntity extends AbstractGaiaEntity implements IGOGAddonMob {
+public class DhampirEntity extends GOGAddonMob {
 
     protected double totalDamageDealt = 0d;
 

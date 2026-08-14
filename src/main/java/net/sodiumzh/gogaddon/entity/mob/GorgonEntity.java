@@ -37,14 +37,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GorgonEntity extends AbstractGaiaEntity implements PowerableMob, IGOGAddonMob, IMeleeAndRangedAttackMob {
+public class GorgonEntity extends GOGAddonMob implements PowerableMob, IMeleeAndRangedAttackMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(GorgonEntity.class,
         EntityDataSerializers.BOOLEAN);
     protected boolean isMelee = false;
 
 
-    public GorgonEntity(EntityType<? extends Monster> entityType, Level level) {
+    public GorgonEntity(EntityType<? extends GorgonEntity> entityType, Level level) {
         super(entityType, level);
     }
 

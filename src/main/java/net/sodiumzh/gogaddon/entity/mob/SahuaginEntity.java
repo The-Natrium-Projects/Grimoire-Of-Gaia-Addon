@@ -16,14 +16,16 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.sodiumzh.gogaddon.GOGAddon;
 import net.sodiumzh.gogaddon.entity.IMeleeAndRangedAttackMob;
 import net.sodiumzh.gogaddon.util.GOGAddonStatics;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SahuaginEntity extends AbstractGaiaEntity implements IGOGAddonMob, IMeleeAndRangedAttackMob {
-    public SahuaginEntity(EntityType<? extends Monster> entityType, Level level) {
+public class SahuaginEntity extends GOGAddonMob implements IMeleeAndRangedAttackMob {
+
+    public SahuaginEntity(EntityType<? extends SahuaginEntity> entityType, Level level) {
         super(entityType, level);
     }
 

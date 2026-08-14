@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRangedAttackMob, IGOGAddonMob, PowerableMob {
+public class BaphometEntity extends GOGAddonMob implements IMeleeAndRangedAttackMob, PowerableMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(BaphometEntity.class,
         EntityDataSerializers.BOOLEAN);
@@ -163,56 +163,6 @@ public class BaphometEntity extends AbstractGaiaEntity implements IMeleeAndRange
     }
 
     // GOGAddonMob interface end //
-
-    // COPY-PASTE TO ALL MOBS //
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        this.updateState();
-        if (!this.level().isClientSide)
-            this.updateInventory();
-    }
-
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!this.canHurt(pAmount, pSource)) return false;
-        boolean res = super.hurt(pSource, pAmount);
-        if (res)
-            this.onHurt(pAmount, pSource);
-        return res;
-    }
-
-    @Override
-    public boolean doHurtTarget(Entity pEntity) {
-        boolean res = super.doHurtTarget(pEntity);
-        if (res && pEntity instanceof LivingEntity le) {
-            this.onAttack(le);
-        }
-        return res;
-    }
-
-    @Override
-    public boolean canBeAffected(MobEffectInstance pEffectInstance) {
-        return super.canBeAffected(pEffectInstance) && !immuneToEffects().contains(pEffectInstance.getEffect());
-    }
-
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-        SpawnGroupData res = super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData, tag);
-        this.populateDefaultEquipmentSlots(this.getRandom(), difficultyInstance);
-        return res;
-    }
-
-    @Override
-    public void die(DamageSource pDamageSource) {
-        super.die(pDamageSource);
-        if (this.isDeadOrDying()) {
-            this.onDeath(pDamageSource);
-        }
-    }
-
-    // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends BaphometEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
