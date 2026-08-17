@@ -64,7 +64,7 @@ public class GOGAddonBiomeModifiers {
         );
         registerBiomeModifier(context, "add_dhampir",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.DHAMPIR.getEntityType(), 5, 1, 2)
+            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.DHAMPIR.getEntityType(), 5, 1, 1)
         );
         registerBiomeModifier(context, "add_gorgon",
             OVERWORLD_SWAMP, null,

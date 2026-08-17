@@ -6,7 +6,7 @@
   ],
   "spawners": {
     "type": "grimoireofgaia:valkyrie",
-    "maxCount": 2,
+    "maxCount": 1,
     "minCount": 1,
     "weight": 1
   },
