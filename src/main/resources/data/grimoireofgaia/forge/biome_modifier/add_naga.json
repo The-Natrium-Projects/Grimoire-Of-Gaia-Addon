@@ -3,7 +3,7 @@
   "blacklist": [],
   "spawners": {
     "type": "grimoireofgaia:naga",
-    "maxCount": 2,
+    "maxCount": 1,
     "minCount": 1,
     "weight": 5
   },

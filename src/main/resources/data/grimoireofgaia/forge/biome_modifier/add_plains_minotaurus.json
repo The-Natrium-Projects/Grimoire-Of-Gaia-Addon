@@ -5,8 +5,8 @@
   ],
   "spawners": {
     "type": "grimoireofgaia:minotaurus",
-    "maxCount": 4,
-    "minCount": 2,
+    "maxCount": 1,
+    "minCount": 1,
     "weight": 13
   },
   "whitelist": [

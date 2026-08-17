@@ -7,7 +7,7 @@
   ],
   "spawners": {
     "type": "grimoireofgaia:flesh_lich",
-    "maxCount": 2,
+    "maxCount": 1,
     "minCount": 1,
     "weight": 7
   },

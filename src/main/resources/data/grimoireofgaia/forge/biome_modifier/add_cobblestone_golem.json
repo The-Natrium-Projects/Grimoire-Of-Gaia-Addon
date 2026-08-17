@@ -3,8 +3,8 @@
   "blacklist": [],
   "spawners": {
     "type": "grimoireofgaia:cobblestone_golem",
-    "maxCount": 4,
-    "minCount": 2,
+    "maxCount": 1,
+    "minCount": 1,
     "weight": 10
   },
   "whitelist": [
