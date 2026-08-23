@@ -52,12 +52,6 @@ public class VampireEntity extends GOGAddonMob implements PowerableMob {
     }
 
     @Override
-    public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense3();
-    }
-
-
-    @Override
     public MobType getMobType() {
         return MobType.UNDEAD;
     }

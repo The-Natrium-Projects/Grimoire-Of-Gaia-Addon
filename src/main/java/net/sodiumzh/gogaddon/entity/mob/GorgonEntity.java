@@ -70,10 +70,6 @@ public class GorgonEntity extends GOGAddonMob implements PowerableMob, IMeleeAnd
         super.defineSynchedData();
         this.entityData.define(POWERED, false);
     }
-    @Override
-    public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense3();
-    }
 
     @Override
     public boolean isPowered() {
@@ -154,69 +150,12 @@ public class GorgonEntity extends GOGAddonMob implements PowerableMob, IMeleeAnd
 
     // GOGAddon mob interface end //
 
-    // COPY-PASTE TO ALL MOBS //
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        this.updateState();
-        if (!this.level().isClientSide)
-            this.updateInventory();
-    }
-
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!this.canHurt(pAmount, pSource)) return false;
-        boolean res = super.hurt(pSource, pAmount);
-        if (res)
-            this.onHurt(pAmount, pSource);
-        return res;
-    }
-
-    @Override
-    public boolean doHurtTarget(Entity pEntity) {
-        boolean res = super.doHurtTarget(pEntity);
-        if (res && pEntity instanceof LivingEntity le) {
-            this.onAttack(le);
-        }
-        return res;
-    }
-
-    @Override
-    public boolean canBeAffected(MobEffectInstance pEffectInstance) {
-        return super.canBeAffected(pEffectInstance) && !immuneToEffects().contains(pEffectInstance.getEffect());
-    }
-
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-        SpawnGroupData res = super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData, tag);
-        this.populateDefaultEquipmentSlots(this.getRandom(), difficultyInstance);
-        return res;
-    }
-
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
         if (pTarget.isAlive()) {
             RangedUtil.rangedAttack(pTarget, this, pVelocity);
         }
     }
-
-    @Override
-    protected void populateDefaultEquipmentSlots(RandomSource pRandom, DifficultyInstance pDifficulty) {
-        ItemStack defaultBow = new ItemStack(Items.BOW);
-        defaultBow.enchant(Enchantments.POWER_ARROWS, 4);
-        this.setItemInHand(InteractionHand.MAIN_HAND, defaultBow);
-    }
-
-    @Override
-    public void die(DamageSource pDamageSource) {
-        super.die(pDamageSource);
-        if (this.isDeadOrDying()) {
-            this.onDeath(pDamageSource);
-        }
-    }
-
-    // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends GorgonEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);

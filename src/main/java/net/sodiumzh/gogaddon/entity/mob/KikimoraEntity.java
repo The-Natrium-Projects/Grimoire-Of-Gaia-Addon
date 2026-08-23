@@ -42,11 +42,6 @@ public class KikimoraEntity extends GOGAddonNeutralMob implements IDayMob {
         }
     }
 
-    @Override
-    public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense1();
-    }
-
     public static boolean checkSpawnRules(EntityType<? extends KikimoraEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return GOGAddonStatics.MobStatics.dayGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);
     }
@@ -74,11 +69,6 @@ public class KikimoraEntity extends GOGAddonNeutralMob implements IDayMob {
     @Override
     public void onDealDamage(LivingEntity target, float amount, DamageSource damageSource) {
 
-    }
-
-    @Override
-    public List<MobEffect> immuneToEffects() {
-        return null;
     }
 
     @Override

@@ -50,11 +50,6 @@ public class DhampirEntity extends GOGAddonMob {
     }
 
     @Override
-    public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense2();
-    }
-
-    @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putDouble("totalDamageDealt", this.totalDamageDealt);
@@ -141,56 +136,6 @@ public class DhampirEntity extends GOGAddonMob {
     public void onDeath(DamageSource damageSource) {
 
     }
-
-    // COPY-PASTE TO ALL MOBS //
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        this.updateState();
-        if (!this.level().isClientSide)
-            this.updateInventory();
-    }
-
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!this.canHurt(pAmount, pSource)) return false;
-        boolean res = super.hurt(pSource, pAmount);
-        if (res)
-            this.onHurt(pAmount, pSource);
-        return res;
-    }
-
-    @Override
-    public boolean doHurtTarget(Entity pEntity) {
-        boolean res = super.doHurtTarget(pEntity);
-        if (res && pEntity instanceof LivingEntity le) {
-            this.onAttack(le);
-        }
-        return res;
-    }
-
-    @Override
-    public boolean canBeAffected(MobEffectInstance pEffectInstance) {
-        return super.canBeAffected(pEffectInstance) && !immuneToEffects().contains(pEffectInstance.getEffect());
-    }
-
-    @Override
-    public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor levelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-        SpawnGroupData res = super.finalizeSpawn(levelAccessor, difficultyInstance, spawnType, groupData, tag);
-        this.populateDefaultEquipmentSlots(this.getRandom(), difficultyInstance);
-        return res;
-    }
-
-    @Override
-    public void die(DamageSource pDamageSource) {
-        super.die(pDamageSource);
-        if (this.isDeadOrDying()) {
-            this.onDeath(pDamageSource);
-        }
-    }
-
-    // COPY-PASTE END //
 
     public static boolean checkSpawnRules(EntityType<? extends DhampirEntity> entityType, ServerLevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
         return GOGAddonStatics.MobStatics.nightGroundMobSpawnRules(entityType, levelAccessor, spawnType, pos, random);

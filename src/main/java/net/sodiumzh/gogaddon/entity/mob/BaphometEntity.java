@@ -84,11 +84,6 @@ public class BaphometEntity extends GOGAddonMob implements IMeleeAndRangedAttack
     }
 
     @Override
-    public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense3();
-    }
-
-    @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
         if (pTarget.isAlive()) {
             RangedUtil.fireball(pTarget, this, pVelocity);

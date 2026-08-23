@@ -1,6 +1,7 @@
 package net.sodiumzh.gogaddon.entity.mob;
 
 import gaia.entity.AbstractGaiaEntity;
+import gaia.util.SharedEntityData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -49,7 +50,12 @@ public abstract class GOGAddonMob extends AbstractGaiaEntity implements IGOGAddo
 
     @Override
     public float getBaseDefense() {
-        return 0;
+        return switch (this.getGaiaLevel()) {
+            case 1 -> SharedEntityData.getBaseDefense1();
+            case 2 -> SharedEntityData.getBaseDefense2();
+            case 3 -> SharedEntityData.getBaseDefense3();
+            default -> throw new RuntimeException("Illegal Gaia mob tier. Should be 1, 2 or 3. Found " + this.getGaiaLevel() + ".");
+        };
     }
 
     @Override

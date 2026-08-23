@@ -51,11 +51,6 @@ public class SelkieEntity extends GOGAddonMob implements IMeleeAndRangedAttackMo
     }
 
     @Override
-    public float getBaseDefense() {
-        return SharedEntityData.getBaseDefense1();
-    }
-
-    @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
         if (pTarget.isAlive()) {
             RangedUtil.rangedAttack(pTarget, this, pVelocity);
