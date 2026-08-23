@@ -14,14 +14,14 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GOGAddonBiomeModifiers {
+public class GOGPlusBiomeModifiers {
 
     public static void init(){}
 
@@ -59,35 +59,35 @@ public class GOGAddonBiomeModifiers {
     public static void registerSpawnBiomeModifiers(BootstapContext<BiomeModifier> context) {
         registerBiomeModifier(context, "add_baphomet",
             NETHER, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.BAPHOMET.getEntityType(), 1, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.BAPHOMET.getEntityType(), 1, 1, 1)
         );
         registerBiomeModifier(context, "add_dhampir",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.DHAMPIR.getEntityType(), 5, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.DHAMPIR.getEntityType(), 5, 1, 1)
         );
         registerBiomeModifier(context, "add_gorgon",
             OVERWORLD_SWAMP, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.GORGON.getEntityType(), 1, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.GORGON.getEntityType(), 1, 1, 1)
         );
         registerBiomeModifier(context, "add_futakuchi_onna",
             OVERWORLD_SPOOKY_FOREST, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.FUTAKUCHI_ONNA.getEntityType(), 10, 2, 3)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.FUTAKUCHI_ONNA.getEntityType(), 10, 2, 3)
         );
         registerBiomeModifier(context, "add_sahuagin",
             OVERWORLD_SWAMP, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.SAHUAGIN.getEntityType(), 10, 2, 3)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.SAHUAGIN.getEntityType(), 10, 2, 3)
         );
         registerBiomeModifier(context, "add_kikimora",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.KIKIMORA.getEntityType(), 10, 1, 2)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.KIKIMORA.getEntityType(), 10, 1, 2)
         );
         registerBiomeModifier(context, "add_vampire",
             OVERWORLD_CONIFEROUS, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.VAMPIRE.getEntityType(), 1, 1, 1)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.VAMPIRE.getEntityType(), 1, 1, 1)
         );
         registerBiomeModifier(context, "add_selkie",
             OVERWORLD_SNOWY, null,
-            new MobSpawnSettings.SpawnerData(GOGAddonEntityTypes.SELKIE.getEntityType(), 5, 2, 3)
+            new MobSpawnSettings.SpawnerData(GOGPlusEntityTypes.SELKIE.getEntityType(), 5, 2, 3)
         );
 
     }
@@ -110,6 +110,6 @@ public class GOGAddonBiomeModifiers {
 
     /** Mirroring GaiaBiomeModifiers#generateKey */
     private static ResourceKey<BiomeModifier> generateKey(String name) {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(GOGAddon.MOD_ID, name));
+        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(GOGPlus.MOD_ID, name));
     }
 }

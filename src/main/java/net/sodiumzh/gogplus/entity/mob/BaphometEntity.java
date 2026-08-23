@@ -32,7 +32,7 @@ import net.sodiumzh.nfu.util.NFUEntityStatics;
 
 import java.util.List;
 
-public class BaphometEntity extends GOGAddonMob implements IMeleeAndRangedAttackMob, PowerableMob {
+public class BaphometEntity extends GOGPlusMob implements IMeleeAndRangedAttackMob, PowerableMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(BaphometEntity.class,
         EntityDataSerializers.BOOLEAN);

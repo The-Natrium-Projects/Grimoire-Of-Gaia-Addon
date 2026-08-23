@@ -21,7 +21,7 @@ import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import java.util.List;
 
-public class VampireEntity extends GOGAddonMob implements PowerableMob {
+public class VampireEntity extends GOGPlusMob implements PowerableMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(VampireEntity.class,
         EntityDataSerializers.BOOLEAN);

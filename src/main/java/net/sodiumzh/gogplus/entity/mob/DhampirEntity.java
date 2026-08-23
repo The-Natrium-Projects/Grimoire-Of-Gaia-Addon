@@ -19,15 +19,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.sodiumzh.gogplus.registry.GOGAddonConfigs;
-import net.sodiumzh.gogplus.registry.GOGAddonEntityTypes;
+import net.sodiumzh.gogplus.registry.GOGPlusConfigs;
+import net.sodiumzh.gogplus.registry.GOGPlusEntityTypes;
 import net.sodiumzh.gogplus.util.GOGAddonStatics;
 import net.sodiumzh.nfu.util.NFUEntityStatics;
 import net.sodiumzh.nfu.util.NFUParticleStatics;
 
 import java.util.List;
 
-public class DhampirEntity extends GOGAddonMob {
+public class DhampirEntity extends GOGPlusMob {
 
     protected double totalDamageDealt = 0d;
 
@@ -107,13 +107,13 @@ public class DhampirEntity extends GOGAddonMob {
         if (amount > 1) {
             NFUParticleStatics.sendHeartParticlesToEntityDefault(this, 0.0f, 2);
         }
-        double convertDmg = GOGAddonConfigs.ValueCache.Gameplay.DHAMPIR_CONVERSION_DAMAGE;
-        double convertChance = GOGAddonConfigs.ValueCache.Gameplay.DHAMPIR_CONVERSION_CHANCE;
+        double convertDmg = GOGPlusConfigs.ValueCache.Gameplay.DHAMPIR_CONVERSION_DAMAGE;
+        double convertChance = GOGPlusConfigs.ValueCache.Gameplay.DHAMPIR_CONVERSION_CHANCE;
         if (convertDmg >= 1d && convertChance > 0d) {
             int convertAmount = (int)Math.round(Math.floor((this.totalDamageDealt + amount) / convertDmg) - Math.floor(this.totalDamageDealt / convertDmg));
             for (int i = 0; i < convertAmount; ++i) {
                 if (this.getRandom().nextDouble() <= convertChance) {
-                    VampireEntity vampireEntity = this.convertTo(GOGAddonEntityTypes.VAMPIRE.getEntityType(), true);
+                    VampireEntity vampireEntity = this.convertTo(GOGPlusEntityTypes.VAMPIRE.getEntityType(), true);
                     if (vampireEntity != null) {
                         vampireEntity.playSound(SoundEvents.ENCHANTMENT_TABLE_USE, 1.5f, 1.0f);
                         NFUParticleStatics.sendParticlesToEntity(vampireEntity, ParticleTypes.EXPLOSION, 0d, 1.5d, 5, 1.0d);

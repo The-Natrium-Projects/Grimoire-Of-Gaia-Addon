@@ -17,7 +17,7 @@ import net.sodiumzh.gogplus.util.GOGAddonStatics;
 
 import java.util.List;
 
-public class SahuaginEntity extends GOGAddonMob implements IMeleeAndRangedAttackMob {
+public class SahuaginEntity extends GOGPlusMob implements IMeleeAndRangedAttackMob {
 
     public SahuaginEntity(EntityType<? extends SahuaginEntity> entityType, Level level) {
         super(entityType, level);

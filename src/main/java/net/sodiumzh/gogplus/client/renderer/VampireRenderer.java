@@ -8,27 +8,27 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 import net.sodiumzh.gogplus.client.model.VampireModel;
-import net.sodiumzh.gogplus.client.renderer.layer.GOGAddonEyesLayer;
+import net.sodiumzh.gogplus.client.renderer.layer.GOGPlusEyesLayer;
 import net.sodiumzh.gogplus.entity.mob.VampireEntity;
 
 public class VampireRenderer extends MobRenderer<VampireEntity, VampireModel> {
 
     public static final ModelLayerLocation LAYER_LOCATION =
-        new ModelLayerLocation(new ResourceLocation(GOGAddon.MOD_ID, "vampire"), "main");
+        new ModelLayerLocation(new ResourceLocation(GOGPlus.MOD_ID, "vampire"), "main");
 
     private static final ResourceLocation EYES_TEXTURE =
-        new ResourceLocation(GOGAddon.MOD_ID, "textures/entity/vampire/vampire_eyes.png");
+        new ResourceLocation(GOGPlus.MOD_ID, "textures/entity/vampire/vampire_eyes.png");
     private static final ResourceLocation TEXTURE =
-        new ResourceLocation(GOGAddon.MOD_ID, "textures/entity/vampire/vampire.png");
+        new ResourceLocation(GOGPlus.MOD_ID, "textures/entity/vampire/vampire.png");
     private static final RenderType EYES_LAYER = RenderType.eyes(EYES_TEXTURE);
 
     public VampireRenderer(EntityRendererProvider.Context context) {
         super(context, new VampireModel(context.bakeLayer(LAYER_LOCATION)), 0.5F);
         this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
-        this.addLayer(new GOGAddonEyesLayer<>(this, EYES_LAYER));
+        this.addLayer(new GOGPlusEyesLayer<>(this, EYES_LAYER));
         this.addLayer(new AuraLayer<>(this, () -> {
             return new VampireModel(context.bakeLayer(LAYER_LOCATION));
         }));

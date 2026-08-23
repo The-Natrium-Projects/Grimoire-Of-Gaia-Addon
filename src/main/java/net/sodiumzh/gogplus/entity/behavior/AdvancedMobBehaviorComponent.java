@@ -6,8 +6,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.gogplus.GOGAddon;
-import net.sodiumzh.gogplus.registry.GOGAddonEntityComponents;
+import net.sodiumzh.gogplus.GOGPlus;
+import net.sodiumzh.gogplus.registry.GOGPlusEntityComponents;
 import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
 import net.sodiumzh.nfu.entity.component.EntityComponentBase;
 import net.sodiumzh.nfu.exception.MissingRegistryEntryException;
@@ -28,7 +28,7 @@ public class AdvancedMobBehaviorComponent extends EntityComponentBase<AbstractGa
 
     public AdvancedMobBehaviorComponent(AbstractGaiaEntity entity) {
         super(entity);
-        this.behaviors = GOGAddonMobBehaviorMappings.get(entity.getType()).map(f -> f.apply(this))
+        this.behaviors = GOGPlusMobBehaviorMappings.get(entity.getType()).map(f -> f.apply(this))
                 .orElseThrow(() -> new MissingRegistryEntryException("Missing GOG-Addon mob behavior info. Must be registered in GOGAddonMobBehaviorMappings."));
     }
 
@@ -50,7 +50,7 @@ public class AdvancedMobBehaviorComponent extends EntityComponentBase<AbstractGa
     }
 
     public static Optional<AdvancedMobBehaviorComponent> get(Entity e) {
-        return EntityComponentAPI.getComponentByPath(e, GOGAddonEntityComponents.ACCESSOR_ADVANCED_MOB_BEHAVIORS);
+        return EntityComponentAPI.getComponentByPath(e, GOGPlusEntityComponents.ACCESSOR_ADVANCED_MOB_BEHAVIORS);
     }
 
     public static Optional<IAdvancedMobBehaviors<? extends AbstractGaiaEntity>> getBehaviorsIfEnabled(Entity e) {
@@ -73,7 +73,7 @@ public class AdvancedMobBehaviorComponent extends EntityComponentBase<AbstractGa
         this.behaviors.deserializeNBT(nbt);
     }
 
-    @Mod.EventBusSubscriber(modid = GOGAddon.MOD_ID, bus = FORGE)
+    @Mod.EventBusSubscriber(modid = GOGPlus.MOD_ID, bus = FORGE)
     public static class EventListeners {
 
         @SubscribeEvent

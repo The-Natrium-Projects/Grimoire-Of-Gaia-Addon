@@ -5,15 +5,15 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-@Mod.EventBusSubscriber(modid = GOGAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class GOGAddonMobBehaviorMappings {
+@Mod.EventBusSubscriber(modid = GOGPlus.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class GOGPlusMobBehaviorMappings {
 
     private static final Map<EntityType<? extends AbstractGaiaEntity>, Function<AdvancedMobBehaviorComponent, IAdvancedMobBehaviors<? extends AbstractGaiaEntity>>>
         TABLE = new HashMap<>();

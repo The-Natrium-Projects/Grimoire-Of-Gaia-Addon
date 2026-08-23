@@ -8,11 +8,11 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 
-public class GOGAddonBlocks {
+public class GOGPlusBlocks {
 
-    public static final DeferredRegister<Block> REG = DeferredRegister.create(ForgeRegistries.BLOCKS, GOGAddon.MOD_ID);
+    public static final DeferredRegister<Block> REG = DeferredRegister.create(ForgeRegistries.BLOCKS, GOGPlus.MOD_ID);
 
     public static final RegistryObject<Block> ENCHANTED_COBBLESTONE = REG.register("enchanted_cobblestone", () ->
         new Block(BlockBehaviour.Properties.of()

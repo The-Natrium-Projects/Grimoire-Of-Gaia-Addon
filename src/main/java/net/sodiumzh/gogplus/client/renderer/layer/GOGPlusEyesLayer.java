@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.world.entity.Entity;
 
-public class GOGAddonEyesLayer<E extends Entity, R extends EntityModel<E>> extends EyesLayer<E, R> {
+public class GOGPlusEyesLayer<E extends Entity, R extends EntityModel<E>> extends EyesLayer<E, R> {
 
     private final RenderType renderType;
 
-    public GOGAddonEyesLayer(RenderLayerParent<E, R> layerParent, RenderType renderType) {
+    public GOGPlusEyesLayer(RenderLayerParent<E, R> layerParent, RenderType renderType) {
         super(layerParent);
         this.renderType = renderType;
     }

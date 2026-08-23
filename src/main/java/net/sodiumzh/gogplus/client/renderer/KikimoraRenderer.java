@@ -6,15 +6,15 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 import net.sodiumzh.gogplus.client.model.KikimoraModel;
 import net.sodiumzh.gogplus.entity.mob.KikimoraEntity;
 
 public class KikimoraRenderer extends MobRenderer<KikimoraEntity, KikimoraModel> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(GOGAddon.MOD_ID, "textures/entity/kikimora/kikimora.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(GOGPlus.MOD_ID, "textures/entity/kikimora/kikimora.png");
     public static final ModelLayerLocation LAYER_LOCATION =
-        new ModelLayerLocation(new ResourceLocation(GOGAddon.MOD_ID, "kikimora"), "main");
+        new ModelLayerLocation(new ResourceLocation(GOGPlus.MOD_ID, "kikimora"), "main");
 
     public KikimoraRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new KikimoraModel(pContext.bakeLayer(LAYER_LOCATION)), 0.5F);

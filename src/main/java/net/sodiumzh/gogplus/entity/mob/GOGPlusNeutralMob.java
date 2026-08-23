@@ -1,5 +1,6 @@
 package net.sodiumzh.gogplus.entity.mob;
 
+import gaia.entity.AbstractAssistGaiaEntity;
 import gaia.entity.AbstractGaiaEntity;
 import gaia.util.SharedEntityData;
 import net.minecraft.nbt.CompoundTag;
@@ -11,9 +12,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class GOGAddonMob extends AbstractGaiaEntity implements IGOGAddonMob {
+public abstract class GOGPlusNeutralMob extends AbstractAssistGaiaEntity implements IGOGAddonMob {
 
-    public GOGAddonMob(EntityType<? extends AbstractGaiaEntity> entityType, Level level) {
+    public GOGPlusNeutralMob(EntityType<? extends AbstractGaiaEntity> entityType, Level level) {
         super(entityType, level);
     }
 

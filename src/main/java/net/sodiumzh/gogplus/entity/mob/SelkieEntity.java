@@ -25,7 +25,7 @@ import net.sodiumzh.gogplus.ai.goal.SelectedRangedBowAttackGoal;
 import net.sodiumzh.gogplus.entity.IMeleeAndRangedAttackMob;
 import net.sodiumzh.gogplus.util.GOGAddonStatics;
 
-public class SelkieEntity extends GOGAddonMob implements IMeleeAndRangedAttackMob, IDayMob {
+public class SelkieEntity extends GOGPlusMob implements IMeleeAndRangedAttackMob, IDayMob {
 
     public SelkieEntity(EntityType<? extends SelkieEntity> entityType, Level level) {
         super(entityType, level);

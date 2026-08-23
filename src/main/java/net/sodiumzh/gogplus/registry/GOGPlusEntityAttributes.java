@@ -5,17 +5,17 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 import net.sodiumzh.nfu.entity.EntityAttributeProvider;
 import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 
-@Mod.EventBusSubscriber(modid = GOGAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class GOGAddonEntityAttributes {
+@Mod.EventBusSubscriber(modid = GOGPlus.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class GOGPlusEntityAttributes {
 
     public static final NFURegistryEntryCollection<EntityAttributeProvider> COLLECTION =
-        NFURegistryEntryCollection.create(NFURegistries.ENTITY_ATTRIBUTE_PROVIDERS, GOGAddon.MOD_ID);
+        NFURegistryEntryCollection.create(NFURegistries.ENTITY_ATTRIBUTE_PROVIDERS, GOGPlus.MOD_ID);
 
     public static final NFURegistry.Accessor<EntityAttributeProvider> DEFAULT_TIER_1 = COLLECTION.register("default_tier_1",
         () -> EntityAttributeProvider.monster()
@@ -50,13 +50,13 @@ public class GOGAddonEntityAttributes {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(GOGAddonEntityTypes.VAMPIRE.getEntityType(), DEFAULT_TIER_3.get().get().build());
-        event.put(GOGAddonEntityTypes.BAPHOMET.getEntityType(), DEFAULT_TIER_3.get().get().build());
-        event.put(GOGAddonEntityTypes.DHAMPIR.getEntityType(), DEFAULT_TIER_2.get().get().build());
-        event.put(GOGAddonEntityTypes.GORGON.getEntityType(), DEFAULT_TIER_3.get().get().build());
-        event.put(GOGAddonEntityTypes.SELKIE.getEntityType(), DEFAULT_TIER_1.get().get().build());
-        event.put(GOGAddonEntityTypes.KIKIMORA.getEntityType(), DEFAULT_TIER_1.get().get().build());
-        event.put(GOGAddonEntityTypes.FUTAKUCHI_ONNA.getEntityType(), DEFAULT_TIER_1.get().get().build());
-        event.put(GOGAddonEntityTypes.SAHUAGIN.getEntityType(), DEFAULT_TIER_1.get().get().build());
+        event.put(GOGPlusEntityTypes.VAMPIRE.getEntityType(), DEFAULT_TIER_3.get().get().build());
+        event.put(GOGPlusEntityTypes.BAPHOMET.getEntityType(), DEFAULT_TIER_3.get().get().build());
+        event.put(GOGPlusEntityTypes.DHAMPIR.getEntityType(), DEFAULT_TIER_2.get().get().build());
+        event.put(GOGPlusEntityTypes.GORGON.getEntityType(), DEFAULT_TIER_3.get().get().build());
+        event.put(GOGPlusEntityTypes.SELKIE.getEntityType(), DEFAULT_TIER_1.get().get().build());
+        event.put(GOGPlusEntityTypes.KIKIMORA.getEntityType(), DEFAULT_TIER_1.get().get().build());
+        event.put(GOGPlusEntityTypes.FUTAKUCHI_ONNA.getEntityType(), DEFAULT_TIER_1.get().get().build());
+        event.put(GOGPlusEntityTypes.SAHUAGIN.getEntityType(), DEFAULT_TIER_1.get().get().build());
     }
 }

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 import net.sodiumzh.nfu.item.NFUBlockItem;
 import net.sodiumzh.nfu.item.NFUItem;
 
@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = GOGAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class GOGAddonItems {
+@Mod.EventBusSubscriber(modid = GOGPlus.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class GOGPlusItems {
 
-    public static final DeferredRegister<Item> REG = DeferredRegister.create(ForgeRegistries.ITEMS, GOGAddon.MOD_ID);
+    public static final DeferredRegister<Item> REG = DeferredRegister.create(ForgeRegistries.ITEMS, GOGPlus.MOD_ID);
     private static List<String> NO_TAB_KEY_LIST = new ArrayList<>();
 
     public static <T extends Item> RegistryObject<T> registerNoTab(String name, Supplier<? extends T> supplier) {
@@ -47,7 +47,7 @@ public class GOGAddonItems {
     public static final RegistryObject<NFUItem> EXPLOSIVE_CORE = REG.register("explosive_core",
         () -> new NFUItem(new Item.Properties()));
     public static final RegistryObject<NFUBlockItem> ENCHANTED_COBBLESTONE = REG.register("enchanted_cobblestone",
-        () -> new NFUBlockItem(GOGAddonBlocks.ENCHANTED_COBBLESTONE.get(), new Item.Properties()));
+        () -> new NFUBlockItem(GOGPlusBlocks.ENCHANTED_COBBLESTONE.get(), new Item.Properties()));
 
     // Tier 2 Loots
     public static final RegistryObject<NFUItem> GOLDEN_SCALE = REG.register("golden_scale",
@@ -61,7 +61,7 @@ public class GOGAddonItems {
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {
         if (event.getTab().equals(GaiaRegistry.GAIA_TAB.get())) {
             ForgeRegistries.ITEMS.getKeys().stream()
-                .filter(key -> key.getNamespace().equals(GOGAddon.MOD_ID))
+                .filter(key -> key.getNamespace().equals(GOGPlus.MOD_ID))
                 .filter(key -> !NO_TAB_KEY_LIST.contains(key.getPath()))
                 .map(ForgeRegistries.ITEMS::getValue)
                 .filter(Objects::nonNull)

@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.sodiumzh.gogplus.util.GOGAddonStatics;
 
-public class KikimoraEntity extends GOGAddonNeutralMob implements IDayMob {
+public class KikimoraEntity extends GOGPlusNeutralMob implements IDayMob {
 
     public KikimoraEntity(EntityType<? extends KikimoraEntity> entityType, Level level) {
         super(entityType, level);

@@ -9,16 +9,16 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.RegistryObject;
-import net.sodiumzh.gogplus.GOGAddon;
-import net.sodiumzh.gogplus.registry.GOGAddonEntityTypes;
-import net.sodiumzh.gogplus.registry.GOGAddonItems;
-import net.sodiumzh.gogplus.registry.GOGAddonSoundEvents;
+import net.sodiumzh.gogplus.GOGPlus;
+import net.sodiumzh.gogplus.registry.GOGPlusEntityTypes;
+import net.sodiumzh.gogplus.registry.GOGPlusItems;
+import net.sodiumzh.gogplus.registry.GOGPlusSoundEvents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class GOGAddonMobReg<T extends Mob> {
+public class GOGPlusMobType<T extends Mob> {
     protected final String name;
     protected final RegistryObject<EntityType<T>> entityType;
     protected final GaiaMobType gaiaMobType;
@@ -95,54 +95,54 @@ public class GOGAddonMobReg<T extends Mob> {
         return this.ATTACK_MALE == null ? null : (SoundEvent)this.ATTACK_MALE.get();
     }
 
-    public GOGAddonMobReg(String name, Supplier<EntityType.Builder<T>> builder, GaiaMobType mobType, int backgroundColor, int highlightColor, boolean say, boolean hurt, boolean death, boolean step, boolean attack, boolean hasGenders, boolean noSpawnEgg, boolean traderEgg) {
+    public GOGPlusMobType(String name, Supplier<EntityType.Builder<T>> builder, GaiaMobType mobType, int backgroundColor, int highlightColor, boolean say, boolean hurt, boolean death, boolean step, boolean attack, boolean hasGenders, boolean noSpawnEgg, boolean traderEgg) {
         this.name = name;
-        this.entityType = GOGAddonEntityTypes.ENTITY_TYPES.register(name, () -> {
+        this.entityType = GOGPlusEntityTypes.ENTITY_TYPES.register(name, () -> {
             return builder.get().build(name);
         });
         this.gaiaMobType = mobType;
         if (!noSpawnEgg) {
             if (traderEgg) {
-                this.spawnEgg = GOGAddonItems.REG.register("spawn_" + name, () -> {
+                this.spawnEgg = GOGPlusItems.REG.register("spawn_" + name, () -> {
                     return new MerchantSpawnItem(this.entityType, new Item.Properties());
                 });
             } else {
-                this.spawnEgg = GOGAddonItems.REG.register(name + "_spawn_egg", () -> {
+                this.spawnEgg = GOGPlusItems.REG.register(name + "_spawn_egg", () -> {
                     return new ForgeSpawnEggItem(this.entityType, backgroundColor, highlightColor, new Item.Properties());
                 });
             }
         }
 
-        this.SAY = say ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_say", () -> {
-            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_say"));
+        this.SAY = say ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_say", () -> {
+            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_say"));
         }) : null;
-        this.HURT = hurt ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_hurt", () -> {
-            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_hurt"));
+        this.HURT = hurt ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_hurt", () -> {
+            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_hurt"));
         }) : null;
-        this.DEATH = death ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_death", () -> {
-            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_death"));
+        this.DEATH = death ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_death", () -> {
+            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_death"));
         }) : null;
-        this.STEP = step ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_step", () -> {
-            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_step"));
+        this.STEP = step ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_step", () -> {
+            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_step"));
         }) : null;
-        this.ATTACK = attack ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_attack", () -> {
-            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_attack"));
+        this.ATTACK = attack ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_attack", () -> {
+            return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_attack"));
         }) : null;
         if (hasGenders) {
-            this.SAY_MALE = say ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_male_say", () -> {
-                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_male_say"));
+            this.SAY_MALE = say ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_male_say", () -> {
+                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_male_say"));
             }) : null;
-            this.HURT_MALE = hurt ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_male_hurt", () -> {
-                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_male_hurt"));
+            this.HURT_MALE = hurt ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_male_hurt", () -> {
+                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_male_hurt"));
             }) : null;
-            this.DEATH_MALE = death ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_male_death", () -> {
-                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_male_death"));
+            this.DEATH_MALE = death ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_male_death", () -> {
+                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_male_death"));
             }) : null;
-            this.STEP_MALE = step ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_male_step", () -> {
-                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_male_step"));
+            this.STEP_MALE = step ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_male_step", () -> {
+                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_male_step"));
             }) : null;
-            this.ATTACK_MALE = attack ? GOGAddonSoundEvents.SOUND_EVENTS.register(name + "_male_attack", () -> {
-                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGAddon.MOD_ID, name + "_male_attack"));
+            this.ATTACK_MALE = attack ? GOGPlusSoundEvents.SOUND_EVENTS.register(name + "_male_attack", () -> {
+                return SoundEvent.createVariableRangeEvent(new ResourceLocation(GOGPlus.MOD_ID, name + "_male_attack"));
             }) : null;
         }
 
@@ -249,8 +249,8 @@ public class GOGAddonMobReg<T extends Mob> {
             return this;
         }
 
-        public GOGAddonMobReg<T> build() {
-            return new GOGAddonMobReg<>(this.name, this.builder, this.gaiaMobType, this.backgroundColor, this.highlightColor, this.say, this.hurt, this.death, this.step, this.attack, this.hasGenders, this.noSpawnEgg, this.traderEgg);
+        public GOGPlusMobType<T> build() {
+            return new GOGPlusMobType<>(this.name, this.builder, this.gaiaMobType, this.backgroundColor, this.highlightColor, this.say, this.hurt, this.death, this.step, this.attack, this.hasGenders, this.noSpawnEgg, this.traderEgg);
         }
     }
 }

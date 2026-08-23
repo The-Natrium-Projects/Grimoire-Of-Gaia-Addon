@@ -3,7 +3,7 @@ package net.sodiumzh.gogplus.registry;
 import gaia.entity.AbstractGaiaEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 import net.sodiumzh.gogplus.entity.behavior.AdvancedMobBehaviorComponent;
 import net.sodiumzh.nfu.NFULibrary;
 import net.sodiumzh.nfu.entity.component.EntityComponentSetupEvent;
@@ -14,10 +14,10 @@ import net.sodiumzh.nfu.registry.NFURegistries;
 import net.sodiumzh.nfu.registry.NFURegistry;
 import net.sodiumzh.nfu.registry.NFURegistryEntryCollection;
 
-public class GOGAddonEntityComponents {
+public class GOGPlusEntityComponents {
 
     public static final NFURegistryEntryCollection<EntityComponentType<?, ?>> COLLECTION =
-        NFURegistryEntryCollection.create(NFURegistries.ENTITY_COMPONENT_TYPES, GOGAddon.MOD_ID);
+        NFURegistryEntryCollection.create(NFURegistries.ENTITY_COMPONENT_TYPES, GOGPlus.MOD_ID);
 
     public static final NFURegistry.Accessor<EntityComponentType<AbstractGaiaEntity, AdvancedMobBehaviorComponent>>
             ADVANCED_MOB_BEHAVIORS = COLLECTION.register("advanced_mob_behaviors", () ->
@@ -32,7 +32,7 @@ public class GOGAddonEntityComponents {
 
         @SubscribeEvent
         public static void onInitComponents(EntityComponentSetupEvent event) {
-            event.addComponent(PATH_ADVANCED_MOB_BEHAVIORS, GOGAddonEntityComponents.ADVANCED_MOB_BEHAVIORS.get());
+            event.addComponent(PATH_ADVANCED_MOB_BEHAVIORS, GOGPlusEntityComponents.ADVANCED_MOB_BEHAVIORS.get());
         }
     }
 

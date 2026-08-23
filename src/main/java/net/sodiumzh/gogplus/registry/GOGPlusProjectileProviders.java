@@ -29,7 +29,7 @@ import net.sodiumzh.nfu.util.NFUMathStatics;
 import java.util.function.Function;
 import java.util.stream.DoubleStream;
 
-public class GOGAddonProjectileProviders {
+public class GOGPlusProjectileProviders {
 
     private static final RandomSource RND = new ThreadSafeRandomSource();
 

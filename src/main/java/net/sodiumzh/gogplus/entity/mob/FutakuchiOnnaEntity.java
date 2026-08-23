@@ -20,7 +20,7 @@ import net.sodiumzh.gogplus.util.GOGAddonStatics;
 
 import java.util.List;
 
-public class FutakuchiOnnaEntity extends GOGAddonMob {
+public class FutakuchiOnnaEntity extends GOGPlusMob {
 
     public static final EntityDataAccessor<Boolean> HAS_TARGET = SynchedEntityData.defineId(FutakuchiOnnaEntity.class,
         EntityDataSerializers.BOOLEAN);

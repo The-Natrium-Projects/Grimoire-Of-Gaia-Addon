@@ -14,31 +14,31 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.sodiumzh.gogplus.GOGAddon;
-import net.sodiumzh.gogplus.registry.GOGAddonBiomeModifiers;
+import net.sodiumzh.gogplus.GOGPlus;
+import net.sodiumzh.gogplus.registry.GOGPlusBiomeModifiers;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class GOGAddonDatagen {
+public class GOGPlusDatagen {
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = CompletableFuture.supplyAsync(GOGAddonDatagen::getProvider);
+        CompletableFuture<HolderLookup.Provider> lookupProvider = CompletableFuture.supplyAsync(GOGPlusDatagen::getProvider);
         ExistingFileHelper helper = event.getExistingFileHelper();
 
         if (event.includeServer()) {
             generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(
-                packOutput, lookupProvider, Set.of(GOGAddon.MOD_ID)));
+                packOutput, lookupProvider, Set.of(GOGPlus.MOD_ID)));
         }
     }
 
     private static HolderLookup.Provider getProvider() {
         final RegistrySetBuilder registryBuilder = new RegistrySetBuilder();
-        registryBuilder.add(ForgeRegistries.Keys.BIOME_MODIFIERS, GOGAddonBiomeModifiers::registerSpawnBiomeModifiers);
+        registryBuilder.add(ForgeRegistries.Keys.BIOME_MODIFIERS, GOGPlusBiomeModifiers::registerSpawnBiomeModifiers);
         // We need the BIOME registry to be present so we can use a biome tag, doesn't matter that it's empty
         registryBuilder.add(Registries.BIOME, context -> {
         });

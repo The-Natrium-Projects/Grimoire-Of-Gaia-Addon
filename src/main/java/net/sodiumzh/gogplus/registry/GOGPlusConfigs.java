@@ -4,10 +4,10 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.sodiumzh.gogplus.GOGAddon;
+import net.sodiumzh.gogplus.GOGPlus;
 
-@Mod.EventBusSubscriber(modid = GOGAddon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class GOGAddonConfigs {
+@Mod.EventBusSubscriber(modid = GOGPlus.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class GOGPlusConfigs {
 
     protected static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static ForgeConfigSpec CONFIG;
@@ -39,9 +39,9 @@ public class GOGAddonConfigs {
         }
 
         public static void refresh() {
-            Gameplay.MOBS_USE_ADVANCED_BEHAVIORS = GOGAddonConfigs.MOBS_USE_ADVANCED_BEHAVIORS.get();
-            Gameplay.DHAMPIR_CONVERSION_CHANCE = GOGAddonConfigs.DHAMPIR_CONVERSION_CHANCE.get();
-            Gameplay.DHAMPIR_CONVERSION_DAMAGE = GOGAddonConfigs.DHAMPIR_CONVERSION_DAMAGE.get();
+            Gameplay.MOBS_USE_ADVANCED_BEHAVIORS = GOGPlusConfigs.MOBS_USE_ADVANCED_BEHAVIORS.get();
+            Gameplay.DHAMPIR_CONVERSION_CHANCE = GOGPlusConfigs.DHAMPIR_CONVERSION_CHANCE.get();
+            Gameplay.DHAMPIR_CONVERSION_DAMAGE = GOGPlusConfigs.DHAMPIR_CONVERSION_DAMAGE.get();
         }
 
     }

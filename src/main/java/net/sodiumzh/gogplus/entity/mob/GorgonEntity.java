@@ -30,7 +30,7 @@ import net.sodiumzh.gogplus.util.GOGAddonStatics;
 
 import java.util.List;
 
-public class GorgonEntity extends GOGAddonMob implements PowerableMob, IMeleeAndRangedAttackMob {
+public class GorgonEntity extends GOGPlusMob implements PowerableMob, IMeleeAndRangedAttackMob {
 
     public static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(GorgonEntity.class,
         EntityDataSerializers.BOOLEAN);

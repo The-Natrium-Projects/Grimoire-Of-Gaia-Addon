@@ -9,7 +9,7 @@ import net.sodiumzh.gogplus.entity.behavior.IRangedAttackBehaviors;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class GOGAddonRangedAttackGoal extends Goal {
+public class GOGPlusRangedAttackGoal extends Goal {
     private final AbstractGaiaEntity mob;
     private final IRangedAttackBehaviors rangedAttackBehaviors;
     @Nullable // Non-null when the goal is running
@@ -22,11 +22,11 @@ public class GOGAddonRangedAttackGoal extends Goal {
     private final float attackRadius;
     private final float attackRadiusSqr;
 
-    public GOGAddonRangedAttackGoal(IRangedAttackBehaviors rangedAttackBehaviors, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
+    public GOGPlusRangedAttackGoal(IRangedAttackBehaviors rangedAttackBehaviors, double pSpeedModifier, int pAttackInterval, float pAttackRadius) {
         this(rangedAttackBehaviors, pSpeedModifier, pAttackInterval, pAttackInterval, pAttackRadius);
     }
 
-    public GOGAddonRangedAttackGoal(IRangedAttackBehaviors rangedAttackBehaviors, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
+    public GOGPlusRangedAttackGoal(IRangedAttackBehaviors rangedAttackBehaviors, double pSpeedModifier, int pAttackIntervalMin, int pAttackIntervalMax, float pAttackRadius) {
         this.rangedAttackBehaviors = rangedAttackBehaviors;
         this.mob = rangedAttackBehaviors.asBehaviors().getMob();
         this.speedModifier = pSpeedModifier;

@@ -9,8 +9,8 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.sodiumzh.gogplus.entity.ai.GOGAddonRangedAttackGoal;
-import net.sodiumzh.gogplus.registry.GOGAddonProjectileProviders;
+import net.sodiumzh.gogplus.entity.ai.GOGPlusRangedAttackGoal;
+import net.sodiumzh.gogplus.registry.GOGPlusProjectileProviders;
 import net.sodiumzh.nfu.entity.NFUItemProjectileEntity;
 import net.sodiumzh.nfu.entity.component.EntityComponentAPI;
 import net.sodiumzh.nfu.exception.ReflectionFailedException;
@@ -26,10 +26,10 @@ import java.util.function.Supplier;
 public class ValkyrieBehaviors extends AdvancedMobBehaviors<Valkyrie> implements IRangedAttackBehaviors{
 
     private static final RandomSelection<Function<Mob, NFUItemProjectileEntity>> PROJECTILE_SELECTOR =
-            new RandomSelection<>(GOGAddonProjectileProviders.VALKYRIE_COMMON_PROJECTILE)
-                    .add(GOGAddonProjectileProviders.VALKYRIE_EXPLOSIVE_PROJECTILE, 0.2d)
-                    .add(GOGAddonProjectileProviders.VALKYRIE_THUNDER_PROJECTILE, 0.2d)
-                    .add(GOGAddonProjectileProviders.VALKYRIE_ICE_PROJECTILE, 0.2d);
+            new RandomSelection<>(GOGPlusProjectileProviders.VALKYRIE_COMMON_PROJECTILE)
+                    .add(GOGPlusProjectileProviders.VALKYRIE_EXPLOSIVE_PROJECTILE, 0.2d)
+                    .add(GOGPlusProjectileProviders.VALKYRIE_THUNDER_PROJECTILE, 0.2d)
+                    .add(GOGPlusProjectileProviders.VALKYRIE_ICE_PROJECTILE, 0.2d);
 
     private MeleeAttackGoal meleeAttackGoal = null;
 
@@ -72,7 +72,7 @@ public class ValkyrieBehaviors extends AdvancedMobBehaviors<Valkyrie> implements
 
     @Override
     public void setupGoals() {
-        this.getMob().goalSelector.addGoal(1, new GOGAddonRangedAttackGoal(this, 1.0, 3*20, 16f) {
+        this.getMob().goalSelector.addGoal(1, new GOGPlusRangedAttackGoal(this, 1.0, 3*20, 16f) {
             @Override
             public boolean canUse() {
                 return super.canUse() && this.getMob().getTarget() != null && this.getMob().getTarget().distanceToSqr(this.getMob()) >= 16.0d;
