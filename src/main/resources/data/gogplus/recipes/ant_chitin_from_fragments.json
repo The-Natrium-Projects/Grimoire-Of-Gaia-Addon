@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:ant_chitin_fragment"
+    },
+    {
+      "item": "gogplus:ant_chitin_fragment"
+    },
+    {
+      "item": "gogplus:ant_chitin_fragment"
+    },
+    {
+      "item": "gogplus:ant_chitin_fragment"
+    }
+  ],
+
+  "result":{
+    "item": "gogplus:ant_chitin",
+    "count": 1
+  }
+}

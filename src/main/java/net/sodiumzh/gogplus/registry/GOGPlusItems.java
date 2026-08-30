@@ -33,17 +33,17 @@ public class GOGPlusItems {
 
     // Tier 1 Loots
     public static final RegistryObject<NFUItem> ANT_CHITIN = REG.register("ant_chitin",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> ANT_CHITIN_FRAGMENT = REG.register("ant_chitin_fragment",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> GHOST_FIRE = REG.register("ghost_fire",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> MYSTERIOUS_BRANCH = REG.register("mysterious_branch",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> SHINY_SCALE = REG.register("shiny_scale",
-        () -> new NFUItem(new Item.Properties()));
+        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> ENCHANTED_FEATHER = REG.register("enchanted_feather",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> EXPLOSIVE_CORE = REG.register("explosive_core",
         () -> new NFUItem(new Item.Properties()));
     public static final RegistryObject<NFUBlockItem> ENCHANTED_COBBLESTONE = REG.register("enchanted_cobblestone",
@@ -51,11 +51,11 @@ public class GOGPlusItems {
 
     // Tier 2 Loots
     public static final RegistryObject<NFUItem> GOLDEN_SCALE = REG.register("golden_scale",
-        () -> new NFUItem(new Item.Properties().rarity(Rarity.UNCOMMON)).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties().rarity(Rarity.UNCOMMON)).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     
     // Tier 3 Loots
     public static final RegistryObject<NFUItem> HOLY_FEATHER = REG.register("holy_feather",
-        () -> new NFUItem(new Item.Properties().rarity(Rarity.RARE)).descTranslatable("tooltip.gogaddon.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties().rarity(Rarity.RARE)).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
 
     @SubscribeEvent
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {

@@ -1,0 +1,25 @@
+{
+  "item.gogplus.ant_chitin": "蚂蚁壳质",
+  "item.gogplus.ant_chitin_fragment": "蚂蚁壳质碎片",
+  "item.gogplus.ghost_fire": "鬼火",
+  "item.gogplus.mysterious_branch": "神秘树枝",
+  "item.gogplus.shiny_scale": "闪耀鳞片",
+  "item.gogplus.enchanted_feather": "附魔羽毛",
+  "item.gogplus.explosive_core": "爆破核心",
+  "item.gogplus.enchanted_cobblestone": "附魔圆石",
+  "item.gogplus.golden_scale": "黄金鳞片",
+  "item.gogplus.holy_feather": "神圣羽毛",
+
+  "block.gogplus.enchanted_cobblestone": "附魔圆石",
+
+  "entity.gogplus.baphomet": "巴风特",
+  "entity.gogplus.dhampir": "半吸血鬼",
+  "entity.gogplus.futakuchi_onna": "二口女",
+  "entity.gogplus.gorgon": "戈耳工",
+  "entity.gogplus.kikimora": "奇奇莫拉",
+  "entity.gogplus.sahuagin": "沙华鱼人",
+  "entity.gogplus.selkie": "海豹人",
+  "entity.gogplus.vampire": "吸血鬼",
+
+  "tooltip.gogplus.unimplemented_ingredient": "该材料功能尚未完成。用途将在未来更新中加入。"
+}

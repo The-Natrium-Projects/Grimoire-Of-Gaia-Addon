@@ -1,17 +1,17 @@
 {
   "replace": false,
   "entries": [
-    "gogaddon:ant_chitin_fragment",
-    "gogaddon:enchanted_cobblestone",
-    "gogaddon:enchanted_cobblestone_large",
-    "gogaddon:shiny_scale",
-    "gogaddon:shiny_scale_large",
-    "gogaddon:ghost_fire",
-    "gogaddon:mysterious_branch",
-    "gogaddon:mysterious_branch_large",
-    "gogaddon:enchanted_feather",
-    "gogaddon:explosive_core",
-    "gogaddon:golden_scale",
-    "gogaddon:holy_feather"
+    "gogplus:ant_chitin_fragment",
+    "gogplus:enchanted_cobblestone",
+    "gogplus:enchanted_cobblestone_large",
+    "gogplus:shiny_scale",
+    "gogplus:shiny_scale_large",
+    "gogplus:ghost_fire",
+    "gogplus:mysterious_branch",
+    "gogplus:mysterious_branch_large",
+    "gogplus:enchanted_feather",
+    "gogplus:explosive_core",
+    "gogplus:golden_scale",
+    "gogplus:holy_feather"
   ]
 }

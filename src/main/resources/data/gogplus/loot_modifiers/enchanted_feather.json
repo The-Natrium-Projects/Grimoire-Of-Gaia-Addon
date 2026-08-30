@@ -1,0 +1,50 @@
+{
+  "type": "nfulib:add_item_for_entity",
+  "addition": "gogplus:enchanted_feather",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "grimoireofgaia:harpy"
+          }
+        },
+        {
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type": "grimoireofgaia:wizard_harpy"
+          }
+        }
+        ]
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "minecraft:random_chance_with_looting",
+      "chance": 0.3,
+      "looting_multiplier": 0.1
+    }
+  ],
+  "functions": [
+    {
+      "function": "minecraft:set_count",
+      "count": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      }
+    },
+    {
+      "function": "minecraft:looting_enchant",
+      "count": {
+        "min": 0.0,
+        "max": 1.0
+      }
+    }
+    ]
+}

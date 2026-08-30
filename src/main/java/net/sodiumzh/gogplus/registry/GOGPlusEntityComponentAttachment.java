@@ -14,9 +14,9 @@ public class GOGPlusEntityComponentAttachment {
 
     @SubscribeEvent
     public static void onSetupComponents(EntityComponentSetupEvent event) {
-        event.addNode(HierarchyPath.byLiteral("/gogaddon"));
+        event.addNode(HierarchyPath.byLiteral("/gogplus"));
         if (event.getEntity() instanceof Mob mob && GOGPlusMobBehaviorMappings.contains(mob.getType())) {
-            event.addComponent(HierarchyPath.byLiteral("/gogaddon/mob_behaviors"), GOGPlusEntityComponents.ADVANCED_MOB_BEHAVIORS.get());
+            event.addComponent(HierarchyPath.byLiteral("/gogplus/mob_behaviors"), GOGPlusEntityComponents.ADVANCED_MOB_BEHAVIORS.get());
         }
     }
 

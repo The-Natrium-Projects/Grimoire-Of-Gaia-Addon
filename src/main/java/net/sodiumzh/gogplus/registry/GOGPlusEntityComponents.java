@@ -23,7 +23,8 @@ public class GOGPlusEntityComponents {
             ADVANCED_MOB_BEHAVIORS = COLLECTION.register("advanced_mob_behaviors", () ->
         new EntityComponentType<>(AbstractGaiaEntity.class, AdvancedMobBehaviorComponent.class, AdvancedMobBehaviorComponent::new));
 
-    public static final HierarchyPath PATH_ADVANCED_MOB_BEHAVIORS = HierarchyPath.byLiteral("/gogaddon/mob_behaviors");
+    public static final HierarchyPath PATH_GOGPLUS = HierarchyPath.byLiteral("/gogplus");
+    public static final HierarchyPath PATH_ADVANCED_MOB_BEHAVIORS = HierarchyPath.byLiteral("/gogplus/mob_behaviors");
     public static final SubComponentAccessor<AbstractGaiaEntity, AdvancedMobBehaviorComponent>
             ACCESSOR_ADVANCED_MOB_BEHAVIORS = new SubComponentAccessor<>(PATH_ADVANCED_MOB_BEHAVIORS, ADVANCED_MOB_BEHAVIORS);
 
@@ -32,6 +33,7 @@ public class GOGPlusEntityComponents {
 
         @SubscribeEvent
         public static void onInitComponents(EntityComponentSetupEvent event) {
+            event.addNode(PATH_GOGPLUS);
             event.addComponent(PATH_ADVANCED_MOB_BEHAVIORS, GOGPlusEntityComponents.ADVANCED_MOB_BEHAVIORS.get());
         }
     }

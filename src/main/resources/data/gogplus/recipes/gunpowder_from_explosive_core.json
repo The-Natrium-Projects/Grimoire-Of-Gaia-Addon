@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:explosive_core"
+    }
+  ],
+
+  "result":{
+    "item": "minecraft:gunpowder",
+    "count": 6
+  }
+}

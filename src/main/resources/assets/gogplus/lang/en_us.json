@@ -1,0 +1,34 @@
+{
+  "item.gogplus.ant_chitin": "Ant Chitin",
+  "item.gogplus.ant_chitin_fragment": "Ant Chitin Fragment",
+  "item.gogplus.ghost_fire": "Ghost Fire",
+  "item.gogplus.mysterious_branch": "Mysterious Branch",
+  "item.gogplus.shiny_scale": "Shiny Scale",
+  "item.gogplus.enchanted_feather": "Enchanted Feather",
+  "item.gogplus.explosive_core": "Explosive Core",
+  "item.gogplus.enchanted_cobblestone": "Enchanted Cobblestone",
+  "item.gogplus.golden_scale": "Golden Scale",
+  "item.gogplus.holy_feather": "Holy Feather",
+
+  "item.gogplus.baphomet_spawn_egg": "Baphomet Spawn Egg",
+  "item.gogplus.dhampir_spawn_egg": "Dhampir Spawn Egg",
+  "item.gogplus.futakuchi_onna_spawn_egg": "Futakuchi-Onna Spawn Egg",
+  "item.gogplus.gorgon_spawn_egg": "Gorgon Spawn Egg",
+  "item.gogplus.kikimora_spawn_egg": "Kikimora Spawn Egg",
+  "item.gogplus.sahuagin_spawn_egg": "Sahuagin Spawn Egg",
+  "item.gogplus.selkie_spawn_egg": "Selkie Spawn Egg",
+  "item.gogplus.vampire_spawn_egg": "Vampire Spawn Egg",
+
+  "block.gogplus.enchanted_cobblestone": "Enchanted Cobblestone",
+
+  "entity.gogplus.baphomet": "Baphomet",
+  "entity.gogplus.dhampir": "Dhampir",
+  "entity.gogplus.futakuchi_onna": "Futakuchi-Onna",
+  "entity.gogplus.gorgon": "Gorgon",
+  "entity.gogplus.kikimora": "Kikimora",
+  "entity.gogplus.sahuagin": "Sahuagin",
+  "entity.gogplus.selkie": "Selkie",
+  "entity.gogplus.vampire": "Vampire",
+
+  "tooltip.gogplus.unimplemented_ingredient": "Not yet implemented. Usage will be added in future versions."
+}

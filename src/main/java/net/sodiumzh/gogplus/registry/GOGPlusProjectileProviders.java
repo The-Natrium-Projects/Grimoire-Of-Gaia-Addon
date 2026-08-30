@@ -43,7 +43,7 @@ public class GOGPlusProjectileProviders {
                     .particle(ParticleTypes.SMOKE, 10)
                     .setLiquidResistanceFactor(0.2f)
                     .setAirResistanceFactor(0.01f)
-                    .setIdentifier(new ResourceLocation("gogaddon:valkyrie_thunder_projectile"))
+                    .setIdentifier(new ResourceLocation("gogplus:valkyrie_thunder_projectile"))
                     .setOnHitBlockOrLiving((proj, h) -> {
                         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, proj.level());
                         lightningBolt.setPos(proj.position());
@@ -64,7 +64,7 @@ public class GOGPlusProjectileProviders {
                     .particle(ParticleTypes.FLAME, 10)
                     .setLiquidResistanceFactor(0.2f)
                     .setAirResistanceFactor(0.01f)
-                    .setIdentifier(new ResourceLocation("gogaddon:valkyrie_explosive_projectile"))
+                    .setIdentifier(new ResourceLocation("gogplus:valkyrie_explosive_projectile"))
                     .setOnHitBlockOrLiving((proj, h) -> {
                         if (h instanceof EntityHitResult eh && !(eh.getEntity() instanceof LivingEntity)) return;
                         proj.level().explode(proj,
@@ -84,7 +84,7 @@ public class GOGPlusProjectileProviders {
                     .particle(ParticleTypes.SNOWFLAKE, 200)
                     .particleAreaShape(IInequalityPattern3D.SPHERE.get().inequality())
                     .setBlockOverlapFilter((z, pos, bs) -> bs.is(Blocks.FIRE))
-                    .setIdentifier(new ResourceLocation("gogaddon:valkyrie_ice_zone"))
+                    .setIdentifier(new ResourceLocation("gogplus:valkyrie_ice_zone"))
                     .setOnServerLivingOverlap((z, e) -> {
                         if (!e.equals(owner)
                                 && e.getBoundingBox().getCenter().distanceToSqr(z.getBoundingBox().getCenter()) <= 36d) {
@@ -109,7 +109,7 @@ public class GOGPlusProjectileProviders {
                     .particle(ParticleTypes.SNOWFLAKE, 10)
                     .setLiquidResistanceFactor(0.2f)
                     .setAirResistanceFactor(0.01f)
-                    .setIdentifier(new ResourceLocation("gogaddon:valkyrie_ice_projectile"))
+                    .setIdentifier(new ResourceLocation("gogplus:valkyrie_ice_projectile"))
                     .setOnHitBlockOrLiving((proj, h) -> {
                         if (h instanceof EntityHitResult eh && !(eh.getEntity() instanceof LivingEntity)) return;
                         var iceZone = VALKYRIE_ICE_ZONE.apply(owner);
@@ -127,7 +127,7 @@ public class GOGPlusProjectileProviders {
                     .setLiquidResistanceFactor(0.2f)
                     .setAirResistanceFactor(0.01f)
                     .setHitIgnoresOwner(true)
-                    .setIdentifier(new ResourceLocation("gogaddon:valkyrie_common_projectile_fragment"))
+                    .setIdentifier(new ResourceLocation("gogplus:valkyrie_common_projectile_fragment"))
                     .setOnHitLiving((proj, h) -> {
                         h.getEntity().hurt(new DamageSource(
                                         proj.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.INDIRECT_MAGIC),
@@ -145,7 +145,7 @@ public class GOGPlusProjectileProviders {
                     .setLiquidResistanceFactor(0.2f)
                     .setAirResistanceFactor(0.01f)
                     .setHitIgnoresOwner(true)
-                    .setIdentifier(new ResourceLocation("gogaddon:valkyrie_common_projectile"))
+                    .setIdentifier(new ResourceLocation("gogplus:valkyrie_common_projectile"))
                     .setOnHitLiving((proj, h) -> {
                         h.getEntity().hurt(new DamageSource(
                                         proj.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.INDIRECT_MAGIC),
