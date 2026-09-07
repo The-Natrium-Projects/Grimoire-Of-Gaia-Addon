@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:ghost_fire"
+    }
+  ],
+
+  "result":{
+    "item": "hmag:soul_powder",
+    "count": 6
+  }
+}

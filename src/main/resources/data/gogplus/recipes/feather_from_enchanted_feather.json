@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:enchanted_feather"
+    }
+  ],
+
+  "result":{
+    "item": "minecraft:feather",
+    "count": 6
+  }
+}

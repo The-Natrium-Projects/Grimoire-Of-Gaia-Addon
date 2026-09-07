@@ -6,7 +6,7 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "type": "grimoireofgaia:mermaid"
+        "type": "grimoireofgaia:naga"
       }
     },
     {
@@ -22,16 +22,9 @@
     {
       "function": "minecraft:set_count",
       "count": {
-        "min": 2.0,
+        "min": 1.0,
         "max": 3.0,
         "type": "minecraft:uniform"
-      }
-    },
-    {
-      "function": "minecraft:looting_enchant",
-      "count": {
-        "min": 0.0,
-        "max": 1.0
       }
     }
     ]

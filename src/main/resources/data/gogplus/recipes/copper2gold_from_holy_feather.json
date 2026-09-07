@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:holy_feather"
+    },
+    {
+      "item": "minecraft:copper_block"
+    },
+    {
+      "item": "minecraft:copper_block"
+    }
+  ],
+
+  "result":{
+    "item": "minecraft:gold_block",
+    "count": 2
+  }
+}
