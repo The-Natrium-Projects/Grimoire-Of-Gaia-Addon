@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
-
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "hmag:soul_powder"
+    }
+  ],
   "ingredients":[
     {
       "item": "gogplus:ghost_fire"
