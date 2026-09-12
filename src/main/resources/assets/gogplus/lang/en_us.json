@@ -30,5 +30,7 @@
   "entity.gogplus.selkie": "Selkie",
   "entity.gogplus.vampire": "Vampire",
 
-  "tooltip.gogplus.unimplemented_ingredient": "Not yet implemented. Usage will be added in future versions."
+  "tooltip.gogplus.unimplemented_ingredient": "Not yet implemented. Usage will be added in future versions.",
+  "tooltip.gogplus.enchanted_cobblestone": "A bright Cobblestone."
+
 }

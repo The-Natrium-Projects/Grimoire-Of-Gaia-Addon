@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:golden_scale"
+    },
+    {
+      "item": "minecraft:apple"
+    }
+  ],
+
+  "result":{
+    "item": "minecraft:golden_apple",
+    "count": 1
+  }
+}

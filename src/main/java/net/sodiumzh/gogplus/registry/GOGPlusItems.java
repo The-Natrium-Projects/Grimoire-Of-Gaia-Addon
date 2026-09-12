@@ -13,6 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.gogplus.GOGPlus;
 import net.sodiumzh.nfu.item.NFUBlockItem;
 import net.sodiumzh.nfu.item.NFUItem;
+import net.sodiumzh.nfu.util.NFUInfoStatics;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,7 +48,8 @@ public class GOGPlusItems {
     public static final RegistryObject<NFUItem> EXPLOSIVE_CORE = REG.register("explosive_core",
         () -> new NFUItem(new Item.Properties()));
     public static final RegistryObject<NFUBlockItem> ENCHANTED_COBBLESTONE = REG.register("enchanted_cobblestone",
-        () -> new NFUBlockItem(GOGPlusBlocks.ENCHANTED_COBBLESTONE.get(), new Item.Properties()));
+        () -> new NFUBlockItem(GOGPlusBlocks.ENCHANTED_COBBLESTONE.get(), new Item.Properties())
+            .description(NFUInfoStatics.createTranslatable("tooltip.gogplus.enchanted_cobblestone")));
 
     // Tier 2 Loots
     public static final RegistryObject<NFUItem> GOLDEN_SCALE = REG.register("golden_scale",

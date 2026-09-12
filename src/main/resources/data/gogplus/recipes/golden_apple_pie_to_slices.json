@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "grimoireofgaia:golden_apple_pie"
+    }
+  ],
+
+  "result":{
+    "item": "grimoireofgaia:golden_apple_pie_slice",
+    "count": 4
+  }
+}

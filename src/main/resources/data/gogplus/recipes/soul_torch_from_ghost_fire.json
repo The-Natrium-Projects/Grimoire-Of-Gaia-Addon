@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "G",
+    "S"
+  ],
+
+  "key":{
+
+    "S":{
+      "item": "minecraft:stick"
+    },
+
+    "G":{
+      "item": "gogplus:ghost_fire"
+    }
+
+  },
+
+  "result":{
+    "item": "minecraft:soul_torch",
+    "count": 4
+  }
+}

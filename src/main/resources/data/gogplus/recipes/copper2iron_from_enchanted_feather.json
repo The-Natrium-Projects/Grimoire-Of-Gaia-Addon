@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":[
+    {
+      "item": "gogplus:enchanted_feather"
+    },
+    {
+      "item": "minecraft:copper_block"
+    }
+  ],
+
+  "result":{
+    "item": "minecraft:iron_block",
+    "count": 1
+  }
+}
