@@ -1,9 +1,8 @@
 package net.sodiumzh.gogplus.registry;
 
 import gaia.registry.GaiaRegistry;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -11,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sodiumzh.gogplus.GOGPlus;
+import net.sodiumzh.gogplus.item.AntArmorItem;
 import net.sodiumzh.nfu.item.NFUBlockItem;
 import net.sodiumzh.nfu.item.NFUItem;
 import net.sodiumzh.nfu.util.NFUInfoStatics;
@@ -58,6 +58,24 @@ public class GOGPlusItems {
     // Tier 3 Loots
     public static final RegistryObject<NFUItem> HOLY_FEATHER = REG.register("holy_feather",
         () -> new NFUItem(new Item.Properties().rarity(Rarity.RARE)).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
+
+    // Equipments
+    public static final RegistryObject<AntArmorItem> ANT_HELMET = REG.register("ant_helmet", () -> new AntArmorItem(
+        ArmorMaterials.IRON,
+        EquipmentSlot.HEAD,
+        new Item.Properties()));
+    public static final RegistryObject<AntArmorItem> ANT_CHESTPLATE = REG.register("ant_chestplate", () -> new AntArmorItem(
+        ArmorMaterials.IRON,
+        EquipmentSlot.CHEST,
+        new Item.Properties()));
+    public static final RegistryObject<AntArmorItem> ANT_LEGGINGS = REG.register("ant_leggings", () -> new AntArmorItem(
+        ArmorMaterials.IRON,
+        EquipmentSlot.LEGS,
+        new Item.Properties()));
+    public static final RegistryObject<AntArmorItem> ANT_BOOTS = REG.register("ant_boots", () -> new AntArmorItem(
+        ArmorMaterials.IRON,
+        EquipmentSlot.FEET,
+        new Item.Properties()));
 
     @SubscribeEvent
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {
