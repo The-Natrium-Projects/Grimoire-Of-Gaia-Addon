@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "gogplus:ant_chitin"
+  },
+  "base": {
+    "item": "minecraft:iron_helmet"
+  },
+  "result": {
+    "item": "gogplus:ant_helmet"
+  },
+  "template": {
+    "item": "minecraft:fermented_spider_eye"
+  }
+}

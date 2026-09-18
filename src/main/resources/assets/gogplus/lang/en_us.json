@@ -10,6 +10,11 @@
   "item.gogplus.golden_scale": "Golden Scale",
   "item.gogplus.holy_feather": "Holy Feather",
 
+  "item.gogplus.ant_helmet": "Ant Disguise Helmet",
+  "item.gogplus.ant_chestplate": "Ant Disguise Chestplate",
+  "item.gogplus.ant_leggings": "Ant Disguise Leggings",
+  "item.gogplus.ant_boots": "Ant Disguise Boots",
+
   "item.gogplus.baphomet_spawn_egg": "Baphomet Spawn Egg",
   "item.gogplus.dhampir_spawn_egg": "Dhampir Spawn Egg",
   "item.gogplus.futakuchi_onna_spawn_egg": "Futakuchi-Onna Spawn Egg",
@@ -31,6 +36,6 @@
   "entity.gogplus.vampire": "Vampire",
 
   "tooltip.gogplus.unimplemented_ingredient": "Not yet implemented. Usage will be added in future versions.",
-  "tooltip.gogplus.enchanted_cobblestone": "A bright Cobblestone."
-
+  "tooltip.gogplus.enchanted_cobblestone": "A bright Cobblestone.",
+  "tooltip.gogplus.ant_armor": "A whole set of Ant Disguise Armor will make arthropods neutral to you."
 }

@@ -34,9 +34,9 @@ public class GOGPlusItems {
 
     // Tier 1 Loots
     public static final RegistryObject<NFUItem> ANT_CHITIN = REG.register("ant_chitin",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()));
     public static final RegistryObject<NFUItem> ANT_CHITIN_FRAGMENT = REG.register("ant_chitin_fragment",
-        () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
+        () -> new NFUItem(new Item.Properties()));
     public static final RegistryObject<NFUItem> GHOST_FIRE = REG.register("ghost_fire",
         () -> new NFUItem(new Item.Properties()).descTranslatable("tooltip.gogplus.unimplemented_ingredient"));
     public static final RegistryObject<NFUItem> MYSTERIOUS_BRANCH = REG.register("mysterious_branch",

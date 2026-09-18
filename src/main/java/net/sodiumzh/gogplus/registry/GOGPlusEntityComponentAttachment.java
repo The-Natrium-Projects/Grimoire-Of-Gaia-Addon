@@ -1,6 +1,7 @@
 package net.sodiumzh.gogplus.registry;
 
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sodiumzh.gogplus.GOGPlus;
@@ -19,7 +20,7 @@ public class GOGPlusEntityComponentAttachment {
         if (event.getEntity() instanceof Mob mob && GOGPlusMobBehaviorMappings.contains(mob.getType())) {
             event.addComponent(HierarchyPath.byLiteral("/gogplus/mob_behaviors"), GOGPlusEntityComponents.ADVANCED_MOB_BEHAVIORS.get());
         }
-        if (event.getEntity().getType().is(GOGPlusTags.ANTS)) {
+        if (event.getEntity() instanceof Mob mob && MobType.ARTHROPOD.equals(mob.getMobType())) {
             event.addComponent(NFUEntityComponents.PATH_DEFAULT_ANGER_HANDLER, NFUEntityComponents.DEFAULT_ANGER_HANDLER.get());
         }
     }

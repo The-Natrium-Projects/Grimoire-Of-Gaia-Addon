@@ -10,6 +10,20 @@
   "item.gogplus.golden_scale": "黄金鳞片",
   "item.gogplus.holy_feather": "神圣羽毛",
 
+  "item.gogplus.ant_helmet": "拟蚁头盔",
+  "item.gogplus.ant_chestplate": "拟蚁胸甲",
+  "item.gogplus.ant_leggings": "拟蚁护腿",
+  "item.gogplus.ant_boots": "拟蚁靴子",
+
+  "item.gogplus.baphomet_spawn_egg": "巴风特刷怪蛋",
+  "item.gogplus.dhampir_spawn_egg": "半吸血鬼刷怪蛋",
+  "item.gogplus.futakuchi_onna_spawn_egg": "二口女刷怪蛋",
+  "item.gogplus.gorgon_spawn_egg": "戈尔工刷怪蛋",
+  "item.gogplus.kikimora_spawn_egg": "奇奇莫拉刷怪蛋",
+  "item.gogplus.sahuagin_spawn_egg": "沙华鱼人刷怪蛋",
+  "item.gogplus.selkie_spawn_egg": "海豹人刷怪蛋",
+  "item.gogplus.vampire_spawn_egg": "吸血鬼刷怪蛋",
+
   "block.gogplus.enchanted_cobblestone": "附魔圆石",
 
   "entity.gogplus.baphomet": "巴风特",
@@ -21,5 +35,7 @@
   "entity.gogplus.selkie": "海豹人",
   "entity.gogplus.vampire": "吸血鬼",
 
-  "tooltip.gogplus.unimplemented_ingredient": "该材料功能尚未完成。用途将在未来更新中加入。"
+  "tooltip.gogplus.unimplemented_ingredient": "该材料功能尚未完成。用途将在未来更新中加入。",
+  "tooltip.gogplus.enchanted_cobblestone": "一个能发光的原石。",
+  "tooltip.gogplus.ant_armor": "穿着全套拟蚁护甲时，使节肢类生物对你中立。"
 }
